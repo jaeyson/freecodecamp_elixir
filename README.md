@@ -2,7 +2,7 @@
 some exercises from freecodecamp.org using Elixir programming language
 
 ```elixir
-#Reverse a string:
+#Reverse a String:
 String.reverse("hello")
 > "olleh"
 ```
