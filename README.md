@@ -8,7 +8,7 @@ IO.puts(String.reverse("hello"))
 ```
 
 ```elixir
-#Factorialize a Number
+#Factorialize a Number:
 defmodule Math do
   def factorial(0), do: 1
   def factorial(n) when n > 0 do
@@ -19,4 +19,9 @@ end
 IO.puts(Math.factorial(3))
 # or IO.puts Math.factorial(3)
 --> 6
+```
+
+```elixir
+#Check for Palindromes:
+
 ```
