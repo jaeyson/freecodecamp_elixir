@@ -17,5 +17,6 @@ defmodule Math do
 end
 
 IO.puts(Math.factorial(3))
+# or IO.puts Math.factorial(3)
 --> 6
 ```
