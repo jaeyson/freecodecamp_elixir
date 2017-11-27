@@ -4,7 +4,7 @@ some exercises from freecodecamp.org using Elixir programming language
 ```elixir
 #Reverse a String:
 String.reverse("hello")
-> "olleh"
+--> "olleh"
 ```
 
 ```elixir
