@@ -25,3 +25,27 @@ IO.puts(Math.factorial(3))
 #Check for Palindromes:
 
 ```
+
+---
+[http://elixir-lang.github.io/getting-started/typespecs-and-behaviours.html](# Typespecs and behaviours)
+```elixir
+# Defining custom types
+defmodule Math do
+  @spec sum(number) :: {number, Integer.t}
+  def sum(x,y \\ 0) do
+    x+y
+  end
+end
+IO.puts Math.sum(1,2)
+--> 3
+
+# Function specifications
+defmodule Math do
+  @spec sum(number) :: Integer
+  def sum(x,y \\ 0) do
+    x+y
+  end
+end
+IO.puts Math.sum(1,2)
+--> 3
+```
