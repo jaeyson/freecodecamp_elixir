@@ -27,7 +27,7 @@ IO.puts(Math.factorial(3))
 ```
 
 ---
-[http://elixir-lang.github.io/getting-started/typespecs-and-behaviours.html](# Typespecs and behaviours)
+[http://elixir-lang.github.io/getting-started/typespecs-and-behaviours.html](#Typespecs and behaviours)
 ```elixir
 # Defining custom types
 defmodule Math do
