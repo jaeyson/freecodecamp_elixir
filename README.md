@@ -23,7 +23,23 @@ IO.puts(Math.factorial(3))
 
 ```elixir
 #Check for Palindromes:
+defmodule Word do
+  #@spec is_palindrome?(char) :: String
+  
+  def is_palindrome?(char) do
+    #old = Regex.scan(~r/[^\s+^\W+]/i, char)
+    old = Regex.scan(~r/[^\s+^\W+]/i,char)
+            |> Enum.join
+            |> String.downcase
 
+    old === String.reverse(old)
+  end
+end
+
+IO.puts Word.is_palindrome?("A nut for a jar of tuna") #true
+IO.puts Word.is_palindrome?(".,.,.,") #true, ???
+IO.puts Word.is_palindrome?("142321") #false
+#IO.puts("foo" =~ ~r/foo/)
 ```
 
 ---
