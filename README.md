@@ -24,8 +24,7 @@ IO.puts(Math.factorial(3))
 ```elixir
 #Check for Palindromes:
 defmodule Word do
-  #@spec is_palindrome?(char) :: String
-  
+  @spec is_palindrome?(char) :: String
   def is_palindrome?(char) do
     #old = Regex.scan(~r/[^\s+^\W+]/i, char)
     old = Regex.scan(~r/[^\s+^\W+]/i,char)
