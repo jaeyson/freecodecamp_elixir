@@ -49,6 +49,19 @@ defmodule Word do
 end
 
 IO.puts Word.find_longest("foo this") #4
+
+
+
+#Find the Longest Word in a String version 2:
+defmodule Word do
+  def find_longest(str) do
+    length = Enum.map(String.split(str), &(String.length(&1))) |> Enum.max
+    value = String.split(str) |> Enum.max
+    "The longest word: #{value} (#{length} characters)"
+  end
+end
+
+Word.find_longest("foo this") #"The longest word: this (4 characters)"
 ```
 
 ---
