@@ -26,7 +26,6 @@ IO.puts(Math.factorial(3))
 defmodule Word do
   @spec is_palindrome?(char) :: String
   def is_palindrome?(char) do
-    #old = Regex.scan(~r/[^\s+^\W+]/i, char)
     old = Regex.scan(~r/[^\s+^\W+]/i,char)
             |> Enum.join
             |> String.downcase
@@ -39,6 +38,17 @@ IO.puts Word.is_palindrome?("A nut for a jar of tuna") #true
 IO.puts Word.is_palindrome?(".,.,.,") #true, ???
 IO.puts Word.is_palindrome?("142321") #false
 #IO.puts("foo" =~ ~r/foo/)
+```
+
+```elixir
+#Find the Longest Word in a String:
+defmodule Word do
+  def find_longest(str) do
+    Enum.map(String.split(str), &(String.length(&1))) |> Enum.max
+  end
+end
+
+IO.puts Word.find_longest("foo this") #4
 ```
 
 ---
