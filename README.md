@@ -32,7 +32,7 @@ iex(23)> IO.puts(Math.factorial(3)) # or IO.puts Math.factorial(3)
 6
 :ok
 ```
-**[⬆ back to top](#front-end-development-certification)**
+**[⬆ back to top](#freecodecamp-exercises-using-elixir)**
 
 #### Check for Palindromes
 ```elixir
@@ -54,7 +54,7 @@ true
 
 #IO.puts("foo" =~ ~r/foo/)
 ```
-**[⬆ back to top](#front-end-development-certification)**
+**[⬆ back to top](#freecodecamp-exercises-using-elixir)**
 
 #### Find the Longest Word in a String
 ```elixir
@@ -82,7 +82,7 @@ end
 iex(3)> Word.find_longest("foo this")
 "The longest word: this (4 characters)"
 ```
-**[⬆ back to top](#front-end-development-certification)**
+**[⬆ back to top](#freecodecamp-exercises-using-elixir)**
 
 #### Title Case a Sentence
 ```elixir
@@ -98,7 +98,7 @@ end
 iex> Word.title_case("foo this")
 "Foo This"
 ```
-**[⬆ back to top](#front-end-development-certification)**
+**[⬆ back to top](#freecodecamp-exercises-using-elixir)**
 
 
 ---
