@@ -6,6 +6,8 @@ Some exercises from freecodecamp.org using Elixir programming language
     1. [Reverse a String](#reverse-a-string)
     2. [Factorialize a Number](#factorialize-a-number)
     3. [Check for Palindromes](#check-for-palindromes)
+    4. [Find the Longest Word in a String](#find-the-longest-word-in-a-string)
+    5. [Title Case a Sentence](#title-case-a-sentence)
 
 #### Reverse a String
 ```elixir
@@ -46,9 +48,10 @@ defmodule Word do
   end
 end
 
-IO.puts Word.is_palindrome?("A nut for a jar of tuna") #true
-IO.puts Word.is_palindrome?(".,.,.,") #true, ???
-IO.puts Word.is_palindrome?("142321") #false
+iex> IO.puts Word.is_palindrome?("A nut for a jar of tuna")
+true
+:ok
+
 #IO.puts("foo" =~ ~r/foo/)
 ```
 **[⬆ back to top](#front-end-development-certification)**
@@ -62,8 +65,9 @@ defmodule Word do
   end
 end
 
-IO.puts Word.find_longest("foo this") #4
-
+iex(3)> IO.puts Word.find_longest("foo this")
+4
+:ok
 
 
 #Find the Longest Word in a String version 2:
@@ -75,7 +79,8 @@ defmodule Word do
   end
 end
 
-Word.find_longest("foo this") #"The longest word: this (4 characters)"
+iex(3)> Word.find_longest("foo this")
+"The longest word: this (4 characters)"
 ```
 **[⬆ back to top](#front-end-development-certification)**
 
@@ -90,9 +95,10 @@ defmodule Word do
   end
 end
 
-iex(19)> Word.title_case("foo this")
+iex> Word.title_case("foo this")
 "Foo This"
 ```
+**[⬆ back to top](#front-end-development-certification)**
 
 
 ---
