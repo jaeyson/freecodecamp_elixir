@@ -1,12 +1,22 @@
 # Freecodecamp.org exercises using Elixir
-some exercises from freecodecamp.org using Elixir programming language
+Some exercises from freecodecamp.org using Elixir programming language
 
+### Front End Development Certification
+  - Basic Algorithm Scripting
+    1. [Reverse a String](#reverse-a-string)
+    2. [Factorialize a Number](#factorialize-a-number)
+    3. [Check for Palindromes](#check-for-palindromes)
+
+#### Reverse a String
 ```elixir
 #Reverse a String:
-IO.puts(String.reverse("hello"))
---> "olleh"
+iex> IO.puts(String.reverse("hello"))
+olleh
+:ok
 ```
+**[⬆ back to top](#front-end-development-certification)**
 
+#### Factorialize a Number
 ```elixir
 #Factorialize a Number:
 defmodule Math do
@@ -16,11 +26,13 @@ defmodule Math do
   end
 end
 
-IO.puts(Math.factorial(3))
-# or IO.puts Math.factorial(3)
---> 6
+iex(23)> IO.puts(Math.factorial(3)) # or IO.puts Math.factorial(3)
+6
+:ok
 ```
+**[⬆ back to top](#front-end-development-certification)**
 
+#### Check for Palindromes
 ```elixir
 #Check for Palindromes:
 defmodule Word do
@@ -39,7 +51,9 @@ IO.puts Word.is_palindrome?(".,.,.,") #true, ???
 IO.puts Word.is_palindrome?("142321") #false
 #IO.puts("foo" =~ ~r/foo/)
 ```
+**[⬆ back to top](#front-end-development-certification)**
 
+#### Find the Longest Word in a String
 ```elixir
 #Find the Longest Word in a String:
 defmodule Word do
@@ -63,6 +77,23 @@ end
 
 Word.find_longest("foo this") #"The longest word: this (4 characters)"
 ```
+**[⬆ back to top](#front-end-development-certification)**
+
+#### Title Case a Sentence
+```elixir
+#Title Case a Sentence:
+defmodule Word do
+  def title_case(str) do
+    Enum.map(String.split(str),
+      fn(x) -> String.capitalize(x) end)
+    |> Enum.join(" ")
+  end
+end
+
+iex(19)> Word.title_case("foo this")
+"Foo This"
+```
+
 
 ---
 [Typespecs and behaviours](http://elixir-lang.github.io/getting-started/typespecs-and-behaviours.html)
