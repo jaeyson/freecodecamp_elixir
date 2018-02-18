@@ -28,7 +28,7 @@ defmodule Math do
   end
 end
 
-iex(23)> IO.puts(Math.factorial(3)) # or IO.puts Math.factorial(3)
+iex> IO.puts(Math.factorial(3)) # or IO.puts Math.factorial(3)
 6
 :ok
 ```
@@ -65,7 +65,7 @@ defmodule Word do
   end
 end
 
-iex(3)> IO.puts Word.find_longest("foo this")
+iex> IO.puts Word.find_longest("foo this")
 4
 :ok
 
@@ -79,7 +79,7 @@ defmodule Word do
   end
 end
 
-iex(3)> Word.find_longest("foo this")
+iex> Word.find_longest("foo this")
 "The longest word: this (4 characters)"
 ```
 **[⬆ back to top](#freecodecamp-exercises-using-elixir)**
