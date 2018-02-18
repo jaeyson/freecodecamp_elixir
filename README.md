@@ -16,7 +16,7 @@ iex> IO.puts(String.reverse("hello"))
 olleh
 :ok
 ```
-**[⬆ back to top](#front-end-development-certification)**
+**[⬆ back to top](#freecodecamp.org-exercises-using-elixir)**
 
 #### Factorialize a Number
 ```elixir
