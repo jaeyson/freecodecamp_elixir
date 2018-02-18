@@ -1,4 +1,4 @@
-# Freecodecamp.org exercises using Elixir
+# Freecodecamp exercises using Elixir
 Some exercises from freecodecamp.org using Elixir programming language
 
 ### Front End Development Certification
@@ -16,7 +16,7 @@ iex> IO.puts(String.reverse("hello"))
 olleh
 :ok
 ```
-**[⬆ back to top](#freecodecamp.org-exercises-using-elixir)**
+**[⬆ back to top](#freecodecamp-exercises-using-elixir)**
 
 #### Factorialize a Number
 ```elixir
