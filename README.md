@@ -8,7 +8,8 @@ Some exercises from freecodecamp.org using Elixir programming language
     3. [Check for Palindromes](#check-for-palindromes)
     4. [Find the Longest Word in a String](#find-the-longest-word-in-a-string)
     5. [Title Case a Sentence](#title-case-a-sentence)
-
+    6. [Return Largest Numbers in Arrays](#return-largest-numbers-in-arrays)
+    
 #### Reverse a String
 ```elixir
 #Reverse a String:
@@ -100,27 +101,16 @@ iex> Word.title_case("foo this")
 ```
 **[⬆ back to top](#freecodecamp-exercises-using-elixir)**
 
-
----
-[Typespecs and behaviours](http://elixir-lang.github.io/getting-started/typespecs-and-behaviours.html)
+#### Return Largest Numbers in Arrays
 ```elixir
-# Defining custom types
-defmodule Math do
-  @spec sum(number) :: {number, Integer.t}
-  def sum(x,y \\ 0) do
-    x+y
+#Return Largest Numbers in Arrays:
+defmodule Array do
+  def largest_number(list) do
+    for number <- list, do: Enum.max(number)
   end
 end
-IO.puts Math.sum(1,2)
---> 3
 
-# Function specifications
-defmodule Math do
-  @spec sum(number) :: Integer
-  def sum(x,y \\ 0) do
-    x+y
-  end
-end
-IO.puts Math.sum(1,2)
---> 3
+iex> Array.largest_number([[13, 27, 18, 26], [4, 5, 1, 3], [32, 35, 37, 39], [1000, 1001, 857, 1]])
+[27, 5, 39, 1001]
 ```
+**[⬆ back to top](#freecodecamp-exercises-using-elixir)**
