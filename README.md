@@ -10,6 +10,7 @@ Some exercises from freecodecamp.org using Elixir programming language
     5. [Title Case a Sentence](#title-case-a-sentence)
     6. [Return Largest Numbers in Arrays](#return-largest-numbers-in-arrays)
     7. [Confirm the Ending](#confirm-the-ending)
+    8. [Repeat a string repeat a string](#repeat-a-string-repeat-a-string)
     
 #### Reverse a String
 ```elixir
@@ -139,5 +140,12 @@ true
 
 iex> String.ends_with?("bastion", "Ion")
 false
+```
+**[⬆ back to top](#freecodecamp-exercises-using-elixir)**
+
+#### Repeat a string repeat a string
+```elixir
+#Repeat a string repeat a string
+
 ```
 **[⬆ back to top](#freecodecamp-exercises-using-elixir)**
