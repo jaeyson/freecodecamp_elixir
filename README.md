@@ -9,6 +9,7 @@ Some exercises from freecodecamp.org using Elixir programming language
     4. [Find the Longest Word in a String](#find-the-longest-word-in-a-string)
     5. [Title Case a Sentence](#title-case-a-sentence)
     6. [Return Largest Numbers in Arrays](#return-largest-numbers-in-arrays)
+    7. [Confirm the Ending](#confirm-the-ending)
     
 #### Reverse a String
 ```elixir
@@ -112,5 +113,31 @@ end
 
 iex> Array.largest_number([[13, 27, 18, 26], [4, 5, 1, 3], [32, 35, 37, 39], [1000, 1001, 857, 1]])
 [27, 5, 39, 1001]
+```
+**[⬆ back to top](#freecodecamp-exercises-using-elixir)**
+
+#### Confirm the Ending
+```elixir
+#Confirm the Ending:
+defmodule Word do
+  def confirm_ending(string, match_string) do
+    start = (String.length(match_string))
+    pattern = String.slice(string, -start, start)
+    match_string == pattern
+  end
+end
+
+iex> Word.confirm_ending("bastion","ion")
+true
+
+iex> Word.confirm_ending("bastion","Ion")
+false
+
+#or use the built-in function
+iex> String.ends_with?("bastion", "ion")
+true
+
+iex> String.ends_with?("bastion", "Ion")
+false
 ```
 **[⬆ back to top](#freecodecamp-exercises-using-elixir)**
