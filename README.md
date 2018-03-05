@@ -1,7 +1,6 @@
 # Freecodecamp exercises using Elixir
 Some exercises from freecodecamp.org using Elixir programming language
 
-### Front End Development Certification
   - Basic Algorithm Scripting
     1. [Reverse a String](#reverse-a-string)
     2. [Factorialize a Number](#factorialize-a-number)
