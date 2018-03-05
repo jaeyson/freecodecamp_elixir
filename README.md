@@ -145,7 +145,13 @@ false
 
 #### Repeat a string repeat a string
 ```elixir
-#Repeat a string repeat a string
+#Repeat a string repeat a string:
+iex> String.duplicate("world", 2)
+"worldworld"
 
+#OR another way:
+duplicate = fn string, number -> :binary.copy(string, number) end
+iex> duplicate.("the", 2)
+"thethe"
 ```
 **[⬆ back to top](#freecodecamp-exercises-using-elixir)**
