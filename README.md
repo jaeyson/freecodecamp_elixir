@@ -121,8 +121,11 @@ iex> Array.largest_number([[13, 27, 18, 26], [4, 5, 1, 3], [32, 35, 37, 39], [10
 #Confirm the Ending:
 defmodule Word do
   def confirm_ending(string, match_string) do
-    start = (String.length(match_string))
+    
+    start = match_string |> String.length()
+    
     pattern = String.slice(string, -start, start)
+    
     match_string == pattern
   end
 end
