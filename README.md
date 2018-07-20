@@ -15,7 +15,7 @@ Some exercises from freecodecamp.org using Elixir programming language
     
 #### Reverse a String
 ```erlang
-#Reverse a String:
+% Reverse a String:
 iex> IO.puts(String.reverse("hello"))
 olleh
 :ok
@@ -24,7 +24,7 @@ olleh
 
 #### Factorialize a Number
 ```erlang
-#Factorialize a Number:
+% Factorialize a Number:
 defmodule Math do
   def factorial(0), do: 1
   def factorial(n) when n > 0 do
@@ -40,7 +40,7 @@ iex> IO.puts(Math.factorial(3)) # or IO.puts Math.factorial(3)
 
 #### Check for Palindromes
 ```erlang
-#Check for Palindromes:
+% Check for Palindromes:
 defmodule Word do
   @spec is_palindrome?(char) :: String
   def is_palindrome?(char) do
@@ -56,13 +56,13 @@ iex> IO.puts Word.is_palindrome?("A nut for a jar of tuna")
 true
 :ok
 
-#IO.puts("foo" =~ ~r/foo/)
+% IO.puts("foo" =~ ~r/foo/)
 ```
 **[⬆ back to top](#freecodecamp-exercises-using-elixir)**
 
 #### Find the Longest Word in a String
 ```erlang
-#Find the Longest Word in a String:
+% Find the Longest Word in a String:
 defmodule Word do
   def find_longest(str) do
     Enum.map(String.split(str), &(String.length(&1))) |> Enum.max
@@ -74,7 +74,7 @@ iex> IO.puts Word.find_longest("foo this")
 :ok
 
 
-#Find the Longest Word in a String version 2:
+% Find the Longest Word in a String version 2:
 defmodule Word do
   def find_longest(str) do
     length = Enum.map(String.split(str), &(String.length(&1))) |> Enum.max
@@ -90,7 +90,7 @@ iex> Word.find_longest("foo this")
 
 #### Title Case a Sentence
 ```erlang
-#Title Case a Sentence:
+% Title Case a Sentence:
 defmodule Word do
   def title_case(str) do
     Enum.map(String.split(str),
@@ -106,7 +106,7 @@ iex> Word.title_case("foo this")
 
 #### Return Largest Numbers in Arrays
 ```erlang
-#Return Largest Numbers in Arrays:
+% Return Largest Numbers in Arrays:
 defmodule Array do
   def largest_number(list) do
     for number <- list, do: Enum.max(number)
@@ -120,7 +120,7 @@ iex> Array.largest_number([[13, 27, 18, 26], [4, 5, 1, 3], [32, 35, 37, 39], [10
 
 #### Confirm the Ending
 ```erlang
-#Confirm the Ending:
+% Confirm the Ending:
 defmodule Word do
   def confirm_ending(string, match_string) do
     
@@ -138,7 +138,7 @@ true
 iex> Word.confirm_ending("bastion","Ion")
 false
 
-#or use the built-in function
+% or use the built-in function
 iex> String.ends_with?("bastion", "ion")
 true
 
@@ -149,11 +149,11 @@ false
 
 #### Repeat a string repeat a string
 ```erlang
-#Repeat a string repeat a string:
+% Repeat a string repeat a string:
 iex> String.duplicate("world", 2)
 "worldworld"
 
-#OR another way:
+% OR another way:
 duplicate = fn string, number -> :binary.copy(string, number) end
 iex> duplicate.("the", 2)
 "thethe"
