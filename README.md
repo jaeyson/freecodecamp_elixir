@@ -14,7 +14,7 @@ Some exercises from freecodecamp.org using Elixir programming language
     8. [Repeat a string repeat a string](#repeat-a-string-repeat-a-string)
     
 #### Reverse a String
-```elixir
+```erlang
 #Reverse a String:
 iex> IO.puts(String.reverse("hello"))
 olleh
@@ -23,7 +23,7 @@ olleh
 **[⬆ back to top](#freecodecamp-exercises-using-elixir)**
 
 #### Factorialize a Number
-```elixir
+```erlang
 #Factorialize a Number:
 defmodule Math do
   def factorial(0), do: 1
@@ -39,7 +39,7 @@ iex> IO.puts(Math.factorial(3)) # or IO.puts Math.factorial(3)
 **[⬆ back to top](#freecodecamp-exercises-using-elixir)**
 
 #### Check for Palindromes
-```elixir
+```erlang
 #Check for Palindromes:
 defmodule Word do
   @spec is_palindrome?(char) :: String
@@ -61,7 +61,7 @@ true
 **[⬆ back to top](#freecodecamp-exercises-using-elixir)**
 
 #### Find the Longest Word in a String
-```elixir
+```erlang
 #Find the Longest Word in a String:
 defmodule Word do
   def find_longest(str) do
@@ -89,7 +89,7 @@ iex> Word.find_longest("foo this")
 **[⬆ back to top](#freecodecamp-exercises-using-elixir)**
 
 #### Title Case a Sentence
-```elixir
+```erlang
 #Title Case a Sentence:
 defmodule Word do
   def title_case(str) do
@@ -105,7 +105,7 @@ iex> Word.title_case("foo this")
 **[⬆ back to top](#freecodecamp-exercises-using-elixir)**
 
 #### Return Largest Numbers in Arrays
-```elixir
+```erlang
 #Return Largest Numbers in Arrays:
 defmodule Array do
   def largest_number(list) do
@@ -119,7 +119,7 @@ iex> Array.largest_number([[13, 27, 18, 26], [4, 5, 1, 3], [32, 35, 37, 39], [10
 **[⬆ back to top](#freecodecamp-exercises-using-elixir)**
 
 #### Confirm the Ending
-```elixir
+```erlang
 #Confirm the Ending:
 defmodule Word do
   def confirm_ending(string, match_string) do
@@ -148,7 +148,7 @@ false
 **[⬆ back to top](#freecodecamp-exercises-using-elixir)**
 
 #### Repeat a string repeat a string
-```elixir
+```erlang
 #Repeat a string repeat a string:
 iex> String.duplicate("world", 2)
 "worldworld"
