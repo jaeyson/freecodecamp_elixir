@@ -13,7 +13,8 @@ Some exercises from freecodecamp.org using Elixir programming language
     7. [Confirm the Ending](#confirm-the-ending)
     8. [Repeat a string repeat a string](#repeat-a-string-repeat-a-string)
     
-#### Reverse a String
+<details><summary><strong name="reverse-a-string">Reverse a String</strong></summary>
+  
 ```erlang
 % Reverse a String:
 iex> IO.puts(String.reverse("hello"))
@@ -21,8 +22,10 @@ olleh
 :ok
 ```
 **[⬆ back to top](#freecodecamp-exercises-using-elixir)**
+</details>
 
-#### Factorialize a Number
+<details><summary><strong name="factorialize-a-number">Factorialize a Number</strong></summary>
+
 ```erlang
 % Factorialize a Number:
 defmodule Math do
@@ -37,8 +40,10 @@ iex> IO.puts(Math.factorial(3)) # or IO.puts Math.factorial(3)
 :ok
 ```
 **[⬆ back to top](#freecodecamp-exercises-using-elixir)**
+</details>
+  
+<details><summary><strong name="check-for-palindromes">Check for Palindromes</strong></summary>
 
-#### Check for Palindromes
 ```erlang
 % Check for Palindromes:
 defmodule Word do
@@ -59,8 +64,10 @@ true
 % IO.puts("foo" =~ ~r/foo/)
 ```
 **[⬆ back to top](#freecodecamp-exercises-using-elixir)**
+</details>
 
-#### Find the Longest Word in a String
+<details><summary><strong name="find-the-longest-word-in-a-string">Find the Longest Word in a String</strong></summary>
+
 ```erlang
 % Find the Longest Word in a String:
 defmodule Word do
@@ -103,8 +110,10 @@ iex> Word.title_case("foo this")
 "Foo This"
 ```
 **[⬆ back to top](#freecodecamp-exercises-using-elixir)**
+</details>
 
-#### Return Largest Numbers in Arrays
+<details><summary><strong name="return-largest-numbers-in-arrays">Return Largest Numbers in Arrays</strong></summary>
+
 ```erlang
 % Return Largest Numbers in Arrays:
 defmodule Array do
@@ -117,8 +126,10 @@ iex> Array.largest_number([[13, 27, 18, 26], [4, 5, 1, 3], [32, 35, 37, 39], [10
 [27, 5, 39, 1001]
 ```
 **[⬆ back to top](#freecodecamp-exercises-using-elixir)**
+</details>
 
-#### Confirm the Ending
+<details><summary><strong name="confirm-the-ending">Confirm the Ending</strong></summary>
+
 ```erlang
 % Confirm the Ending:
 defmodule Word do
@@ -146,8 +157,10 @@ iex> String.ends_with?("bastion", "Ion")
 false
 ```
 **[⬆ back to top](#freecodecamp-exercises-using-elixir)**
+</details>
 
-#### Repeat a string repeat a string
+<details><summary><strong name="repeat-a-string-repeat-a-string">Repeat a string repeat a string</strong></summary>
+
 ```erlang
 % Repeat a string repeat a string:
 iex> String.duplicate("world", 2)
@@ -159,3 +172,4 @@ iex> duplicate.("the", 2)
 "thethe"
 ```
 **[⬆ back to top](#freecodecamp-exercises-using-elixir)**
+</details>
