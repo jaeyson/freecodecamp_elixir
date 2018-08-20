@@ -1,4 +1,4 @@
-![Build Status](https://img.shields.io/badge/status-work%20in%20progress-orange.svg)
+![Build Status](https://img.shields.io/badge/status-work%20in%20progress-orange.svg)(https://learn.freecodecamp.org/)
 
 # Freecodecamp exercises using Elixir
 Some exercises from freecodecamp.org using Elixir programming language
