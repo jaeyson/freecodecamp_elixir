@@ -4,6 +4,7 @@
 Some exercises from freecodecamp.org using Elixir programming language
 
 ### Basic Algorithm Scripting
+
   <details><summary>Reverse a String</summary>
 
   ```elixir
