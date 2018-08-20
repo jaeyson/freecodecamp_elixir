@@ -31,7 +31,7 @@ Some exercises from freecodecamp.org using Elixir programming language
   6
   :ok
   ```
-  **[⬆ back to top](#freecodecamp-exercises-using-elixir)**
+  **[⬆ back to top](#basic-algorithm-scripting)**
   </details>
 
   <details><summary>Check for Palindromes</summary>
@@ -55,7 +55,7 @@ Some exercises from freecodecamp.org using Elixir programming language
 
   % IO.puts("foo" =~ ~r/foo/)
   ```
-  **[⬆ back to top](#freecodecamp-exercises-using-elixir)**
+  **[⬆ back to top](#basic-algorithm-scripting)**
   </details>
 
   <details><summary>Find the Longest Word in a String</summary>
@@ -85,7 +85,7 @@ Some exercises from freecodecamp.org using Elixir programming language
   iex> Word.find_longest("foo this")
   "The longest word: this (4 characters)"
   ```
-  **[⬆ back to top](#freecodecamp-exercises-using-elixir)**
+  **[⬆ back to top](#basic-algorithm-scripting)**
   </details>
 
   <details><summary>Title Case a Sentence</summary>
@@ -103,7 +103,7 @@ Some exercises from freecodecamp.org using Elixir programming language
   iex> Word.title_case("foo this")
   "Foo This"
   ```
-  **[⬆ back to top](#freecodecamp-exercises-using-elixir)**
+  **[⬆ back to top](#basic-algorithm-scripting)**
   </details>
 
   <details><summary>Return Largest Numbers in Arrays</summary>
@@ -119,7 +119,7 @@ Some exercises from freecodecamp.org using Elixir programming language
   iex> Array.largest_number([[13, 27, 18, 26], [4, 5, 1, 3], [32, 35, 37, 39], [1000, 1001, 857, 1]])
   [27, 5, 39, 1001]
   ```
-  **[⬆ back to top](#freecodecamp-exercises-using-elixir)**
+  **[⬆ back to top](#basic-algorithm-scripting)**
   </details>
 
   <details><summary>Confirm the Ending</summary>
@@ -150,7 +150,7 @@ Some exercises from freecodecamp.org using Elixir programming language
   iex> String.ends_with?("bastion", "Ion")
   false
   ```
-  **[⬆ back to top](#freecodecamp-exercises-using-elixir)**
+  **[⬆ back to top](#basic-algorithm-scripting)**
   </details>
 
   <details><summary>Repeat a string repeat a string</summary>
@@ -165,5 +165,5 @@ Some exercises from freecodecamp.org using Elixir programming language
   iex> duplicate.("the", 2)
   "thethe"
   ```
-  **[⬆ back to top](#freecodecamp-exercises-using-elixir)**
+  **[⬆ back to top](#basic-algorithm-scripting)**
   </details>
