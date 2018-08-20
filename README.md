@@ -3,8 +3,8 @@
 # Freecodecamp exercises using Elixir
 Some exercises from freecodecamp.org using Elixir programming language
 
-## Basic Algorithm Scripting
-  <details><summary><strong>Reverse a String</strong></summary>
+### Basic Algorithm Scripting
+  <details><summary>Reverse a String</summary>
 
   ```elixir
   # Reverse a String:
@@ -15,7 +15,7 @@ Some exercises from freecodecamp.org using Elixir programming language
   **[⬆ back to top](#basic-algorithm-scripting)**
   </details>
 
-  <details><summary><strong>Factorialize a Number</strong></summary>
+  <details><summary>Factorialize a Number</summary>
 
   ```elixir
   # Factorialize a Number:
@@ -33,7 +33,7 @@ Some exercises from freecodecamp.org using Elixir programming language
   **[⬆ back to top](#freecodecamp-exercises-using-elixir)**
   </details>
 
-  <details><summary><strong>Check for Palindromes</strong></summary>
+  <details><summary>Check for Palindromes</summary>
 
   ```elixir
   # Check for Palindromes:
@@ -57,7 +57,7 @@ Some exercises from freecodecamp.org using Elixir programming language
   **[⬆ back to top](#freecodecamp-exercises-using-elixir)**
   </details>
 
-  <details><summary><strong>Find the Longest Word in a String</strong></summary>
+  <details><summary>Find the Longest Word in a String</summary>
 
   ```elixir
   # Find the Longest Word in a String:
@@ -87,7 +87,7 @@ Some exercises from freecodecamp.org using Elixir programming language
   **[⬆ back to top](#freecodecamp-exercises-using-elixir)**
   </details>
 
-  <details><summary><strong>Title Case a Sentence</strong></summary>
+  <details><summary>Title Case a Sentence</summary>
 
   ```elixir
   # Title Case a Sentence:
@@ -105,7 +105,7 @@ Some exercises from freecodecamp.org using Elixir programming language
   **[⬆ back to top](#freecodecamp-exercises-using-elixir)**
   </details>
 
-  <details><summary><strong>Return Largest Numbers in Arrays</strong></summary>
+  <details><summary>Return Largest Numbers in Arrays</summary>
 
   ```elixir
   # Return Largest Numbers in Arrays:
@@ -121,7 +121,7 @@ Some exercises from freecodecamp.org using Elixir programming language
   **[⬆ back to top](#freecodecamp-exercises-using-elixir)**
   </details>
 
-  <details><summary><strong>Confirm the Ending</strong></summary>
+  <details><summary>Confirm the Ending</summary>
 
   ```elixir
   # Confirm the Ending:
@@ -152,7 +152,7 @@ Some exercises from freecodecamp.org using Elixir programming language
   **[⬆ back to top](#freecodecamp-exercises-using-elixir)**
   </details>
 
-  <details><summary><strong>Repeat a string repeat a string</strong></summary>
+  <details><summary>Repeat a string repeat a string</summary>
 
   ```elixir
   # Repeat a string repeat a string:
