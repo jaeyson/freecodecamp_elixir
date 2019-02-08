@@ -121,13 +121,13 @@ Some exercises from freecodecamp.org using Elixir programming language
 
   ```elixir
   # Return Largest Numbers in Arrays:
-  defmodule Array do
+  defmodule Lists do
     def largest_number(list) do
       for number <- list, do: Enum.max(number)
     end
   end
 
-  iex> Array.largest_number([[13, 27, 18, 26], [4, 5, 1, 3], [32, 35, 37, 39], [1000, 1001, 857, 1]])
+  iex> Lists.largest_number([[13, 27, 18, 26], [4, 5, 1, 3], [32, 35, 37, 39], [1000, 1001, 857, 1]])
   [27, 5, 39, 1001]
   ```
   **[⬆ back to top](#basic-algorithm-scripting)**
