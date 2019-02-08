@@ -64,7 +64,10 @@ Some exercises from freecodecamp.org using Elixir programming language
   # Find the Longest Word in a String:
   defmodule Word do
     def find_longest(str) do
-      Enum.map(String.split(str), &(String.length(&1))) |> Enum.max
+      str
+      |> String.split()
+      |> Enum.map(&String.length/1)
+      |> Enum.max()
     end
   end
 
@@ -76,9 +79,16 @@ Some exercises from freecodecamp.org using Elixir programming language
   # Find the Longest Word in a String version 2:
   defmodule Word do
     def find_longest(str) do
-      length = Enum.map(String.split(str), &(String.length(&1))) |> Enum.max
-      value = String.split(str) |> Enum.max
-      "The longest word: #{value} (#{length} characters)"
+      length = str
+      |> String.split()
+      |> Enum.map(&String.length/1)
+      |> Enum.max()
+      
+      value = str
+      |> String.split()
+      |> Enum.max()
+      
+      IO.puts "The longest word: #{value} (#{length} characters)"
     end
   end
 
