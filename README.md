@@ -104,13 +104,14 @@ Some exercises from freecodecamp.org using Elixir programming language
   # Title Case a Sentence:
   defmodule Word do
     def title_case(str) do
-      Enum.map(String.split(str),
-        fn(x) -> String.capitalize(x) end)
+      str
+      |> String.split()
+      |> Enum.map(&String.capitalize/1)
       |> Enum.join(" ")
     end
   end
 
-  iex> Word.title_case("foo this")
+  iex> IO.puts Word.title_case("foo this")
   "Foo This"
   ```
   **[⬆ back to top](#basic-algorithm-scripting)**
