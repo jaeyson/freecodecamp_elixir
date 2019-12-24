@@ -1,0 +1,39 @@
+
+# Created by https://www.gitignore.io/api/vim,elixir
+# Edit at https://www.gitignore.io/?templates=vim,elixir
+
+### Elixir ###
+/_build
+/cover
+/deps
+/doc
+/.fetch
+erl_crash.dump
+*.ez
+*.beam
+/config/*.secret.exs
+.elixir_ls/
+
+### Elixir Patch ###
+
+### Vim ###
+# Swap
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+
+# Session
+Session.vim
+Sessionx.vim
+
+# Temporary
+.netrwhist
+*~
+# Auto-generated tag files
+tags
+# Persistent undo
+[._]*.un~
+
+# End of https://www.gitignore.io/api/vim,elixir
