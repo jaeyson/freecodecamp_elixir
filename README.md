@@ -3,6 +3,16 @@
 # Freecodecamp exercises using Elixir
 Some exercises from freecodecamp.org using Elixir programming language
 
+## Basic cli usage (local docs)
+
+```bash
+# install dependencies
+mix deps.get
+
+# generate docs, view them at doc/index.html
+mix docs
+```
+
 ### Basic Algorithm Scripting
 
   <details><summary>Reverse a String</summary>
