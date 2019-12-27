@@ -1,0 +1,43 @@
+name: Elixir CI
+
+on: push
+
+jobs:
+  check-commit-message:
+    name: check commit message if skipping build(s)
+    runs-on: ubuntu-latest
+    
+    # skips CI and prints cli message, without fail build badge
+    if: "contains(github.event.head_commit.message, '[ci skip]')"
+    steps:
+      - name: print message via cli
+        run: echo "no need to build, based from commit message"
+        
+  build:
+    name: Setup Elixir and test it
+    runs-on: ubuntu-latest
+
+    container:
+      image: elixir:1.9.1-slim
+
+    # doesn't contain "ci skip" in commit message
+    if: "!contains(github.event.head_commit.message, '[ci skip]')"
+    
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v1
+        
+      - name: Cache Mix
+        uses: actions/cache@v1
+        with:
+          path: deps
+          key: ${{ runner.os }}-mix-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
+          restore-keys: ${{ runner.os }}-mix-
+
+      - name: Install Dependencies
+        run: |
+          mix local.rebar --force
+          mix local.hex --force
+          mix deps.get
+      - name: Run Tests
+        run: mix test
