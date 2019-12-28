@@ -13,6 +13,5 @@ defmodule Freecodecamp.BasicAlgo do
 
   """
   @spec convert_to_f(integer) :: integer
-  def convert_to_f(celsius) when is_integer(celsius), do: celsius * 9/5 + 32
- 
+  def convert_to_f(celsius) when is_integer(celsius), do: celsius * 9 / 5 + 32
 end
