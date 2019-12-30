@@ -13,7 +13,7 @@ jobs:
       - name: print message via cli
         run: echo "no need to build, based from commit message"
         
-  build:
+  setup-elixir:
     name: Setup Elixir and test it
     runs-on: ubuntu-latest
 
@@ -39,5 +39,17 @@ jobs:
           mix local.rebar --force
           mix local.hex --force
           mix deps.get
+          mix format --check-formatted
       - name: Run Tests
         run: mix test
+
+  push-heroku:
+    needs: setup-elixir
+    runs-on: ubuntu-latest
+
+    # if the commit messages contains "[push heroku]"
+    if: "contains(github.event.head_commit.message, '[push heroku]')"
+    
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v1
