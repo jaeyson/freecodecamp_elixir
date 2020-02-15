@@ -1,7 +1,23 @@
-[![Build Status](https://img.shields.io/badge/status-work%20in%20progress-orange.svg)](https://learn.freecodecamp.org/)
-
 # Freecodecamp exercises using Elixir
 Some exercises from freecodecamp.org using Elixir programming language
+
+[//]: # "Badges"
+[![Last Commit][commit badge]][commit]
+[![Commit activity][pulse badge]][pulse]
+[![Dependabot][dependabot badge]][dependabot]
+[![Actions Status][actions badge]][actions]
+
+[//]: # "Links"
+[commit]: https://github.com/jaeyson/freecodecamp-exercises-using-elixir/commit/master
+[pulse]: https://github.com/jaeyson/freecodecamp-exercises-using-elixir/pulse
+[dependabot]: https://github.com/jaeyson/freecodecamp-exercises-using-elixir
+[actions]: https://github.com/jaeyson/freecodecamp-exercises-using-elixir/actions
+
+[//]: # "Image sources"
+[commit badge]: https://img.shields.io/github/last-commit/jaeyson/freecodecamp-exercises-using-elixir.svg
+[pulse badge]: https://img.shields.io/github/commit-activity/m/jaeyson/freecodecamp-exercises-using-elixir
+[dependabot badge]: https://badgen.net/dependabot/jaeyson/freecodecamp-exercises-using-elixir/111643794?icon=dependabot
+[actions badge]: https://github.com/jaeyson/freecodecamp-exercises-using-elixir/workflows/Elixir%20CI/badge.svg
 
 ## Basic cli usage (local docs)
 
