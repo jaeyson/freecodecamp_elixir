@@ -5,7 +5,7 @@ defmodule Freecodecamp.MixProject do
     [
       app: :freecodecamp,
       version: "0.1.0",
-      elixir: "~> 1.9",
+      elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
       deps: deps()
     ]
@@ -25,7 +25,8 @@ defmodule Freecodecamp.MixProject do
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
       {:stream_data, "~> 0.4.3"},
       {:ex_doc, "~> 0.21.2", only: [:dev, :test], runtime: false},
-      {:credo, "~> 1.1", only: [:dev, :test], runtime: false}
+      {:credo, "~> 1.1", only: [:dev, :test], runtime: false},
+      {:dialyxir, "~> 0.5.1", only: [:dev, :test], runtime: false},
     ]
   end
 end
