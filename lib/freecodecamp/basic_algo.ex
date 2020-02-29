@@ -15,8 +15,11 @@ defmodule Freecodecamp.BasicAlgo do
 
   """
   @spec convert_to_f(integer) :: integer
-  def convert_to_f(celsius \\ 0) when is_integer(celsius), do: celsius * 9 / 5 + 32
+  def convert_to_f(celsius \\ 0) when is_integer(celsius), do: div(celsius * 9, 5) + 32
 
+  # def convert_to_f(celsius \\ 0) when is_integer(celsius), do: celsius * 9 / 5 + 32
+
+  @spec reverse_string(String.t()) :: String.t()
   defdelegate reverse_string(str), to: String, as: :reverse
 
   @doc """
@@ -47,12 +50,10 @@ defmodule Freecodecamp.BasicAlgo do
       5
 
   """
-  @spec find_longest_wordlength(String.t) :: integer
+  @spec find_longest_wordlength(String.t()) :: integer
   def find_longest_wordlength(""), do: 0
+
   def find_longest_wordlength(str) when is_binary(str) do
-    str
-    |> String.split()
-    |> Enum.max_by(&String.length(&1))
-    |> String.length()
+    str |> String.split() |> Enum.max_by(&String.length(&1)) |> String.length()
   end
 end

@@ -7,7 +7,20 @@ defmodule Freecodecamp.MixProject do
       version: "0.1.0",
       elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      aliases: aliases(),
+      deps: deps(),
+
+      # Docs
+      name: "FCC using Elixir",
+      source_url: "https://github.com/jaeyson/freecodecamp-exercises-using-elixir",
+      docs: [
+        authors: ["Jaeyson Anthony Y."],
+        api_reference: false,
+        assets: "assets",
+        main: "Freecodecamp",
+        logo: "assets/static/images/logo.png",
+        extras: ["elixir.md"]
+      ]
     ]
   end
 
@@ -26,7 +39,18 @@ defmodule Freecodecamp.MixProject do
       {:stream_data, "~> 0.4.3"},
       {:ex_doc, "~> 0.21.2", only: [:dev, :test], runtime: false},
       {:credo, "~> 1.1", only: [:dev, :test], runtime: false},
-      {:dialyxir, "~> 0.5.1", only: [:dev, :test], runtime: false},
+      {:dialyxir, "~> 0.5.1", only: [:dev, :test], runtime: false}
+    ]
+  end
+
+  defp aliases do
+    [
+      test: [
+        "format --check-formatted",
+        "test --trace",
+        # "dialyzer",
+        "credo --strict"
+      ]
     ]
   end
 end
