@@ -1,7 +1,8 @@
 defmodule BasicAlgoTest do
   use ExUnit.Case, async: true
 
-  alias Freecodecamp.{AlgoProjects, BasicAlgo, IntermediateAlgo}
+  # alias Freecodecamp.{AlgoProjects, BasicAlgo, IntermediateAlgo}
+  alias Freecodecamp.BasicAlgo
   doctest Freecodecamp.BasicAlgo
 
   # test "greets the world" do
