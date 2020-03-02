@@ -38,7 +38,7 @@ jobs:
         with:
           path: deps/
           key: ${{ runner.os }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
-          restore-keys: ${{ runner.os }}-deps-
+          restore-keys: ${{ runner.os }}-mix-
 
       - name: get build cache
         uses: actions/cache@v1
@@ -46,7 +46,7 @@ jobs:
         with:
           path: _build/test/
           key: ${{ runner.os }}-build-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
-          restore-keys: ${{ runner.os }}-build-
+          restore-keys: ${{ runner.os }}-mix-
 
       - name: Install Dependencies
         if: (steps.deps-cache.outputs.cache-hit != 'true') && (steps.build-cache.outputs.cache-hit != 'true')
