@@ -1,31 +1,50 @@
 defmodule BasicAlgoTest do
   use ExUnit.Case, async: true
+  use ExUnitProperties, async: true
 
   # alias Freecodecamp.{AlgoProjects, BasicAlgo, IntermediateAlgo}
   alias Freecodecamp.BasicAlgo
   doctest Freecodecamp.BasicAlgo
 
-  # test "greets the world" do
-  #   assert Freecodecamp.hello() == :world
-  # end
-
   describe "Convert Celsius to Fahrenheit:" do
-    test "-30C == -22F", do: assert(BasicAlgo.convert_to_f(-30) == -22)
-    test "-10 == 14", do: assert(BasicAlgo.convert_to_f(-10) == 14)
+    property "takes a random integer and converts it" do
+      check all(number <- integer()) do
+        test_number =
+          (number * 9)
+          |> div(5)
+          |> Kernel.+(32)
+
+        origin_number = ((test_number - 32) * 5 / 9) |> round()
+
+        assert BasicAlgo.convert_to_f(number) == test_number
+        assert number == origin_number
+      end
+    end
   end
 
   describe "Reverse a string:" do
-    test "hello should become olleh", do: assert(BasicAlgo.reverse_string("hello") == "olleh")
-    test "Howdy should become ydwoH", do: assert(BasicAlgo.reverse_string("Howdy") == "ydwoH")
+    property "takes a random string and reverse it twice" do
+      check all(str <- string(:printable)) do
+        test_string =
+          str
+          |> String.split("", trim: true)
+          |> Enum.reverse()
+          |> Enum.join("")
+
+        assert BasicAlgo.reverse_string(str) == test_string
+      end
+    end
   end
 
   describe "Factorialize a number:" do
-    test "!5 == 120", do: assert(BasicAlgo.factorialize(5) == 120)
+    test "!5 == 120",
+      do: assert(BasicAlgo.factorialize(5) == 120)
 
     test "!20 == 2_432_902_008_176_640_000",
       do: assert(BasicAlgo.factorialize(20) == 2_432_902_008_176_640_000)
 
-    test "!0 == 1", do: assert(BasicAlgo.factorialize(0) == 1)
+    test "!0 == 1",
+      do: assert(BasicAlgo.factorialize(0) == 1)
   end
 
   describe "Find the longest word in a string:" do
@@ -37,5 +56,40 @@ defmodule BasicAlgoTest do
 
     test "force = 5",
       do: assert(BasicAlgo.find_longest_wordlength("May the force be with you") == 5)
+  end
+
+  describe "Return largest numbers in lists:" do
+    test "returns [27, 5, 39, 1001]",
+      do:
+        assert(
+          BasicAlgo.largest_of_four([
+            [13, 27, 18, 26],
+            [4, 5, 1, 3],
+            [32, 35, 37, 39],
+            [1000, 1001, 857, 1]
+          ]) == [27, 5, 39, 1001]
+        )
+
+    test "returns [9, 35, 97, 1000000]",
+      do:
+        assert(
+          BasicAlgo.largest_of_four([
+            [4, 9, 1, 3],
+            [13, 35, 18, 26],
+            [32, 35, 97, 39],
+            [1_000_000, 1001, 857, 1]
+          ]) == [9, 35, 97, 1_000_000]
+        )
+
+    test "returns [25, 48, 21, -3]",
+      do:
+        assert(
+          BasicAlgo.largest_of_four([
+            [17, 23, 25, 12],
+            [25, 7, 34, 48],
+            [4, -10, 18, 21],
+            [-72, -3, -17, -10]
+          ]) == [25, 48, 21, -3]
+        )
   end
 end
