@@ -18,8 +18,7 @@ defmodule Freecodecamp.MixProject do
         api_reference: false,
         assets: "assets",
         main: "Freecodecamp",
-        logo: "assets/static/images/logo.png",
-        extras: ["elixir.md"]
+        logo: "assets/static/images/logo.png"
       ]
     ]
   end
