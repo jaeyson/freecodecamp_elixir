@@ -78,4 +78,28 @@ defmodule Freecodecamp.BasicAlgo do
   """
   @spec largest_of_four(list(integer)) :: integer
   def largest_of_four(list), do: Enum.map(list, &Enum.max/1)
+
+  @doc """
+  Return repeated string
+
+  ## Examples
+
+      iex> BasicAlgo.repeat_string_num_times("abc", 2)
+      "abcabc"
+
+      iex> BasicAlgo.repeat_string_num_times("abc", -1)
+      ""
+      
+      iex> BasicAlgo.repeat_string_num_times("abc", -1)
+      ""
+
+  """
+  @spec repeat_string_num_times(String.t(), integer) :: String.t()
+  def repeat_string_num_times(_string, num) when num <= 0, do: ""
+  def repeat_string_num_times("", _num), do: ""
+  def repeat_string_num_times(string, 1), do: string
+
+  def repeat_string_num_times(string, num) when num > 1 do
+    string <> repeat_string_num_times(string, num - 1)
+  end
 end

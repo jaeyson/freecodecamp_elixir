@@ -92,4 +92,22 @@ defmodule BasicAlgoTest do
           ]) == [25, 48, 21, -3]
         )
   end
+
+  describe "Repeat a string:" do
+    property "Repeats a string for random amount of times" do
+      check all(
+              str <- string(:printable),
+              pos_int <- positive_integer(),
+              neg_int <- integer(),
+              neg_int < 0
+            ) do
+        assert BasicAlgo.repeat_string_num_times(str, pos_int) ==
+                 String.duplicate(str, pos_int)
+
+        assert BasicAlgo.repeat_string_num_times(str, neg_int) == ""
+
+        assert BasicAlgo.repeat_string_num_times(str, 0) == ""
+      end
+    end
+  end
 end
