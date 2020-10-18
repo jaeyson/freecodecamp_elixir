@@ -38,7 +38,7 @@ defmodule Freecodecamp.MixProject do
       {:stream_data, "~> 0.4.3"},
       {:ex_doc, "~> 0.21.2", only: [:dev, :test], runtime: false},
       {:credo, "~> 1.1", only: [:dev, :test], runtime: false},
-      {:dialyxir, "~> 0.5.1", only: [:dev, :test], runtime: false}
+      {:dialyxir, "~> 1.0.0", only: [:dev, :test], runtime: false}
     ]
   end
 
