@@ -98,8 +98,7 @@ defmodule BasicAlgoTest do
       check all(
               str <- string(:printable),
               pos_int <- positive_integer(),
-              neg_int <- integer(),
-              neg_int < 0
+              neg_int <- integer(-1..-10_000)
             ) do
         assert BasicAlgo.repeat_string_num_times(str, pos_int) ==
                  String.duplicate(str, pos_int)
