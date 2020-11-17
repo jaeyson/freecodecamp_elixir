@@ -1,6 +1,7 @@
 defmodule BasicAlgoTest do
   use ExUnit.Case, async: true
   use ExUnitProperties, async: true
+  require Logger
 
   # alias Freecodecamp.{AlgoProjects, BasicAlgo, IntermediateAlgo}
   alias Freecodecamp.BasicAlgo
@@ -106,6 +107,33 @@ defmodule BasicAlgoTest do
         assert BasicAlgo.repeat_string_num_times(str, neg_int) == ""
 
         assert BasicAlgo.repeat_string_num_times(str, 0) == ""
+      end
+    end
+  end
+
+  describe "Mutations" do
+    property "Test different inputs" do
+      check all(
+              str1 <- string(:alphanumeric, min_length: 3),
+              str2 <- string(:alphanumeric, min_length: 3)
+            ) do
+        sort_list =
+          &(String.downcase(&1)
+            |> String.split("", trim: true)
+            |> Enum.uniq()
+            |> Enum.sort())
+
+        sort_first_string =
+          for letter <- sort_list.(str1),
+              letter in sort_list.(str2),
+              do: letter
+
+        test_boolean = sort_first_string === sort_list.(str2)
+
+        assert BasicAlgo.mutation(["", ""]) === false
+        assert BasicAlgo.mutation([str1, ""]) === false
+        assert BasicAlgo.mutation(["", str2]) === false
+        assert BasicAlgo.mutation([str1, str2]) === test_boolean
       end
     end
   end
