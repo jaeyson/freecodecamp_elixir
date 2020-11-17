@@ -16,11 +16,8 @@ config/*.secret.exs
 .elixir_ls
 tmp
 priv/static
+bencmarks/output
 ### Elixir Patch ###
-
-### NodeJS ###
-npm-debug.log
-assets/node_modules
 
 ### Vim ###
 # Swap
