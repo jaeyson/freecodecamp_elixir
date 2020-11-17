@@ -87,7 +87,7 @@ defmodule Freecodecamp.BasicAlgo do
       iex> BasicAlgo.repeat_string_num_times("abc", 2)
       "abcabc"
 
-      iex> BasicAlgo.repeat_string_num_times("abc", -1)
+      iex> BasicAlgo.repeat_string_num_times("abc", 0)
       ""
       
       iex> BasicAlgo.repeat_string_num_times("abc", -1)
@@ -101,5 +101,39 @@ defmodule Freecodecamp.BasicAlgo do
 
   def repeat_string_num_times(string, num) when num > 1 do
     string <> repeat_string_num_times(string, num - 1)
+  end
+
+  @doc """
+  Returns true if the string in the first element of the array
+  contains all of the letters of the string in the second
+  element of the array.
+
+  ## Examples
+
+      iex> BasicAlgo.mutation(["hello", "Hey"])
+      false
+
+      iex> BasicAlgo.mutation(["hello", "neo"])
+      false
+      
+      iex> BasicAlgo.mutation(["Noel", "Ole"])
+      true
+
+  """
+  @spec mutation(list(String.t())) :: boolean()
+  def mutation(["", ""]), do: false
+  def mutation(["", _source]), do: false
+  def mutation([_target, ""]), do: false
+
+  def mutation([target, source] = _list) do
+    list =
+      &(String.downcase(&1)
+        |> String.split("", trim: true)
+        |> Enum.uniq()
+        |> Enum.sort())
+
+    new_list = list.(target) |> Enum.filter(&(&1 in list.(source)))
+
+    new_list == list.(source)
   end
 end
