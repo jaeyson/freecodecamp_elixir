@@ -1,5 +1,5 @@
-# Freecodecamp exercises using Elixir
-Some exercises from freecodecamp.org using Elixir programming language
+# Freecodecamp Elixir
+Solving exercises from Freecodecamp.org using Elixir programming language. Includes benchmarks and tests for every functions.
 
 [//]: # "Badges"
 [![Last Commit][commit badge]][commit]
@@ -8,18 +8,18 @@ Some exercises from freecodecamp.org using Elixir programming language
 [![Actions Status][actions badge]][actions]
 
 [//]: # "Links"
-[commit]: https://github.com/jaeyson/freecodecamp-exercises-using-elixir/commit/master
-[pulse]: https://github.com/jaeyson/freecodecamp-exercises-using-elixir/pulse
-[dependabot]: https://github.com/jaeyson/freecodecamp-exercises-using-elixir
-[actions]: https://github.com/jaeyson/freecodecamp-exercises-using-elixir/actions
+[commit]: https://github.com/jaeyson/freecodecamp-elixir/commit/master
+[pulse]: https://github.com/jaeyson/freecodecamp-elixir/pulse
+[dependabot]: https://github.com/jaeyson/freecodecamp-elixir
+[actions]: https://github.com/jaeyson/freecodecamp-elixir/actions
 
 [//]: # "Image sources"
-[commit badge]: https://img.shields.io/github/last-commit/jaeyson/freecodecamp-exercises-using-elixir.svg
-[pulse badge]: https://img.shields.io/github/commit-activity/m/jaeyson/freecodecamp-exercises-using-elixir
-[dependabot badge]: https://badgen.net/dependabot/jaeyson/freecodecamp-exercises-using-elixir/111643794?icon=dependabot
-[actions badge]: https://github.com/jaeyson/freecodecamp-exercises-using-elixir/workflows/Elixir%20CI/badge.svg
+[commit badge]: https://img.shields.io/github/last-commit/jaeyson/freecodecamp-elixir.svg
+[pulse badge]: https://img.shields.io/github/commit-activity/m/jaeyson/freecodecamp-elixir
+[dependabot badge]: https://badgen.net/dependabot/jaeyson/freecodecamp-elixir/111643794?icon=dependabot
+[actions badge]: https://github.com/jaeyson/freecodecamp-elixir/workflows/Elixir%20CI/badge.svg
 
-### pre-commit hook
+### Pre-commit Hook
 
 ```bash
 chmod +x create_pre_commit_hook.sh
@@ -27,10 +27,10 @@ chmod +x create_pre_commit_hook.sh
 ./create_pre_commit_hook
 ```
 
-### using docker
+### Using Docker (or use [`asdf`](https://asdf-vm.com/#/core-manage-asdf))
 
 ```plaintext
-freecodecamp-exercises-using-elixir/
+freecodecamp-elixir/
 ├── ...
 ├── lib/
 │   ├── freecodecamp/
@@ -50,7 +50,7 @@ freecodecamp-exercises-using-elixir/
 └── ...
 ```
 
-### build
+### Build
 
 ```bash
 docker-compose build && docker-compose up -d
@@ -59,7 +59,7 @@ docker-compose build && docker-compose up -d
 docker ps
 ```
 
-### create elixir project
+### Create Elixir Project
 
 ```bash
 # get deps
@@ -69,27 +69,30 @@ docker exec -it app mix deps.get
 docker-compose --compatibility up
 ```
 
-### test
+### Test
 
 ```bash
 # should be inside app/ folder before running command
 docker exec -it app mix test
 ```
 
-### generate html docs
+### Generate `HTML` Docs
 
 ```bash
 docker exec -it app mix docs
 ```
 
-### benchmarks (Benchee)
+### Benchmarks (using Benchee)
 
 If you want to benchmark a specific function:
 
 ```bash (path=benchmarks/basic_algo.exs)
-# change the function name from
+# freecodecamp-elixir/benchmarks/basic_algo.exs
+
+# Example: change the function name from
 # "mutation" to "repeat_string"
 # BasicAlgo.run("mutation", HTML)
+# or uncomment lines to use that instead
 BasicAlgo.run("repeat_string", HTML)
 
 # you can use the default formatter (console)
@@ -100,7 +103,7 @@ BasicAlgo.run("repeat_string", Console)
 docker exec -it app mix run benchmarks/basic_algo.exs
 ```
 
-### other useful commands
+### Other useful commands
 
 ```bash
 # check ip of running container
