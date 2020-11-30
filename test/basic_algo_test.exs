@@ -1,9 +1,7 @@
 defmodule BasicAlgoTest do
   use ExUnit.Case, async: true
   use ExUnitProperties, async: true
-  require Logger
 
-  # alias Freecodecamp.{AlgoProjects, BasicAlgo, IntermediateAlgo}
   alias Freecodecamp.BasicAlgo
   doctest Freecodecamp.BasicAlgo
 
@@ -134,6 +132,27 @@ defmodule BasicAlgoTest do
         assert BasicAlgo.mutation([str1, ""]) === false
         assert BasicAlgo.mutation(["", str2]) === false
         assert BasicAlgo.mutation([str1, str2]) === test_boolean
+      end
+    end
+  end
+
+  describe "Truncate string and appends ellipses" do
+    property "random strings and truncate with ellipses" do
+      check all(
+              string <- string(:alphanumeric, min_length: 3),
+              pos_int <- positive_integer(),
+              neg_int <- integer(-1..-10_000)
+            ) do
+        test_truncate = fn words, len ->
+          {trimmed_word, _} = String.split_at(words, len)
+          trimmed_word <> "..."
+        end
+
+        assert BasicAlgo.truncate_string("", pos_int) === "..."
+        assert BasicAlgo.truncate_string("", neg_int) === "..."
+        assert BasicAlgo.truncate_string(string, neg_int) === "..."
+        assert BasicAlgo.truncate_string(string, 0) === "..."
+        assert BasicAlgo.truncate_string(string, pos_int) === test_truncate.(string, pos_int)
       end
     end
   end
