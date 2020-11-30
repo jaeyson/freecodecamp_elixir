@@ -136,4 +136,50 @@ defmodule Freecodecamp.BasicAlgo do
 
     new_list == list.(source)
   end
+
+  @doc """
+  Truncate a string (first argument) if it is longer than
+  the given maximum string length (second argument). Return
+  the truncated string with a `...` ending.
+
+  ## Examples
+
+      iex> BasicAlgo.truncate_string("A-tisket a-tasket A green and yellow basket", 8)
+      "A-tisket..."
+
+      iex> BasicAlgo.truncate_string("Absolutely Longer", 2)
+      "Ab..."
+      
+      iex> BasicAlgo.truncate_string("A-", 1)
+      "A..."
+
+      iex> BasicAlgo.truncate_string("A-tisket", -1)
+      "..."
+
+      iex> BasicAlgo.truncate_string("Hello", 50)
+      "Hello..."
+
+  """
+  @spec truncate_string(String.t(), integer) :: String.t()
+  def truncate_string(_words, len) when len <= 0, do: "..."
+  def truncate_string("", _len), do: "..."
+
+  def truncate_string(words, len) do
+    case String.length(words) < len do
+      true ->
+        words <> "..."
+
+      false ->
+        words
+        |> String.to_charlist()
+        |> do_truncate_string(len)
+        |> to_string()
+        |> Kernel.<>("...")
+    end
+  end
+
+  defp do_truncate_string(_letter, 0), do: []
+
+  defp do_truncate_string([head | tails] = _list, len),
+    do: [[head] | do_truncate_string(tails, len - 1)]
 end
