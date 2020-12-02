@@ -56,7 +56,28 @@ defmodule Benchmark.BasicAlgo do
       fn _ ->
         {
           gen_string_input(),
-          gen_pos_int_input()
+          gen_int_input(-10_000..10_000)
+        }
+      end
+    )
+  end
+
+  @spec get_index_to_ins(module(), any()) :: module()
+  def get_index_to_ins(formatter, _args) do
+    generic_benchee(
+      %{
+        "List comprehension" => fn {list_int, value} ->
+          BasicAlgo.get_index_to_ins(list_int, value)
+        end,
+        "Enum.filter" => fn {list_int, value} ->
+          get_index_to_ins_gen(list_int, value)
+        end
+      },
+      formatter,
+      fn _ ->
+        {
+          gen_list_int_input(-10_000..10_000),
+          gen_int_input(-10_000..10_000)
         }
       end
     )
@@ -69,9 +90,18 @@ defmodule Benchmark.BasicAlgo do
   # TODO: 
   # StreamData.integer(1..1_000) |> Enum.take(30) |> Enum.random()
   # StreamData.integer(1..1_000) |> Enum.take(1) |> hd()
-  @spec gen_pos_int_input :: integer()
-  defp gen_pos_int_input do
-    StreamData.integer(1..1_000)
+  @spec gen_list_int_input(Range.t()) :: list(integer)
+  defp gen_list_int_input(range) do
+    range
+    |> StreamData.integer()
+    |> StreamData.list_of()
+    |> Enum.take(Enum.random(1..1_000))
+    |> Enum.random()
+  end
+
+  @spec gen_int_input(Range.t()) :: integer()
+  defp gen_int_input(range) do
+    StreamData.integer(range)
     |> Enum.take(1)
     |> hd()
   end
@@ -115,14 +145,32 @@ defmodule Benchmark.BasicAlgo do
     {trimmed_word, _} = String.split_at(words, len)
     trimmed_word <> "..."
   end
+
+  @spec get_index_to_ins_gen(list(integer), integer) :: integer
+  defp get_index_to_ins_gen([], _value), do: 0
+
+  defp get_index_to_ins_gen(list, value) do
+    sorted_list = Enum.sort(list)
+
+    sorted_list
+    |> Enum.filter(&(&1 >= round(value)))
+    |> do_get_index_to_ins(sorted_list)
+  end
+
+  defp do_get_index_to_ins([], _list), do: 0
+
+  defp do_get_index_to_ins(result, list) do
+    Enum.find_index(list, &(&1 == List.first(result)))
+  end
 end
 
 alias Benchmark.BasicAlgo
 alias Benchee.Formatters.{HTML, Console}
 
 # BasicAlgo.run("mutation", Console)
-BasicAlgo.run("truncate_string", Console)
+BasicAlgo.run("get_index_to_ins", Console)
 
 # Available functions (uncomment above):
 #   - mutation
 #   - truncate_string
+#   - get_index_to_ins
