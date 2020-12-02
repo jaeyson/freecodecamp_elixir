@@ -156,4 +156,35 @@ defmodule BasicAlgoTest do
       end
     end
   end
+
+  describe "Basic Algorithm Scripting: Where do I Belong" do
+    property "takes a list of random integer and returns the lowest index from a value" do
+      check all(
+              list_of_int <- list_of(integer()),
+              value <- integer()
+            ) do
+        test_helper = fn result, sorted_list ->
+          case result === [] do
+            true ->
+              0
+
+            false ->
+              Enum.find_index(sorted_list, &(&1 == List.first(result)))
+          end
+        end
+
+        test_main = fn list_of_int, value ->
+          sorted_list = Enum.sort(list_of_int)
+
+          sorted_list
+          |> Enum.filter(&(&1 >= round(value)))
+          |> test_helper.(sorted_list)
+        end
+
+        assert BasicAlgo.get_index_to_ins([], 0) == 0
+        assert test_main.([], 0) == 0
+        assert BasicAlgo.get_index_to_ins(list_of_int, value) == test_main.(list_of_int, value)
+      end
+    end
+  end
 end
