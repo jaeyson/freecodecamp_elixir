@@ -182,4 +182,42 @@ defmodule Freecodecamp.BasicAlgo do
 
   defp do_truncate_string([head | tails] = _list, len),
     do: [[head] | do_truncate_string(tails, len - 1)]
+
+  @doc """
+  Return the lowest index at which a value (second argument) should be inserted into an array (first argument) once it has been **sorted**. The returned value should be a number.
+
+  For example, `get_index_to_ins([1,2,3,4], 1.5)` should return 1 because it is greater than 1 (index 0), but less than 2 (index 1).
+
+  Likewise, `get_index_to_ins([20,3,5], 19)` should return 2 because once the array has been sorted it will look like [3,5,20] and 19 is less than 20 (index 2) and greater than 5 (index 1).
+
+  ## Examples
+
+      iex> BasicAlgo.get_index_to_ins([1, 2, 3, 4], 1.5)
+      1
+
+      iex> BasicAlgo.get_index_to_ins([20, 3, 5], 19)
+      2
+      
+      iex> BasicAlgo.get_index_to_ins([3, 10, 5], 3)
+      0
+      
+  """
+  @spec get_index_to_ins(list(integer), integer) :: integer
+  def get_index_to_ins([], _value), do: 0
+
+  def get_index_to_ins(list, value) do
+    sorted_list = Enum.sort(list)
+
+    result =
+      for element <- sorted_list,
+          element >= value,
+          do:
+            sorted_list
+            |> Enum.find_index(&(&1 == round(element)))
+
+    List.first(result) |> do_get_index_to_ins()
+  end
+
+  def do_get_index_to_ins(nil), do: 0
+  def do_get_index_to_ins(result), do: result
 end
