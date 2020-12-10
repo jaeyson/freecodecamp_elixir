@@ -5,97 +5,98 @@ defmodule BasicAlgoTest do
   alias Freecodecamp.BasicAlgo
   doctest Freecodecamp.BasicAlgo
 
-  describe "Convert Celsius to Fahrenheit:" do
-    property "takes a random integer and converts it" do
+  describe "Basic Algorithm Scripting: Convert Celsius to Fahrenheit" do
+    property "takes a random integer and converts it to Fahrenheit" do
       check all(number <- integer()) do
-        test_number =
+        test_function =
           (number * 9)
           |> div(5)
           |> Kernel.+(32)
 
-        origin_number = ((test_number - 32) * 5 / 9) |> round()
+        origin_number = ((test_function - 32) * 5 / 9) |> round()
 
-        assert BasicAlgo.convert_to_f(number) == test_number
+        assert BasicAlgo.convert_to_f(number) == test_function
         assert number == origin_number
       end
     end
   end
 
-  describe "Reverse a string:" do
-    property "takes a random string and reverse it twice" do
-      check all(str <- string(:printable)) do
-        test_string =
-          str
-          |> String.split("", trim: true)
-          |> Enum.reverse()
-          |> Enum.join("")
-
-        assert BasicAlgo.reverse_string(str) == test_string
+  describe "Basic Algorithm Scripting: Reverse a String" do
+    property "takes a random string and reverses it" do
+      check all(string <- string(:alphanumeric, min_length: 3, max_length: 1_000)) do
+        assert BasicAlgo.reverse_string(string) == String.reverse(string)
       end
     end
   end
 
-  describe "Factorialize a number:" do
-    test "!5 == 120",
-      do: assert(BasicAlgo.factorialize(5) == 120)
+  describe "Basic Algorithm Scripting: Factorialize a Number" do
+    property "takes a random number and factorialize" do
+      check all(number <- integer(-1_000..1_000)) do
+        test_function = fn input ->
+          1..input
+          |> Stream.filter(&(&1 !== 0))
+          |> Enum.reduce(1, &(&1 * &2))
+        end
 
-    test "!20 == 2_432_902_008_176_640_000",
-      do: assert(BasicAlgo.factorialize(20) == 2_432_902_008_176_640_000)
-
-    test "!0 == 1",
-      do: assert(BasicAlgo.factorialize(0) == 1)
+        assert BasicAlgo.factorialize(0) === 1
+        assert test_function.(0) === 1
+        assert BasicAlgo.factorialize(number) === test_function.(number)
+      end
+    end
   end
 
-  describe "Find the longest word in a string:" do
-    test "jumped = 6",
-      do:
-        assert(
-          BasicAlgo.find_longest_wordlength("The quick brown fox jumped over the lazy dog") == 6
-        )
+  describe "Basic Algorithm Scripting: Find the Longest Word in a String" do
+    property "takes random strings then returns integer" do
+      check all(string <- string(:alphanumeric, min_length: 3, max_length: 1_000)) do
+        test_function = fn string ->
+          case string do
+            "" ->
+              0
 
-    test "force = 5",
-      do: assert(BasicAlgo.find_longest_wordlength("May the force be with you") == 5)
+            _ ->
+              string
+              |> String.split()
+              |> Enum.max_by(&String.length(&1))
+              |> String.length()
+          end
+        end
+
+        assert BasicAlgo.find_longest_word_length("") == 0
+        assert test_function.("") == 0
+        assert BasicAlgo.find_longest_word_length(string) == test_function.(string)
+      end
+    end
   end
 
-  describe "Return largest numbers in lists:" do
-    test "returns [27, 5, 39, 1001]",
-      do:
-        assert(
-          BasicAlgo.largest_of_four([
-            [13, 27, 18, 26],
-            [4, 5, 1, 3],
-            [32, 35, 37, 39],
-            [1000, 1001, 857, 1]
-          ]) == [27, 5, 39, 1001]
-        )
+  describe "Basic Algorithm Scripting: Return Largest Numbers in Lists" do
+    property "takes a list of random no.s & return largest in each of these" do
+      check all(
+              random_input <-
+                -10_000..10_000
+                |> integer()
+                |> list_of(length: 4)
+            ) do
+        list_of_int =
+          random_input
+          |> constant()
+          |> Enum.take(4)
 
-    test "returns [9, 35, 97, 1000000]",
-      do:
-        assert(
-          BasicAlgo.largest_of_four([
-            [4, 9, 1, 3],
-            [13, 35, 18, 26],
-            [32, 35, 97, 39],
-            [1_000_000, 1001, 857, 1]
-          ]) == [9, 35, 97, 1_000_000]
-        )
+        test_function = fn list ->
+          list
+          |> Stream.filter(&(&1 !== []))
+          |> Stream.map(&Enum.max/1)
+          |> Enum.to_list()
+        end
 
-    test "returns [25, 48, 21, -3]",
-      do:
-        assert(
-          BasicAlgo.largest_of_four([
-            [17, 23, 25, 12],
-            [25, 7, 34, 48],
-            [4, -10, 18, 21],
-            [-72, -3, -17, -10]
-          ]) == [25, 48, 21, -3]
-        )
+        assert BasicAlgo.largest_of_four(list_of_int) === test_function.(list_of_int)
+      end
+    end
   end
 
-  describe "Repeat a string:" do
+  describe "Basic Algorithm Scripting: Repeat a String Repeat a String" do
     property "Repeats a string for random amount of times" do
       check all(
-              str <- string(:printable),
+              str <- string(:alphanumeric, min_length: 3, max_length: 1_000),
               pos_int <- positive_integer(),
               neg_int <- integer(-1..-10_000)
             ) do
@@ -109,11 +110,11 @@ defmodule BasicAlgoTest do
     end
   end
 
-  describe "Mutations" do
-    property "Test different inputs" do
+  describe "Basic Algorithm Scripting: Mutations" do
+    property "takes a list of two random strings and returns boolean" do
       check all(
-              str1 <- string(:alphanumeric, min_length: 3),
-              str2 <- string(:alphanumeric, min_length: 3)
+              str1 <- string(:alphanumeric, min_length: 3, max_length: 1_000),
+              str2 <- string(:alphanumeric, min_length: 3, max_length: 1_000)
             ) do
         sort_list =
           &(String.downcase(&1)
@@ -126,24 +127,24 @@ defmodule BasicAlgoTest do
               letter in sort_list.(str2),
               do: letter
 
-        test_boolean = sort_first_string === sort_list.(str2)
+        test_function = sort_first_string === sort_list.(str2)
 
         assert BasicAlgo.mutation(["", ""]) === false
         assert BasicAlgo.mutation([str1, ""]) === false
         assert BasicAlgo.mutation(["", str2]) === false
-        assert BasicAlgo.mutation([str1, str2]) === test_boolean
+        assert BasicAlgo.mutation([str1, str2]) === test_function
       end
     end
   end
 
-  describe "Truncate string and appends ellipses" do
+  describe "Basic Algorithm Scripting: Truncate a String" do
     property "random strings and truncate with ellipses" do
       check all(
-              string <- string(:alphanumeric, min_length: 3),
+              string <- string(:alphanumeric, min_length: 3, max_length: 1_000),
               pos_int <- positive_integer(),
               neg_int <- integer(-1..-10_000)
             ) do
-        test_truncate = fn words, len ->
+        test_function = fn words, len ->
           {trimmed_word, _} = String.split_at(words, len)
           trimmed_word <> "..."
         end
@@ -152,7 +153,7 @@ defmodule BasicAlgoTest do
         assert BasicAlgo.truncate_string("", neg_int) === "..."
         assert BasicAlgo.truncate_string(string, neg_int) === "..."
         assert BasicAlgo.truncate_string(string, 0) === "..."
-        assert BasicAlgo.truncate_string(string, pos_int) === test_truncate.(string, pos_int)
+        assert BasicAlgo.truncate_string(string, pos_int) === test_function.(string, pos_int)
       end
     end
   end
@@ -173,7 +174,7 @@ defmodule BasicAlgoTest do
           end
         end
 
-        test_main = fn list_of_int, value ->
+        test_function = fn list_of_int, value ->
           sorted_list = Enum.sort(list_of_int)
 
           sorted_list
@@ -182,8 +183,10 @@ defmodule BasicAlgoTest do
         end
 
         assert BasicAlgo.get_index_to_ins([], 0) == 0
-        assert test_main.([], 0) == 0
-        assert BasicAlgo.get_index_to_ins(list_of_int, value) == test_main.(list_of_int, value)
+        assert test_function.([], 0) == 0
+
+        assert BasicAlgo.get_index_to_ins(list_of_int, value) ==
+                 test_function.(list_of_int, value)
       end
     end
   end
