@@ -15,7 +15,8 @@ defmodule Freecodecamp.BasicAlgo do
 
   """
   @spec convert_to_f(integer) :: integer
-  def convert_to_f(celsius \\ 0) when is_integer(celsius), do: div(celsius * 9, 5) + 32
+  def convert_to_f(celsius \\ 0) when is_integer(celsius),
+    do: div(celsius * 9, 5) + 32
 
   @doc """
   Reverses a string
@@ -27,7 +28,11 @@ defmodule Freecodecamp.BasicAlgo do
 
   """
   @spec reverse_string(String.t()) :: String.t()
-  defdelegate reverse_string(str), to: String, as: :reverse
+  # defdelegate reverse_string(str), to: String, as: :reverse
+  def reverse_string(""), do: ""
+
+  def reverse_string(<<letter::utf8, rest::binary>> = _string),
+    do: reverse_string(rest) <> <<letter>>
 
   @doc """
   Factorialize a number
@@ -43,25 +48,37 @@ defmodule Freecodecamp.BasicAlgo do
   """
   @spec factorialize(integer) :: integer
   def factorialize(0), do: 1
-  def factorialize(n) when is_integer(n), do: n * factorialize(n - 1)
+
+  def factorialize(number) when is_integer(number) do
+    1..number
+    |> Stream.filter(&(&1 !== 0))
+    |> Enum.to_list()
+    |> do_factorialize()
+  end
+
+  defp do_factorialize(list) when list === [], do: 1
+  defp do_factorialize([head | tail]), do: head * do_factorialize(tail)
 
   @doc """
   Find the longest word and returns the length of it
 
   ## Examples
 
-      iex> BasicAlgo.find_longest_wordlength("")
+      iex> BasicAlgo.find_longest_word_length("")
       0
 
-      iex> BasicAlgo.find_longest_wordlength("May the force be with you")
+      iex> BasicAlgo.find_longest_word_length("May the force be with you")
       5
 
   """
-  @spec find_longest_wordlength(String.t()) :: integer
-  def find_longest_wordlength(""), do: 0
+  @spec find_longest_word_length(String.t()) :: integer
+  def find_longest_word_length(""), do: 0
 
-  def find_longest_wordlength(str) when is_binary(str) do
-    str |> String.split() |> Enum.max_by(&String.length(&1)) |> String.length()
+  def find_longest_word_length(string) when is_binary(string) do
+    string
+    |> String.splitter([" "])
+    |> Enum.map(&String.length(&1))
+    |> Enum.max()
   end
 
   @doc """
@@ -77,7 +94,20 @@ defmodule Freecodecamp.BasicAlgo do
 
   """
   @spec largest_of_four(list(integer)) :: integer
-  def largest_of_four(list), do: Enum.map(list, &Enum.max/1)
+  def largest_of_four(list) do
+    list
+    |> Stream.filter(&(&1 !== []))
+    |> Enum.to_list()
+    |> do_largest_of_four()
+  end
+
+  defp do_largest_of_four([]), do: []
+
+  defp do_largest_of_four([head | tail] = _list) do
+    sorted_head = head |> Enum.sort(:desc) |> hd()
+
+    [sorted_head | do_largest_of_four(tail)]
+  end
 
   @doc """
   Return repeated string
@@ -188,7 +218,7 @@ defmodule Freecodecamp.BasicAlgo do
 
   For example, `get_index_to_ins([1,2,3,4], 1.5)` should return 1 because it is greater than 1 (index 0), but less than 2 (index 1).
 
-  Likewise, `get_index_to_ins([20,3,5], 19)` should return 2 because once the array has been sorted it will look like [3,5,20] and 19 is less than 20 (index 2) and greater than 5 (index 1).
+  Likewise, `get_index_to_ins([20,3,5], 19)` should return 2 because once the array has been sorted it will look like `[3,5,20]` and 19 is less than 20 (index 2) and greater than 5 (index 1).
 
   ## Examples
 
