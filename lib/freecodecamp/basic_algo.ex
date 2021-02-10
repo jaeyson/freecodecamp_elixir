@@ -250,4 +250,32 @@ defmodule Freecodecamp.BasicAlgo do
 
   def do_get_index_to_ins(nil), do: 0
   def do_get_index_to_ins(result), do: result
+
+  @doc """
+  Check if a string (first argument, `string`) ends with the
+  given target string (second argument, `target`).
+
+  ## Examples
+
+      iex> BasicAlgo.confirm_ending("Bastian", "n")
+      true
+
+      iex> BasicAlgo.confirm_ending("Congratulation", "on")
+      true
+      
+      iex> BasicAlgo.confirm_ending("Connor", "n")
+      false
+      
+  """
+  @spec confirm_ending(String.t(), String.t()) :: boolean()
+  def confirm_ending(string, target)
+      when byte_size(string) < byte_size(target) do
+    false
+  end
+
+  def confirm_ending(string, target) do
+    length = String.length(string) - String.length(target)
+    <<_substr::binary-size(length), rest::binary>> = string
+    rest === target
+  end
 end

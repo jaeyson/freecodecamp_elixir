@@ -137,6 +137,27 @@ defmodule Benchmark.BasicAlgo do
     )
   end
 
+  @spec confirm_ending(module(), any()) :: module()
+  def confirm_ending(formatter, _args) do
+    generic_benchee(
+      %{
+        "confirm_ending: String.ends_with?" => fn {str_one, str_two} ->
+          BasicAlgo.confirm_ending(str_one, str_two)
+        end,
+        "confirm_ending: pattern match" => fn {str_one, str_two} ->
+          confirm_ending_gen(str_one, str_two)
+        end
+      },
+      formatter,
+      fn _ ->
+        {
+          gen_string_input(),
+          gen_string_input()
+        }
+      end
+    )
+  end
+
   ##################################################
   ### Below are helpers for the main functions above
   ##################################################
@@ -244,13 +265,18 @@ defmodule Benchmark.BasicAlgo do
     |> Stream.map(&Enum.max/1)
     |> Enum.to_list()
   end
+
+  @spec confirm_ending_gen(String.t(), String.t()) :: boolean()
+  def confirm_ending_gen(string, target) do
+    String.ends_with?(string, target)
+  end
 end
 
 alias Benchmark.BasicAlgo
 alias Benchee.Formatters.{HTML, Console}
 
-# BasicAlgo.run("mutation", Console)
-BasicAlgo.run("largest_of_four", Console)
+# BasicAlgo.run("mutation", HTML)
+BasicAlgo.run("confirm_ending", Console)
 
 # Available functions (uncomment above):
 #   - mutation
@@ -260,3 +286,4 @@ BasicAlgo.run("largest_of_four", Console)
 #   - reverse_string
 #   - find_longest_word_length
 #   - largest_of_four
+#   - confirm_ending
