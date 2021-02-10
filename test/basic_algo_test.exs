@@ -190,4 +190,26 @@ defmodule BasicAlgoTest do
       end
     end
   end
+
+  describe "Basic Algorithm Scripting: Confirm the Ending" do
+    property "takes 2 words then returns boolean, comparion with string ends with target " do
+      check all(
+              string <- string(:alphanumeric, min_length: 3, max_length: 1_000),
+              target <- string(:alphanumeric, min_length: 3, max_length: 1_000)
+            ) do
+        test_function = fn str, tar ->
+          String.ends_with?(str, tar)
+        end
+
+        assert BasicAlgo.confirm_ending("", "") === true
+        assert BasicAlgo.confirm_ending("", "ion") === false
+        assert BasicAlgo.confirm_ending("Bastian", "") === true
+        assert BasicAlgo.confirm_ending("Bastian", "n") === true
+        assert BasicAlgo.confirm_ending("Connor", "n") === false
+
+        assert BasicAlgo.confirm_ending("Abstraction", "action") === true
+        assert BasicAlgo.confirm_ending(string, target) === test_function.(string, target)
+      end
+    end
+  end
 end
