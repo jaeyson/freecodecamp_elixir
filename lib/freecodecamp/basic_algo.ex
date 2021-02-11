@@ -280,7 +280,7 @@ defmodule Freecodecamp.BasicAlgo do
   end
 
   @doc """
-  Create a function that looks through an array arr and returns the first element in it that passes a 'truth test'. This means that given an element x, the 'truth test' is passed if func(x) is true. If no element passes the test, return `undefined`.
+  Returns the first element thats passes the `truth test` from a given function.
 
   ## Examples
 
@@ -325,4 +325,39 @@ defmodule Freecodecamp.BasicAlgo do
   @spec boo_who(any()) :: boolean()
   def boo_who(any) when is_boolean(any), do: true
   def boo_who(_not_boolean), do: false
+
+  @doc """
+  Capitalize each word in a sentence
+
+  ## Examples
+
+      iex> BasicAlgo.title_case("I'm a little tea pot")
+      "I'm A Little Tea Pot"
+
+      iex> BasicAlgo.title_case("sHoRt AnD sToUt")
+      "Short And Stout"
+
+      iex> BasicAlgo.title_case("HERE IS MY HANDLE HERE IS MY SPOUT")
+      "Here Is My Handle Here Is My Spout"
+
+  """
+  @spec title_case(String.t()) :: String.t()
+  def title_case(""), do: ""
+
+  def title_case(string) do
+    do_title_case(~w(#{string}), "")
+
+    # ~w(#{string})
+    # |> Enum.map(&String.downcase(&1))
+    # |> Enum.map(&String.capitalize(&1))
+    # |> Enum.join(" ")
+  end
+
+  defp do_title_case([], <<_::binary-size(1), string::binary>>), do: string
+
+  defp do_title_case([head | tail] = _list, string) do
+    <<first_letter::binary-size(1), rest::binary>> = head
+    capitalized = ~s(#{string} #{String.upcase(first_letter)}#{String.downcase(rest)})
+    do_title_case(tail, capitalized)
+  end
 end
