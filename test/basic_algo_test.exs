@@ -212,4 +212,23 @@ defmodule BasicAlgoTest do
       end
     end
   end
+
+  describe "Basic Algorithm Scripting: Finders Keepers" do
+    property "looks thru a list then returns first element that passes" do
+      check all(list <- list_of(integer())) do
+        test_function = fn list, fun ->
+          Enum.find(list, fun)
+        end
+
+        assert BasicAlgo.find_element([1, 3, 5, 8, 9, 10], &(Integer.mod(&1, 2) === 0)) === 8
+        assert test_function.([1, 3, 5, 8, 9, 10], &(Integer.mod(&1, 2) === 0)) === 8
+
+        assert BasicAlgo.find_element([1, 3, 5, 9], &(Integer.mod(&1, 2) === 0)) === nil
+        assert test_function.([1, 3, 5, 9], &(Integer.mod(&1, 2) === 0)) === nil
+
+        assert BasicAlgo.find_element(list, &(Integer.mod(&1, 2) === 0)) ===
+                 test_function.(list, &(Integer.mod(&1, 2) === 0))
+      end
+    end
+  end
 end

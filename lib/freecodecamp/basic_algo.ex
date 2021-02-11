@@ -278,4 +278,29 @@ defmodule Freecodecamp.BasicAlgo do
     <<_substr::binary-size(length), rest::binary>> = string
     rest === target
   end
+
+  @doc """
+  Create a function that looks through an array arr and returns the first element in it that passes a 'truth test'. This means that given an element x, the 'truth test' is passed if func(x) is true. If no element passes the test, return `undefined`.
+
+  ## Examples
+
+      iex> BasicAlgo.find_element([1, 3, 5, 8, 9, 10], &Integer.mod(&1, 2) === 0)
+      8
+
+      iex> BasicAlgo.find_element([1, 3, 5, 9], &(Integer.mod(&1, 2) === 0))
+      nil
+
+      iex> BasicAlgo.find_element([], & &1 === 0)
+      nil
+
+  """
+  @spec find_element(Enumerable.t(), function()) :: any()
+  def find_element([], _fun), do: nil
+
+  def find_element([head | _tail] = list, fun) do
+    do_find_element(fun.(head), list, fun)
+  end
+
+  defp do_find_element(true, [head | _tail], _fun), do: head
+  defp do_find_element(false, [_head | tail], fun), do: find_element(tail, fun)
 end

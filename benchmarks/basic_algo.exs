@@ -158,6 +158,25 @@ defmodule Benchmark.BasicAlgo do
     )
   end
 
+  @spec find_element(module(), any()) :: module()
+  def find_element(formatter, _args) do
+    generic_benchee(
+      %{
+        "find_element: Enum.find" => fn list ->
+          Enum.find(list, fn num -> Integer.mod(num, 2) === 0 end)
+        end,
+        "find_element: BasicAlgo.find_element" => fn list ->
+          BasicAlgo.find_element(list, fn num -> Integer.mod(num, 2) === 0 end)
+        end,
+        "find_element: case expression" => fn list ->
+          find_element_gen(list, fn num -> Integer.mod(num, 2) === 0 end)
+        end
+      },
+      formatter,
+      fn _ -> gen_list_int_input(1_000) end
+    )
+  end
+
   ##################################################
   ### Below are helpers for the main functions above
   ##################################################
@@ -270,13 +289,26 @@ defmodule Benchmark.BasicAlgo do
   def confirm_ending_gen(string, target) do
     String.ends_with?(string, target)
   end
+
+  @spec find_element_gen(Enumerable.t(), function()) :: any()
+  defp find_element_gen([], _fun), do: nil
+
+  defp find_element_gen([head | tail] = _list, fun) do
+    case fun.(head) do
+      true ->
+        head
+
+      false ->
+        find_element_gen(tail, fun)
+    end
+  end
 end
 
 alias Benchmark.BasicAlgo
 alias Benchee.Formatters.{HTML, Console}
 
 # BasicAlgo.run("mutation", HTML)
-BasicAlgo.run("confirm_ending", Console)
+BasicAlgo.run("find_element", Console)
 
 # Available functions (uncomment above):
 #   - mutation
@@ -287,3 +319,4 @@ BasicAlgo.run("confirm_ending", Console)
 #   - find_longest_word_length
 #   - largest_of_four
 #   - confirm_ending
+#   - find_element
