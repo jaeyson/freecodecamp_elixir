@@ -231,4 +231,18 @@ defmodule BasicAlgoTest do
       end
     end
   end
+
+  describe "Basic Algorithm Scripting: Boo Who" do
+    test "takes an input and returns if it's type of boolean" do
+      assert BasicAlgo.boo_who(true) === true
+      assert BasicAlgo.boo_who(false) === true
+      assert BasicAlgo.boo_who([1, 2, 3]) === false
+      assert BasicAlgo.boo_who(%{a: 1}) === false
+      assert BasicAlgo.boo_who(1) === false
+      assert BasicAlgo.boo_who(nil) === false
+      assert BasicAlgo.boo_who("true") === false
+      assert BasicAlgo.boo_who("false") === false
+      assert BasicAlgo.boo_who("hello") === false
+    end
+  end
 end

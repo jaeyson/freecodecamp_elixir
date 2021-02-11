@@ -303,4 +303,26 @@ defmodule Freecodecamp.BasicAlgo do
 
   defp do_find_element(true, [head | _tail], _fun), do: head
   defp do_find_element(false, [_head | tail], fun), do: find_element(tail, fun)
+
+  @doc """
+  Check if a value is classified as a boolean primitive. Return true or false.
+
+  ## Examples
+
+      iex> BasicAlgo.boo_who(true)
+      true
+
+      iex> BasicAlgo.boo_who(false)
+      true
+
+      iex> BasicAlgo.boo_who([])
+      false
+
+      iex> BasicAlgo.boo_who("a")
+      false
+
+  """
+  @spec boo_who(any()) :: boolean()
+  def boo_who(any) when is_boolean(any), do: true
+  def boo_who(_not_boolean), do: false
 end
