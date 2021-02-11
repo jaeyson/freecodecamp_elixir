@@ -286,7 +286,7 @@ defmodule Benchmark.BasicAlgo do
   end
 
   @spec confirm_ending_gen(String.t(), String.t()) :: boolean()
-  def confirm_ending_gen(string, target) do
+  defp confirm_ending_gen(string, target) do
     String.ends_with?(string, target)
   end
 
