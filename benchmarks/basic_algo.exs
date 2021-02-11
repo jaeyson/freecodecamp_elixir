@@ -177,6 +177,22 @@ defmodule Benchmark.BasicAlgo do
     )
   end
 
+  @spec title_case(module(), any()) :: module()
+  def title_case(formatter, _args) do
+    generic_benchee(
+      %{
+        "title_case: BasicAlgo.title_case" => fn string ->
+          BasicAlgo.title_case(string)
+        end,
+        "title_case: sigil with map" => fn string ->
+          title_case_gen(string)
+        end
+      },
+      formatter,
+      fn _ -> gen_sentence() end
+    )
+  end
+
   ##################################################
   ### Below are helpers for the main functions above
   ##################################################
@@ -202,6 +218,14 @@ defmodule Benchmark.BasicAlgo do
     |> StreamData.string(min_length: 3)
     |> Enum.take(30)
     |> Enum.random()
+  end
+
+  @spec gen_sentence :: String.t()
+  defp gen_sentence do
+    :alphanumeric
+    |> StreamData.string(min_length: 3)
+    |> Enum.take(20)
+    |> Enum.join(" ")
   end
 
   @spec mutation_gen(list(String.t()), atom()) :: boolean()
@@ -302,13 +326,21 @@ defmodule Benchmark.BasicAlgo do
         find_element_gen(tail, fun)
     end
   end
+
+  @spec title_case_gen(String.t()) :: String.t()
+  def title_case_gen(string) do
+    ~w(#{string})
+    |> Enum.map(&String.downcase(&1))
+    |> Enum.map(&String.capitalize(&1))
+    |> Enum.join(" ")
+  end
 end
 
 alias Benchmark.BasicAlgo
 alias Benchee.Formatters.{HTML, Console}
 
 # BasicAlgo.run("mutation", HTML)
-BasicAlgo.run("find_element", Console)
+BasicAlgo.run("title_case", Console)
 
 # Available functions (uncomment above):
 #   - mutation
@@ -320,3 +352,4 @@ BasicAlgo.run("find_element", Console)
 #   - largest_of_four
 #   - confirm_ending
 #   - find_element
+#   - title_case

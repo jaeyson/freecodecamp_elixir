@@ -245,4 +245,23 @@ defmodule BasicAlgoTest do
       assert BasicAlgo.boo_who("hello") === false
     end
   end
+
+  describe "Basic Algorithm Scripting: Title Case A Sentence" do
+    property "Capitalize each word" do
+      check all(string <- list_of(string(:alphanumeric, min_length: 3), length: 50)) do
+        test_string = Enum.join(string, " ")
+
+        test_function = fn str ->
+          str
+          |> String.split(" ", trim: true)
+          |> Enum.map(&String.downcase(&1))
+          |> Enum.map(&String.capitalize(&1))
+          |> Enum.join(" ")
+        end
+
+        assert BasicAlgo.title_case("") === test_function.("")
+        assert BasicAlgo.title_case(test_string) === test_function.(test_string)
+      end
+    end
+  end
 end
