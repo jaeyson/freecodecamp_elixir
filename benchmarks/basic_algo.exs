@@ -193,6 +193,31 @@ defmodule Benchmark.BasicAlgo do
     )
   end
 
+  @spec franken_splice(module(), any()) :: module()
+  def franken_splice(formatter, _args) do
+    generic_benchee(
+      %{
+        "franken_splice: BasicAlgo.franken_splice" => fn {listA, listB, int} ->
+          BasicAlgo.franken_splice(listA, listB, int)
+        end,
+        "franken_splice: List.insert_at" => fn {listA, listB, int} ->
+          franken_splice_gen_v1(listA, listB, int)
+        end,
+        "franken_splice: Enum.split" => fn {listA, listB, int} ->
+          franken_splice_gen_v2(listA, listB, int)
+        end
+      },
+      formatter,
+      fn _ ->
+        {
+          gen_list_int_input(10_000),
+          gen_list_int_input(10_000),
+          gen_int_input(10_000)
+        }
+      end
+    )
+  end
+
   ##################################################
   ### Below are helpers for the main functions above
   ##################################################
@@ -334,13 +359,44 @@ defmodule Benchmark.BasicAlgo do
     |> Enum.map(&String.capitalize(&1))
     |> Enum.join(" ")
   end
+
+  @spec franken_splice_gen_v1(Enumerable.t(), Enumerable.t(), integer) :: Enumerable.t()
+  def franken_splice_gen_v1([], [], _el), do: []
+
+  def franken_splice_gen_v1(list_one, list_two, el) do
+    List.insert_at(list_two, el, list_one) |> List.flatten()
+  end
+
+  @spec franken_splice_gen_v2(Enumerable.t(), Enumerable.t(), integer) :: Enumerable.t()
+  def franken_splice_gen_v2(list_one, list_two, -1) do
+    {head, tails} = Enum.split(list_two, length(list_two))
+    [head | [list_one | [tails]]] |> :lists.flatten()
+  end
+
+  def franken_splice_gen_v2(list_one, list_two, el) when el < -1 do
+    {head, tails} = Enum.split(list_two, el + 1)
+
+    do_franken_splice(list_one, head, tails)
+    |> :lists.flatten()
+  end
+
+  def franken_splice_gen_v2(list_one, list_two, el) do
+    {head, tails} = Enum.split(list_two, el)
+
+    do_franken_splice(list_one, head, tails)
+    |> :lists.flatten()
+  end
+
+  defp do_franken_splice(list_one, head, tails) do
+    [head | [list_one | [tails]]]
+  end
 end
 
 alias Benchmark.BasicAlgo
 alias Benchee.Formatters.{HTML, Console}
 
 # BasicAlgo.run("mutation", HTML)
-BasicAlgo.run("title_case", Console)
+BasicAlgo.run("franken_splice", Console)
 
 # Available functions (uncomment above):
 #   - mutation
@@ -353,3 +409,4 @@ BasicAlgo.run("title_case", Console)
 #   - confirm_ending
 #   - find_element
 #   - title_case
+#   - franken_splice

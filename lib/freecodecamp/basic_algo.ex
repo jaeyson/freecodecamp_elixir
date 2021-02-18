@@ -1,4 +1,5 @@
 defmodule Freecodecamp.BasicAlgo do
+  require Logger
   # @type word() :: String.t()
 
   @moduledoc """
@@ -346,11 +347,6 @@ defmodule Freecodecamp.BasicAlgo do
 
   def title_case(string) do
     do_title_case(~w(#{string}), "")
-
-    # ~w(#{string})
-    # |> Enum.map(&String.downcase(&1))
-    # |> Enum.map(&String.capitalize(&1))
-    # |> Enum.join(" ")
   end
 
   defp do_title_case([], <<_::binary-size(1), string::binary>>), do: string
@@ -360,4 +356,49 @@ defmodule Freecodecamp.BasicAlgo do
     capitalized = ~s(#{string} #{String.upcase(first_letter)}#{String.downcase(rest)})
     do_title_case(tail, capitalized)
   end
+
+  @doc """
+  Inserts the 1st list in 2nd list at its index position (3rd param).
+  Also an [SO link](https://stackoverflow.com/a/27420592/10250774) why doing
+  binary search on linked list is slower. Used linear search instead.
+
+  ## Examples
+
+      iex> BasicAlgo.franken_splice([1, 2, 3], [4, 5], 1)
+      [4, 1, 2, 3, 5]
+
+      iex> BasicAlgo.franken_splice([1, 2], ["a", "b"], 1)
+      ["a", 1, 2, "b"]
+
+      iex> BasicAlgo.franken_splice(["claw", "tentacle"], ["head", "shoulders", "knees", "toes"], 2)
+      ["head", "shoulders", "claw", "tentacle", "knees", "toes"]
+
+  """
+  @spec franken_splice(Enumerable.t(), Enumerable.t(), integer) :: Enumerable.t()
+  def franken_splice(list_a, list_b, el) when el >= 0 do
+    do_franken_splice(el, list_a, [], list_b)
+    |> List.flatten()
+  end
+
+  def franken_splice(list_a, list_b, el) when el < 0 do
+    (length(list_b) + (el + 1))
+    |> do_franken_splice(list_a, [], list_b)
+    |> List.flatten()
+  end
+
+  defp do_franken_splice(counter, list_a, list, list_b)
+       when counter === 0,
+       do: [list | [list_a | [list_b]]]
+
+  defp do_franken_splice(counter, list_a, list, [h | t] = _list_b)
+       when counter > 0,
+       do: do_franken_splice(counter - 1, list_a, [list | [h]], t)
+
+  defp do_franken_splice(_counter, list_a, list, list_b)
+       when list_b === [],
+       do: [list | [list_b | [list_a]]]
+
+  defp do_franken_splice(_counter, list_a, list, list_b)
+       when list === [],
+       do: [list_a | [list | [list_b]]]
 end

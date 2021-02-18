@@ -264,4 +264,33 @@ defmodule BasicAlgoTest do
       end
     end
   end
+
+  describe "Basic Algorithm Scripting: Slice and Splice" do
+    property "inserts the first list at certain location in second list" do
+      check all(
+              list_A <- list_of(integer()),
+              list_B <- list_of(integer()),
+              position <- integer()
+            ) do
+        test_function = fn list_one, list_two, el ->
+          case Enum.empty?(list_one) && Enum.empty?(list_two) do
+            true ->
+              []
+
+            false ->
+              List.insert_at(list_two, el, list_one) |> List.flatten()
+          end
+        end
+
+        assert BasicAlgo.franken_splice(list_A, list_B, position) ===
+                 test_function.(list_A, list_B, position)
+
+        assert BasicAlgo.franken_splice(list_A, list_B, position) ===
+                 test_function.(list_A, list_B, position)
+
+        assert BasicAlgo.franken_splice(list_A, list_B, position) ===
+                 test_function.(list_A, list_B, position)
+      end
+    end
+  end
 end
