@@ -231,4 +231,66 @@ defmodule BasicAlgoTest do
       end
     end
   end
+
+  describe "Basic Algorithm Scripting: Boo Who" do
+    test "takes an input and returns if it's type of boolean" do
+      assert BasicAlgo.boo_who(true) === true
+      assert BasicAlgo.boo_who(false) === true
+      assert BasicAlgo.boo_who([1, 2, 3]) === false
+      assert BasicAlgo.boo_who(%{a: 1}) === false
+      assert BasicAlgo.boo_who(1) === false
+      assert BasicAlgo.boo_who(nil) === false
+      assert BasicAlgo.boo_who("true") === false
+      assert BasicAlgo.boo_who("false") === false
+      assert BasicAlgo.boo_who("hello") === false
+    end
+  end
+
+  describe "Basic Algorithm Scripting: Title Case A Sentence" do
+    property "Capitalize each word" do
+      check all(string <- list_of(string(:alphanumeric, min_length: 3), length: 50)) do
+        test_string = Enum.join(string, " ")
+
+        test_function = fn str ->
+          str
+          |> String.split(" ", trim: true)
+          |> Enum.map(&String.downcase(&1))
+          |> Enum.map(&String.capitalize(&1))
+          |> Enum.join(" ")
+        end
+
+        assert BasicAlgo.title_case("") === test_function.("")
+        assert BasicAlgo.title_case(test_string) === test_function.(test_string)
+      end
+    end
+  end
+
+  describe "Basic Algorithm Scripting: Slice and Splice" do
+    property "inserts the first list at certain location in second list" do
+      check all(
+              list_A <- list_of(integer()),
+              list_B <- list_of(integer()),
+              position <- integer()
+            ) do
+        test_function = fn list_one, list_two, el ->
+          case Enum.empty?(list_one) && Enum.empty?(list_two) do
+            true ->
+              []
+
+            false ->
+              List.insert_at(list_two, el, list_one) |> List.flatten()
+          end
+        end
+
+        assert BasicAlgo.franken_splice(list_A, list_B, position) ===
+                 test_function.(list_A, list_B, position)
+
+        assert BasicAlgo.franken_splice(list_A, list_B, position) ===
+                 test_function.(list_A, list_B, position)
+
+        assert BasicAlgo.franken_splice(list_A, list_B, position) ===
+                 test_function.(list_A, list_B, position)
+      end
+    end
+  end
 end

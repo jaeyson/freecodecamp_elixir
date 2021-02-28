@@ -1,4 +1,5 @@
 defmodule Freecodecamp.BasicAlgo do
+  require Logger
   # @type word() :: String.t()
 
   @moduledoc """
@@ -280,7 +281,7 @@ defmodule Freecodecamp.BasicAlgo do
   end
 
   @doc """
-  Create a function that looks through an array arr and returns the first element in it that passes a 'truth test'. This means that given an element x, the 'truth test' is passed if func(x) is true. If no element passes the test, return `undefined`.
+  Returns the first element thats passes the `truth test` from a given function.
 
   ## Examples
 
@@ -303,4 +304,101 @@ defmodule Freecodecamp.BasicAlgo do
 
   defp do_find_element(true, [head | _tail], _fun), do: head
   defp do_find_element(false, [_head | tail], fun), do: find_element(tail, fun)
+
+  @doc """
+  Check if a value is classified as a boolean primitive. Return true or false.
+
+  ## Examples
+
+      iex> BasicAlgo.boo_who(true)
+      true
+
+      iex> BasicAlgo.boo_who(false)
+      true
+
+      iex> BasicAlgo.boo_who([])
+      false
+
+      iex> BasicAlgo.boo_who("a")
+      false
+
+  """
+  @spec boo_who(any()) :: boolean()
+  def boo_who(any) when is_boolean(any), do: true
+  def boo_who(_not_boolean), do: false
+
+  @doc """
+  Capitalize each word in a sentence
+
+  ## Examples
+
+      iex> BasicAlgo.title_case("I'm a little tea pot")
+      "I'm A Little Tea Pot"
+
+      iex> BasicAlgo.title_case("sHoRt AnD sToUt")
+      "Short And Stout"
+
+      iex> BasicAlgo.title_case("HERE IS MY HANDLE HERE IS MY SPOUT")
+      "Here Is My Handle Here Is My Spout"
+
+  """
+  @spec title_case(String.t()) :: String.t()
+  def title_case(""), do: ""
+
+  def title_case(string) do
+    do_title_case(~w(#{string}), "")
+  end
+
+  defp do_title_case([], <<_::binary-size(1), string::binary>>), do: string
+
+  defp do_title_case([head | tail] = _list, string) do
+    <<first_letter::binary-size(1), rest::binary>> = head
+    capitalized = ~s(#{string} #{String.upcase(first_letter)}#{String.downcase(rest)})
+    do_title_case(tail, capitalized)
+  end
+
+  @doc """
+  Inserts the 1st list in 2nd list at its index position (3rd param).
+  Also an [SO link](https://stackoverflow.com/a/27420592/10250774) why doing
+  binary search on linked list is slower. Used linear search instead.
+
+  ## Examples
+
+      iex> BasicAlgo.franken_splice([1, 2, 3], [4, 5], 1)
+      [4, 1, 2, 3, 5]
+
+      iex> BasicAlgo.franken_splice([1, 2], ["a", "b"], 1)
+      ["a", 1, 2, "b"]
+
+      iex> BasicAlgo.franken_splice(["claw", "tentacle"], ["head", "shoulders", "knees", "toes"], 2)
+      ["head", "shoulders", "claw", "tentacle", "knees", "toes"]
+
+  """
+  @spec franken_splice(Enumerable.t(), Enumerable.t(), integer) :: Enumerable.t()
+  def franken_splice(list_a, list_b, el) when el >= 0 do
+    do_franken_splice(el, list_a, [], list_b)
+    |> List.flatten()
+  end
+
+  def franken_splice(list_a, list_b, el) when el < 0 do
+    (length(list_b) + (el + 1))
+    |> do_franken_splice(list_a, [], list_b)
+    |> List.flatten()
+  end
+
+  defp do_franken_splice(counter, list_a, list, list_b)
+       when counter === 0,
+       do: [list | [list_a | [list_b]]]
+
+  defp do_franken_splice(counter, list_a, list, [h | t] = _list_b)
+       when counter > 0,
+       do: do_franken_splice(counter - 1, list_a, [list | [h]], t)
+
+  defp do_franken_splice(_counter, list_a, list, list_b)
+       when list_b === [],
+       do: [list | [list_b | [list_a]]]
+
+  defp do_franken_splice(_counter, list_a, list, list_b)
+       when list === [],
+       do: [list_a | [list | [list_b]]]
 end
