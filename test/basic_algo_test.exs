@@ -1,6 +1,7 @@
 defmodule BasicAlgoTest do
   use ExUnit.Case, async: true
   use ExUnitProperties, async: true
+  require Logger
 
   alias Freecodecamp.BasicAlgo
   doctest Freecodecamp.BasicAlgo
@@ -291,6 +292,15 @@ defmodule BasicAlgoTest do
         assert BasicAlgo.franken_splice(list_A, list_B, position) ===
                  test_function.(list_A, list_B, position)
       end
+    end
+  end
+
+  describe "Basic Algorithm Scripting: Falsy Bouncer" do
+    test "remove falsy (JS reference) values from list" do
+      assert BasicAlgo.bouncer([7, "ate", "", false, 9]) === [7, "ate", 9]
+      assert BasicAlgo.bouncer(["a", "b", "c"]) === ["a", "b", "c"]
+      assert BasicAlgo.bouncer([false, nil, 0, ""]) === []
+      assert BasicAlgo.bouncer([7, [], false, ""]) === [7, []]
     end
   end
 end

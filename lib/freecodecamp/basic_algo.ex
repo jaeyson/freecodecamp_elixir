@@ -401,4 +401,41 @@ defmodule Freecodecamp.BasicAlgo do
   defp do_franken_splice(_counter, list_a, list, list_b)
        when list === [],
        do: [list_a | [list | [list_b]]]
+
+  @doc """
+  Remove all falsy values from an array. Falsy values
+  in JavaScript are `false, null, 0, "", undefined, and NaN`,
+  only "", false, nil or 0 were implemented for simplicity
+  reasons.
+
+
+  ## Examples
+
+      iex> BasicAlgo.bouncer([7, "ate", "", false, 9])
+      [7, "ate", 9]
+
+      iex> BasicAlgo.bouncer(["a", "b", "c"])
+      ["a", "b", "c"]
+
+      iex> BasicAlgo.bouncer([false, nil, 0, ""])
+      []
+
+      iex> BasicAlgo.bouncer([7, [], false, ""])
+      [7, []]
+  """
+  @spec bouncer(Enumerable.t()) :: Enumerable.t()
+  def bouncer(list),
+    do: do_bouncer(list, [])
+
+  defp do_bouncer(list, filtered_list) when list === [] do
+    filtered_list
+  end
+
+  defp do_bouncer([head | tails] = _list, list) when head in ["", false, nil, 0] do
+    do_bouncer(tails, list)
+  end
+
+  defp do_bouncer([head | tails] = _list, list) do
+    do_bouncer(tails, List.flatten(list, [head]))
+  end
 end
