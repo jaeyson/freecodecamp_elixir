@@ -424,8 +424,7 @@ defmodule Freecodecamp.BasicAlgo do
       [7, []]
   """
   @spec bouncer(Enumerable.t()) :: Enumerable.t()
-  def bouncer(list),
-    do: do_bouncer(list, [])
+  def bouncer(list), do: do_bouncer(list, [])
 
   defp do_bouncer(list, filtered_list) when list === [] do
     filtered_list
@@ -437,5 +436,44 @@ defmodule Freecodecamp.BasicAlgo do
 
   defp do_bouncer([head | tails] = _list, list) do
     do_bouncer(tails, List.flatten(list, [head]))
+  end
+
+  @doc """
+  Splits a list (first argument) into groups the length
+  of size (second argument) and returns them as a
+  two-dimensional list.
+
+  ## Examples
+
+      iex> BasicAlgo.chunk_array_in_groups(["a", "b", "c", "d"], 2)
+      [["a", "b"], ["c", "d"]]
+
+      iex> BasicAlgo.chunk_array_in_groups([0, 1, 2, 3, 4, 5], 3)
+      [[0, 1, 2], [3, 4, 5]]
+
+      iex> BasicAlgo.chunk_array_in_groups([0, 1, 2, 3, 4, 5], 2)
+      [[0, 1], [2, 3], [4, 5]]
+
+  """
+  @spec chunk_array_in_groups(Enumerable.t(), integer) :: list(Enumerable.t())
+  def chunk_array_in_groups([], _size), do: []
+  def chunk_array_in_groups(list, size) when size < 1, do: list
+
+  def chunk_array_in_groups(list, size) do
+    do_chunk_array_in_groups([], [], list, size, 0)
+  end
+
+  defp do_chunk_array_in_groups(list_a, list_b, [], _, _) do
+    list_a ++ [list_b]
+  end
+
+  defp do_chunk_array_in_groups(list_a, list_b, [h | t] = _, size, counter)
+       when counter < size do
+    do_chunk_array_in_groups(list_a, list_b ++ [h], t, size, counter + 1)
+  end
+
+  defp do_chunk_array_in_groups(list_a, list_b, [h | t] = _, size, counter)
+       when counter === size do
+    do_chunk_array_in_groups(list_a ++ [list_b], [h], t, size, 1)
   end
 end

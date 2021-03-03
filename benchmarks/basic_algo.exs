@@ -218,6 +218,27 @@ defmodule Benchmark.BasicAlgo do
     )
   end
 
+  @spec chunk_array_in_groups(module(), any()) :: module()
+  def chunk_array_in_groups(formatter, _args) do
+    generic_benchee(
+      %{
+        "chunk_array_in_groups: BasicAlgo.chunk_array_in_groups" => fn {list, size} ->
+          BasicAlgo.chunk_array_in_groups(list, size)
+        end,
+        "chunk_array_in_groups: Enum.chunk_every" => fn {list, size} ->
+          chunk_array_in_groups_gen(list, size)
+        end
+      },
+      formatter,
+      fn _ ->
+        {
+          gen_list_int_input(10_000),
+          gen_int_input(10_000)
+        }
+      end
+    )
+  end
+
   ##################################################
   ### Below are helpers for the main functions above
   ##################################################
@@ -390,13 +411,21 @@ defmodule Benchmark.BasicAlgo do
   defp do_franken_splice(list_one, head, tails) do
     [head | [list_one | [tails]]]
   end
+
+  @spec chunk_array_in_groups_gen(Enumerable.t(), integer) :: list(Enumerable.t())
+  def chunk_array_in_groups_gen([], _size), do: []
+  def chunk_array_in_groups_gen(list, size) when size < 1, do: list
+
+  def chunk_array_in_groups_gen(list, size) do
+    Enum.chunk_every(list, size)
+  end
 end
 
 alias Benchmark.BasicAlgo
 alias Benchee.Formatters.{HTML, Console}
 
 # BasicAlgo.run("mutation", HTML)
-BasicAlgo.run("franken_splice", Console)
+BasicAlgo.run("chunk_array_in_groups", Console)
 
 # Available functions (uncomment above):
 #   - mutation
@@ -410,3 +439,4 @@ BasicAlgo.run("franken_splice", Console)
 #   - find_element
 #   - title_case
 #   - franken_splice
+#   - chunk_array_in_groups

@@ -303,4 +303,46 @@ defmodule BasicAlgoTest do
       assert BasicAlgo.bouncer([7, [], false, ""]) === [7, []]
     end
   end
+
+  describe "Basic Algorithm Scripting: Chunky Monkey" do
+    property "splits a list and returns nested chunked list" do
+      check all(
+              list_str <- list_of(string(:alphanumeric, min_length: 1, max_length: 3)),
+              list_int <- list_of(integer()),
+              size <- integer()
+            ) do
+        test_function = fn list, chunks ->
+          cond do
+            list === [] ->
+              []
+
+            chunks < 1 ->
+              list
+
+            true ->
+              Enum.chunk_every(list, chunks)
+          end
+        end
+
+        assert BasicAlgo.chunk_array_in_groups(["a", "b", "c", "d"], 2) ===
+                 [["a", "b"], ["c", "d"]]
+
+        assert BasicAlgo.chunk_array_in_groups([0, 1, 2, 3, 4, 5], 3) ===
+                 [[0, 1, 2], [3, 4, 5]]
+
+        assert BasicAlgo.chunk_array_in_groups([0, 1, 2, 3, 4, 5], 2) ===
+                 [[0, 1], [2, 3], [4, 5]]
+
+        assert test_function.(["a", "b", "c", "d"], 2) === [["a", "b"], ["c", "d"]]
+        assert test_function.([0, 1, 2, 3, 4, 5], 3) === [[0, 1, 2], [3, 4, 5]]
+        assert test_function.([0, 1, 2, 3, 4, 5], 2) === [[0, 1], [2, 3], [4, 5]]
+
+        assert BasicAlgo.chunk_array_in_groups(list_str, size) ===
+                 test_function.(list_str, size)
+
+        assert BasicAlgo.chunk_array_in_groups(list_int, size) ===
+                 test_function.(list_int, size)
+      end
+    end
+  end
 end
