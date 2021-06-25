@@ -27,10 +27,11 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
 
-      - uses: actions/setup-elixir@v1
+      - name: Setup Erlang/OTP & Elixir
+      - uses: erlef/setup-beam@v1
         with:
-          otp-version: 22.2
-          elixir-version: 1.10.x
+          otp-version: '24.x'
+          elixir-version: '1.12.x'
 
       - name: get deps cache
         uses: actions/cache@v1

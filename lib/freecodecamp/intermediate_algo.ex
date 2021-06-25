@@ -24,10 +24,24 @@ defmodule Freecodecamp.IntermediateAlgo do
   def sum_all([0, 0]), do: 0
 
   def sum_all([num_one, num_two] = _list) do
-    for(x <- num_one..num_two, do: x)
-    |> do_sum_all()
+    to_list(num_one, num_two, [])
+    |> sum()
   end
 
-  defp do_sum_all([]), do: 0
-  defp do_sum_all([h | t] = _list), do: h + do_sum_all(t)
+  @spec to_list(integer(), integer(), list(integer())) :: list(integer())
+  defp to_list(num_one, num_two, list) when num_one === num_two do
+    list ++ [num_one]
+  end
+
+  defp to_list(num_one, num_two, list) when num_one <= num_two do
+    to_list(num_one + 1, num_two, list ++ [num_one])
+  end
+
+  defp to_list(num_one, num_two, list) when num_one >= num_two do
+    to_list(num_one - 1, num_two, list ++ [num_one])
+  end
+
+  @spec sum(list(integer())) :: integer()
+  defp sum([]), do: 0
+  defp sum([h | t] = _list), do: h + sum(t)
 end
