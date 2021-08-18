@@ -19,16 +19,6 @@ Solving exercises from Freecodecamp.org using Elixir programming language. Inclu
 [dependabot badge]: https://badgen.net/dependabot/jaeyson/freecodecamp-elixir/111643794?icon=dependabot
 [actions badge]: https://github.com/jaeyson/freecodecamp-elixir/workflows/Elixir%20CI/badge.svg
 
-### Pre-commit Hook
-
-```bash
-chmod +x create_pre_commit_hook.sh
-
-./create_pre_commit_hook
-```
-
-### Using Docker (or use [`asdf`](https://asdf-vm.com/#/core-manage-asdf))
-
 ```plaintext
 freecodecamp-elixir/
 ├── ...
@@ -36,19 +26,28 @@ freecodecamp-elixir/
 │   ├── freecodecamp/
 │   │   ├── algo_projects.ex
 │   │   ├── basic_algo.ex
-│   │   └── intermediate_algo.ex
+│   │   ├── intermediate_algo.ex
+│   │   └── ...
+│   ├── mix/
+│   │   └── tasks/
+│   │       └── ...
 │   └── freecodecamp.ex
 ├── test/
 │   ├── basic_algo_test.exs
-│   └── test_helper.exs
-├── .formatter.exs
-├── .gitattributes
-├── .gitignore
+│   └── ...
 ├── docker-compose.yml
 ├── elixir.dockerfile
 ├── mix.exs
 └── ...
 ```
+
+### Create Pre-commit Hook
+
+```bash
+mix precommit
+```
+
+### Using Docker (or use [`asdf`](https://asdf-vm.com/#/core-manage-asdf))
 
 ### Build
 
@@ -74,6 +73,16 @@ docker-compose --compatibility up
 ```bash
 # should be inside app/ folder before running command
 docker exec -it app mix test
+
+# i.e. you want to test only "Basic Algorithms"
+docker exec -it app mix selective_test basic_algo
+
+# or more, separated by spaces
+docker exec -it app mix selective_test basic_algo intermediate_algo
+
+# basic_algo        = Basic Algorithm Scripting
+# intermediate_algo = Intermediate Algorithm Scripting
+# algo_projects     = Algorithm Projects
 ```
 
 ### Generate `HTML` Docs
@@ -103,7 +112,7 @@ BasicAlgo.run("repeat_string", Console)
 docker exec -it app mix run benchmarks/basic_algo.exs
 ```
 
-### Other useful commands
+### Other commands
 
 ```bash
 # check ip of running container

@@ -1,10 +1,8 @@
 defmodule Freecodecamp.BasicAlgo do
-  require Logger
-  # @type word() :: String.t()
-
   @moduledoc """
   Documentation for Freecodecamp (Basic Alogrithmic Scripting).
   """
+  @moduledoc since: "0.1.0"
 
   @doc """
   Convert Celsius to Fahrenheit
@@ -16,8 +14,7 @@ defmodule Freecodecamp.BasicAlgo do
 
   """
   @spec convert_to_f(integer) :: integer
-  def convert_to_f(celsius \\ 0) when is_integer(celsius),
-    do: div(celsius * 9, 5) + 32
+  def convert_to_f(celsius), do: div(celsius * 9, 5) + 32
 
   @doc """
   Reverses a string
@@ -57,6 +54,7 @@ defmodule Freecodecamp.BasicAlgo do
     |> do_factorialize()
   end
 
+  @spec do_factorialize([integer]) :: integer
   defp do_factorialize(list) when list === [], do: 1
   defp do_factorialize([head | tail]), do: head * do_factorialize(tail)
 
@@ -94,7 +92,7 @@ defmodule Freecodecamp.BasicAlgo do
       [25, 48, 21, -3]
 
   """
-  @spec largest_of_four(list(integer)) :: integer
+  @spec largest_of_four([integer]) :: [integer]
   def largest_of_four(list) do
     list
     |> Stream.filter(&(&1 !== []))
@@ -102,6 +100,7 @@ defmodule Freecodecamp.BasicAlgo do
     |> do_largest_of_four()
   end
 
+  @spec do_largest_of_four([integer]) :: [integer]
   defp do_largest_of_four([]), do: []
 
   defp do_largest_of_four([head | tail] = _list) do
@@ -151,7 +150,7 @@ defmodule Freecodecamp.BasicAlgo do
       true
 
   """
-  @spec mutation(list(String.t())) :: boolean()
+  @spec mutation([String.t()]) :: boolean()
   def mutation(["", ""]), do: false
   def mutation(["", _source]), do: false
   def mutation([_target, ""]), do: false
@@ -209,6 +208,7 @@ defmodule Freecodecamp.BasicAlgo do
     end
   end
 
+  @spec do_truncate_string([char()], integer) :: list()
   defp do_truncate_string(_letter, 0), do: []
 
   defp do_truncate_string([head | tails] = _list, len),
@@ -233,7 +233,7 @@ defmodule Freecodecamp.BasicAlgo do
       0
       
   """
-  @spec get_index_to_ins(list(integer), integer) :: integer
+  @spec get_index_to_ins([integer], integer) :: integer
   def get_index_to_ins([], _value), do: 0
 
   def get_index_to_ins(list, value) do
@@ -249,6 +249,7 @@ defmodule Freecodecamp.BasicAlgo do
     List.first(result) |> do_get_index_to_ins()
   end
 
+  @spec do_get_index_to_ins(non_neg_integer | nil) :: non_neg_integer
   def do_get_index_to_ins(nil), do: 0
   def do_get_index_to_ins(result), do: result
 
@@ -295,13 +296,14 @@ defmodule Freecodecamp.BasicAlgo do
       nil
 
   """
-  @spec find_element(Enumerable.t(), function()) :: any()
+  @spec find_element(list(), function()) :: any()
   def find_element([], _fun), do: nil
 
   def find_element([head | _tail] = list, fun) do
     do_find_element(fun.(head), list, fun)
   end
 
+  @spec do_find_element(boolean(), list(), function()) :: any()
   defp do_find_element(true, [head | _tail], _fun), do: head
   defp do_find_element(false, [_head | tail], fun), do: find_element(tail, fun)
 
@@ -349,6 +351,7 @@ defmodule Freecodecamp.BasicAlgo do
     do_title_case(~w(#{string}), "")
   end
 
+  @spec do_title_case(String.t() | [], String.t()) :: String.t()
   defp do_title_case([], <<_::binary-size(1), string::binary>>), do: string
 
   defp do_title_case([head | tail] = _list, string) do
@@ -386,6 +389,7 @@ defmodule Freecodecamp.BasicAlgo do
     |> List.flatten()
   end
 
+  @spec do_franken_splice(integer, list(), list(), list()) :: list()
   defp do_franken_splice(counter, list_a, list, list_b)
        when counter === 0,
        do: [list | [list_a | [list_b]]]
@@ -423,9 +427,10 @@ defmodule Freecodecamp.BasicAlgo do
       iex> BasicAlgo.bouncer([7, [], false, ""])
       [7, []]
   """
-  @spec bouncer(Enumerable.t()) :: Enumerable.t()
+  @spec bouncer(list()) :: list()
   def bouncer(list), do: do_bouncer(list, [])
 
+  @spec do_bouncer(list(), list()) :: list()
   defp do_bouncer(list, filtered_list) when list === [] do
     filtered_list
   end
@@ -455,7 +460,7 @@ defmodule Freecodecamp.BasicAlgo do
       [[0, 1], [2, 3], [4, 5]]
 
   """
-  @spec chunk_array_in_groups(Enumerable.t(), integer) :: list(Enumerable.t())
+  @spec chunk_array_in_groups(list(), integer) :: [list()]
   def chunk_array_in_groups([], _size), do: []
   def chunk_array_in_groups(list, size) when size < 1, do: list
 
@@ -463,6 +468,7 @@ defmodule Freecodecamp.BasicAlgo do
     do_chunk_array_in_groups([], [], list, size, 0)
   end
 
+  @spec do_chunk_array_in_groups(list(), list(), list(), integer, integer) :: list()
   defp do_chunk_array_in_groups(list_a, list_b, [], _, _) do
     list_a ++ [list_b]
   end

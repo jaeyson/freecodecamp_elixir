@@ -1,9 +1,4 @@
-*.exs eol=lf
-*.ex eol=lf
+*     text=auto
 
-*.yml eol=lf
-*.md eol=lf
-
-*.lock export-ignore
-.gitattributes export-ignore
-.gitignore export-ignore
+*.ex  diff=elixir
+*.exs diff=elixir

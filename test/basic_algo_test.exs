@@ -1,11 +1,11 @@
 defmodule BasicAlgoTest do
   use ExUnit.Case, async: true
   use ExUnitProperties, async: true
-  require Logger
 
   alias Freecodecamp.BasicAlgo
   doctest Freecodecamp.BasicAlgo
 
+  @tag :basic_algo
   describe "Basic Algorithm Scripting: Convert Celsius to Fahrenheit" do
     property "takes a random integer and converts it to Fahrenheit" do
       check all(number <- integer()) do
@@ -22,6 +22,7 @@ defmodule BasicAlgoTest do
     end
   end
 
+  @tag :basic_algo
   describe "Basic Algorithm Scripting: Reverse a String" do
     property "takes a random string and reverses it" do
       check all(string <- string(:alphanumeric, min_length: 3, max_length: 1_000)) do
@@ -30,6 +31,7 @@ defmodule BasicAlgoTest do
     end
   end
 
+  @tag :basic_algo
   describe "Basic Algorithm Scripting: Factorialize a Number" do
     property "takes a random number and factorialize" do
       check all(number <- integer(-1_000..1_000)) do
@@ -46,6 +48,7 @@ defmodule BasicAlgoTest do
     end
   end
 
+  @tag :basic_algo
   describe "Basic Algorithm Scripting: Find the Longest Word in a String" do
     property "takes random strings then returns integer" do
       check all(string <- string(:alphanumeric, min_length: 3, max_length: 1_000)) do
@@ -69,6 +72,7 @@ defmodule BasicAlgoTest do
     end
   end
 
+  @tag :basic_algo
   describe "Basic Algorithm Scripting: Return Largest Numbers in Lists" do
     property "takes a list of random no.s & return largest in each of these" do
       check all(
@@ -94,6 +98,7 @@ defmodule BasicAlgoTest do
     end
   end
 
+  @tag :basic_algo
   describe "Basic Algorithm Scripting: Repeat a String Repeat a String" do
     property "Repeats a string for random amount of times" do
       check all(
@@ -111,6 +116,7 @@ defmodule BasicAlgoTest do
     end
   end
 
+  @tag :basic_algo
   describe "Basic Algorithm Scripting: Mutations" do
     property "takes a list of two random strings and returns boolean" do
       check all(
@@ -138,6 +144,7 @@ defmodule BasicAlgoTest do
     end
   end
 
+  @tag :basic_algo
   describe "Basic Algorithm Scripting: Truncate a String" do
     property "random strings and truncate with ellipses" do
       check all(
@@ -159,6 +166,7 @@ defmodule BasicAlgoTest do
     end
   end
 
+  @tag :basic_algo
   describe "Basic Algorithm Scripting: Where do I Belong" do
     property "takes a list of random integer and returns the lowest index from a value" do
       check all(
@@ -192,6 +200,7 @@ defmodule BasicAlgoTest do
     end
   end
 
+  @tag :basic_algo
   describe "Basic Algorithm Scripting: Confirm the Ending" do
     property "takes 2 words then returns boolean, comparion with string ends with target " do
       check all(
@@ -214,6 +223,7 @@ defmodule BasicAlgoTest do
     end
   end
 
+  @tag :basic_algo
   describe "Basic Algorithm Scripting: Finders Keepers" do
     property "looks thru a list then returns first element that passes" do
       check all(list <- list_of(integer())) do
@@ -233,6 +243,7 @@ defmodule BasicAlgoTest do
     end
   end
 
+  @tag :basic_algo
   describe "Basic Algorithm Scripting: Boo Who" do
     test "takes an input and returns if it's type of boolean" do
       assert BasicAlgo.boo_who(true) === true
@@ -247,6 +258,7 @@ defmodule BasicAlgoTest do
     end
   end
 
+  @tag :basic_algo
   describe "Basic Algorithm Scripting: Title Case A Sentence" do
     property "Capitalize each word" do
       check all(string <- list_of(string(:alphanumeric, min_length: 3), length: 50)) do
@@ -266,6 +278,7 @@ defmodule BasicAlgoTest do
     end
   end
 
+  @tag :basic_algo
   describe "Basic Algorithm Scripting: Slice and Splice" do
     property "inserts the first list at certain location in second list" do
       check all(
@@ -295,6 +308,7 @@ defmodule BasicAlgoTest do
     end
   end
 
+  @tag :basic_algo
   describe "Basic Algorithm Scripting: Falsy Bouncer" do
     test "remove falsy (JS reference) values from list" do
       assert BasicAlgo.bouncer([7, "ate", "", false, 9]) === [7, "ate", 9]
@@ -304,6 +318,7 @@ defmodule BasicAlgoTest do
     end
   end
 
+  @tag :basic_algo
   describe "Basic Algorithm Scripting: Chunky Monkey" do
     property "splits a list and returns nested chunked list" do
       check all(

@@ -2,6 +2,7 @@ defmodule Freecodecamp.IntermediateAlgo do
   @moduledoc """
   Documentation for Freecodecamp (Intermediate Alogrithmic Scripting).
   """
+  @moduledoc since: "0.1.0"
 
   @doc """
   Pass a list of two integers. Return
@@ -20,7 +21,7 @@ defmodule Freecodecamp.IntermediateAlgo do
       45
 
   """
-  @spec sum_all(list(integer())) :: integer()
+  @spec sum_all([integer]) :: integer
   def sum_all([0, 0]), do: 0
 
   def sum_all([num_one, num_two] = _list) do
@@ -28,7 +29,7 @@ defmodule Freecodecamp.IntermediateAlgo do
     |> sum()
   end
 
-  @spec to_list(integer(), integer(), list(integer())) :: list(integer())
+  @spec to_list(integer, integer, [integer]) :: [integer]
   defp to_list(num_one, num_two, list) when num_one === num_two do
     list ++ [num_one]
   end
@@ -41,7 +42,7 @@ defmodule Freecodecamp.IntermediateAlgo do
     to_list(num_one - 1, num_two, list ++ [num_one])
   end
 
-  @spec sum(list(integer())) :: integer()
+  @spec sum([integer]) :: integer
   defp sum([]), do: 0
   defp sum([h | t] = _list), do: h + sum(t)
 end
