@@ -1,40 +1,28 @@
+# The directory Mix will write compiled artifacts to.
+/_build/
 
-# Created by https://www.gitignore.io/api/vim,elixir
-# Edit at https://www.gitignore.io/?templates=vim,elixir
+# If you run "mix test --cover", coverage assets end up here.
+/cover/
 
-### Elixir ###
-/_build
-/cover
-/deps
-/doc
+# The directory Mix downloads your dependencies sources to.
+/deps/
+
+# Where third-party dependencies like ExDoc output generated docs.
+/doc/
+
+# Ignore .fetch files in case you like to edit your project deps locally.
 /.fetch
+
+# If the VM crashes, it generates a dump, let's ignore it too.
 erl_crash.dump
+
+# Also ignore archive artifacts (built via "mix archive.build").
 *.ez
-*.beam
-/config/*.secret.exs
-.elixir_ls/
-/benchmarks/output/
 
-### Elixir Patch ###
+# Ignore package tarball (built via "mix hex.build").
+sample-*.tar
 
-### Vim ###
-# Swap
-[._]*.s[a-v][a-z]
-[._]*.sw[a-p]
-[._]s[a-rt-v][a-z]
-[._]ss[a-gi-z]
-[._]sw[a-p]
+# Temporary files, for example, from tests.
+/tmp/
 
-# Session
-Session.vim
-Sessionx.vim
-
-# Temporary
-.netrwhist
-*~
-# Auto-generated tag files
-tags
-# Persistent undo
-[._]*.un~
-
-# End of https://www.gitignore.io/api/vim,elixir
+.elixir_ls
