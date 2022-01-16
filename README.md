@@ -1,4 +1,5 @@
-# Freecodecamp Elixir
+# Freecodecamp exercises using Elixir
+
 Solving exercises from Freecodecamp.org using Elixir programming language. Includes benchmarks and tests for every functions.
 
 [//]: # "Badges"
@@ -10,35 +11,60 @@ Solving exercises from Freecodecamp.org using Elixir programming language. Inclu
 [//]: # "Links"
 [commit]: https://github.com/jaeyson/freecodecamp-elixir/commit/master
 [pulse]: https://github.com/jaeyson/freecodecamp-elixir/pulse
-[dependabot]: https://github.com/jaeyson/freecodecamp-elixir
+[dependabot]: https://github.com/jaeyson/freecodecamp-elixir/pulls/app%2Fdependabot
 [actions]: https://github.com/jaeyson/freecodecamp-elixir/actions
 
 [//]: # "Image sources"
 [commit badge]: https://img.shields.io/github/last-commit/jaeyson/freecodecamp-elixir.svg
 [pulse badge]: https://img.shields.io/github/commit-activity/m/jaeyson/freecodecamp-elixir
-[dependabot badge]: https://badgen.net/dependabot/jaeyson/freecodecamp-elixir/111643794?icon=dependabot
-[actions badge]: https://github.com/jaeyson/freecodecamp-elixir/workflows/Elixir%20CI/badge.svg
+[dependabot badge]: https://img.shields.io/badge/Dependabot-enabled-green
+[actions badge]: https://github.com/jaeyson/freecodecamp-elixir/actions/workflows/elixir.yml/badge.svg
 
-```plaintext
-freecodecamp-elixir/
-├── ...
-├── lib/
-│   ├── freecodecamp/
-│   │   ├── algo_projects.ex
-│   │   ├── basic_algo.ex
-│   │   ├── intermediate_algo.ex
-│   │   └── ...
-│   ├── mix/
-│   │   └── tasks/
-│   │       └── ...
-│   └── freecodecamp.ex
-├── test/
-│   ├── basic_algo_test.exs
-│   └── ...
-├── docker-compose.yml
-├── elixir.dockerfile
-├── mix.exs
-└── ...
+Folders/files that are interesting to read can be found at:
+
+- `benchmarks/`
+- `lib/freecodecamp/`
+- `test/basic_algo_test.exs`
+- `test/intermediate_algo_test.exs`
+
+## Elixir installation
+
+Either use [Docker](https://docs.docker.com/get-docker/), this Docker automated install script `curl -sSL https://get.docker.com/ | sh`, or use [`asdf`](https://asdf-vm.com/#/core-manage-asdf).
+
+## Using Docker
+
+### using `docker_start` shell script (use wsl on windows or git bash, otherwise this works both ?mac? and linux), or see the file if you want to use docker commands instead.
+
+```bash
+# I haven't tried this both on windows and mac, YMMV
+source docker_start
+```
+
+Why `source docker_start` instead of `chmod +x ./docker_start`? read [run bash script doesn't work alias command](https://unix.stackexchange.com/a/386455/437416).
+
+```bash
+# getting dependencies
+mix deps.get --only test
+
+# repl with code loaded
+iex -S mix
+
+# runnig scripts
+elixir sample.exs
+
+# compile
+elixirc solution.ex
+```
+
+### stopping **Elixir** container, remove alias created by shell script
+
+```bash
+# where "elixir" is the name of the container
+docker container stop elixir
+
+# temporary alias are not persisted across different sessions
+# but if you want to remove them
+unalias elixir iex mix elixirc
 ```
 
 ### Create Pre-commit Hook
@@ -47,38 +73,19 @@ freecodecamp-elixir/
 mix precommit
 ```
 
-### Using Docker (or use [`asdf`](https://asdf-vm.com/#/core-manage-asdf))
-
-### Build
-
-```bash
-docker-compose build && docker-compose up -d
-
-# check if it is running
-docker ps
-```
-
-### Create Elixir Project
-
-```bash
-# get deps
-docker exec -it app mix deps.get
-
-# use API v2 (ie resource limits)
-docker-compose --compatibility up
-```
-
 ### Test
 
 ```bash
-# should be inside app/ folder before running command
-docker exec -it app mix test
+mix test
+
+# coverage
+mix text --cover
 
 # i.e. you want to test only "Basic Algorithms"
-docker exec -it app mix selective_test basic_algo
+mix selective_test basic_algo
 
 # or more, separated by spaces
-docker exec -it app mix selective_test basic_algo intermediate_algo
+mix selective_test basic_algo intermediate_algo
 
 # basic_algo        = Basic Algorithm Scripting
 # intermediate_algo = Intermediate Algorithm Scripting
@@ -88,7 +95,8 @@ docker exec -it app mix selective_test basic_algo intermediate_algo
 ### Generate `HTML` Docs
 
 ```bash
-docker exec -it app mix docs
+# running this generates docs in "doc/" directory
+mix docs
 ```
 
 ### Benchmarks (using Benchee)
@@ -109,18 +117,5 @@ BasicAlgo.run("repeat_string", Console)
 ```
 
 ```bash
-docker exec -it app mix run benchmarks/basic_algo.exs
-```
-
-### Other commands
-
-```bash
-# check ip of running container
-docker inspect <CONTAINER_NAME> | grep IPAddress
-
-# runtime metrics of a container
-docker stats <CONTAINER_NAME>
-
-# list open ports
-sudo lsof -i -P -n | grep LISTEN
+mix run benchmarks/basic_algo.exs
 ```

@@ -1,0 +1,50 @@
+#!/bin/bash
+
+CONTAINER_NAME=fccelixir
+IS_IMAGE_EXISTS=$(docker image ls --quiet --filter reference=$CONTAINER_NAME)
+IS_CONTAINER_RUNNING=$(docker container ls --quiet --filter name=$CONTAINER_NAME)
+WORKDIR=/home/$USER/freecodecamp-elixir/
+
+if [ -z $IS_IMAGE_EXISTS ]; then
+    echo "building image $CONTAINER_NAME"
+    docker image build \
+        --build-arg USER_ID=$(id -u ${USER}) \
+        --build-arg GROUP_ID=$(id -u ${USER}) \
+        --build-arg USERNAME=$USER \
+        --build-arg WORKDIR=$WORKDIR \
+        --tag $CONTAINER_NAME .
+
+    if [ -z $IS_CONTAINER_RUNNING ]; then
+        echo "running $CONTAINER_NAME"
+        docker container run --rm \
+            -v $(pwd):$WORKDIR \
+            --tty \
+            --detach \
+            --name $CONTAINER_NAME \
+            $CONTAINER_NAME
+    else
+        echo "starting $CONTAINER_NAME"
+        docker container start $CONTAINER_NAME
+    fi
+else
+    echo "existing image found, running $CONTAINER_NAME"
+        docker container run --rm \
+            -v $(pwd):$WORKDIR \
+            --tty \
+            --detach \
+            --name $CONTAINER_NAME \
+            $CONTAINER_NAME
+fi
+
+# aliasing commands: elixir, iex and mix
+for COMMAND in elixir iex mix elixirc; do
+    # IS_ALIAS_EXISTS=$(alias $COMMAND >/dev/null 2>&1)
+    IS_ALIAS_EXISTS=$(alias $COMMAND >/dev/null 2>&1)
+    if [ -z $IS_ALIAS_EXISTS ]; then
+        echo "setting up alias for command $COMMAND"
+        alias $COMMAND="docker container exec --interactive --tty $CONTAINER_NAME $COMMAND"
+        echo "done: alias $COMMAND"
+    else
+        echo "alias $COMMAND already set up"
+    fi
+done

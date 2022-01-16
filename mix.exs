@@ -5,7 +5,7 @@ defmodule Freecodecamp.MixProject do
     [
       app: :freecodecamp,
       version: "0.1.0",
-      elixir: "~> 1.10",
+      elixir: "~> 1.12",
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
@@ -38,9 +38,8 @@ defmodule Freecodecamp.MixProject do
       {:stream_data, "~> 0.5.0", only: [:dev, :test]},
       {:benchee, "~> 1.0", only: [:dev], runtime: false},
       {:benchee_html, "~> 1.0", only: [:dev], runtime: false},
-      {:ex_doc, "~> 0.23", only: [:dev, :test], runtime: false},
-      {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
-      {:dialyxir, "~> 1.0", only: [:dev, :test], runtime: false}
+      {:ex_doc, "~> 0.27.3", only: [:dev, :test], runtime: false},
+      {:credo, "~> 1.6.1", only: [:dev, :test], runtime: false}
     ]
   end
 
@@ -49,7 +48,6 @@ defmodule Freecodecamp.MixProject do
       test: [
         "format --check-formatted",
         "test --trace",
-        # "dialyzer --plt",
         "credo --strict"
       ]
     ]

@@ -3,7 +3,6 @@
 .gitignore
 .gitattributes
 
-### Elixir/Phoneix ###
 _build
 cover
 deps
@@ -11,35 +10,7 @@ doc
 .fetch
 erl_crash.dump
 *.ez
-*.beam
-config/*.secret.exs
-.elixir_ls
+freecodecamp-elixir-*.tar
 tmp
-priv/static
-bencmarks/output
-### Elixir Patch ###
 
-### Vim ###
-# Swap
-[._]*.s[a-v][a-z]
-[._]*.sw[a-p]
-[._]s[a-rt-v][a-z]
-[._]ss[a-gi-z]
-[._]sw[a-p]
-
-# Session
-Session.vim
-Sessionx.vim
-
-# Temporary
-.netrwhist
-*~
-
-# Auto-generated tag files
-tags
-
-# Persistent undo
-[._]*.un~
-
-# Coc configuration directory
-.vim
+.elixir_ls
