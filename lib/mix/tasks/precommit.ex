@@ -18,9 +18,9 @@ defmodule Mix.Tasks.Precommit do
 
   set -euo
 
-  mix format --check-formatted
-  mix credo --strict
-  mix test --cover --trace
+  MIX_ENV=test mix format --check-formatted
+  MIX_ENV=test mix credo --strict
+  MIX_ENV=test mix coveralls
   """
 
   use Mix.Task
@@ -59,7 +59,7 @@ defmodule Mix.Tasks.Precommit do
   defp gen_precommit([], "") do
     :ok = File.write(@git_hooks_dir <> @hook_name, @sh_script, [:write])
 
-    ~s(Generating new precommit file to @git_hooks_dir... done!)
+    ~s(Generating new precommit file to #{@git_hooks_dir}... done!)
     |> IO.puts()
   end
 

@@ -5,10 +5,17 @@ defmodule Freecodecamp.MixProject do
     [
       app: :freecodecamp,
       version: "0.1.0",
-      elixir: "~> 1.12",
+      elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
+      test_coverage: [tool: ExCoveralls],
       aliases: aliases(),
       deps: deps(),
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
+      ],
 
       # Docs
       name: "FCC using Elixir",
@@ -39,7 +46,8 @@ defmodule Freecodecamp.MixProject do
       {:benchee, "~> 1.0", only: [:dev], runtime: false},
       {:benchee_html, "~> 1.0", only: [:dev], runtime: false},
       {:ex_doc, "~> 0.27.3", only: [:dev, :test], runtime: false},
-      {:credo, "~> 1.6.1", only: [:dev, :test], runtime: false}
+      {:credo, "~> 1.6.1", only: [:dev, :test], runtime: false},
+      {:excoveralls, "~> 0.10", only: :test}
     ]
   end
 

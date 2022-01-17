@@ -76,15 +76,17 @@ defmodule BasicAlgoTest do
   describe "Basic Algorithm Scripting: Return Largest Numbers in Lists" do
     property "takes a list of random no.s & return largest in each of these" do
       check all(
-              random_input <-
-                -10_000..10_000
-                |> integer()
-                |> list_of(length: 4)
+              random_input_one <- integer(-10_000..10_000) |> list_of(length: 4),
+              random_input_two <- integer(-10_000..10_000) |> list_of(length: 4),
+              random_input_three <- integer(-10_000..10_000) |> list_of(length: 4),
+              random_input_four <- integer(-10_000..10_000) |> list_of(length: 4)
             ) do
-        list_of_int =
-          random_input
-          |> constant()
-          |> Enum.take(4)
+        list_of_int = [
+          random_input_one,
+          random_input_two,
+          random_input_three,
+          random_input_four
+        ]
 
         test_function = fn list ->
           list
