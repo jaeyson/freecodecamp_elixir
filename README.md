@@ -7,18 +7,21 @@ Solving exercises from Freecodecamp.org using Elixir programming language. Inclu
 [![Commit activity][pulse badge]][pulse]
 [![Dependabot][dependabot badge]][dependabot]
 [![Actions Status][actions badge]][actions]
+[![Coverage][coverage badge]][coverage]
 
 [//]: # "Links"
 [commit]: https://github.com/jaeyson/freecodecamp-elixir/commit/master
 [pulse]: https://github.com/jaeyson/freecodecamp-elixir/pulse
 [dependabot]: https://github.com/jaeyson/freecodecamp-elixir/pulls/app%2Fdependabot
 [actions]: https://github.com/jaeyson/freecodecamp-elixir/actions
+[coverage]: https://coveralls.io/github/jaeyson/freecodecamp-elixir?branch=master
 
 [//]: # "Image sources"
 [commit badge]: https://img.shields.io/github/last-commit/jaeyson/freecodecamp-elixir.svg
 [pulse badge]: https://img.shields.io/github/commit-activity/m/jaeyson/freecodecamp-elixir
 [dependabot badge]: https://img.shields.io/badge/Dependabot-enabled-green
-[actions badge]: https://github.com/jaeyson/freecodecamp-elixir/actions/workflows/elixir.yml/badge.svg
+[actions badge]: https://github.com/jaeyson/freecodecamp-elixir/actions/workflows/ci.yml/badge.svg
+[coverage badge]: https://coveralls.io/repos/github/jaeyson/freecodecamp-elixir/badge.svg?branch=master
 
 Folders/files that are interesting to read can be found at:
 
@@ -46,14 +49,8 @@ Why `source docker_start` instead of `chmod +x ./docker_start`? read [run bash s
 # getting dependencies
 mix deps.get --only test
 
-# repl with code loaded
+# repl
 iex -S mix
-
-# runnig scripts
-elixir sample.exs
-
-# compile
-elixirc solution.ex
 ```
 
 ### stopping **Elixir** container, remove alias created by shell script

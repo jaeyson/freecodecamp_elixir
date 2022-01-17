@@ -18,9 +18,9 @@ defmodule Mix.Tasks.Precommit do
 
   set -euo
 
-  mix format --check-formatted
-  mix credo --strict
-  mix test --cover --trace
+  MIX_ENV=test mix format --check-formatted
+  MIX_ENV=test mix credo --strict
+  MIX_ENV=test mix coveralls
   """
 
   use Mix.Task

@@ -1,0 +1,81 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  test:
+    name: (${{ matrix.os }}) Unit tests Elixir v${{ matrix.elixir }}/OTP v${{ matrix.otp }}
+    strategy:
+      matrix:
+        include:
+          - os: [ubuntu-latest, macos-latest, windows-latest]
+          - elixir: 1.9.x
+            otp: 21
+          - elixir: 1.10.x
+            otp: 21
+          - elixir: 1.11.x
+            otp: 22
+          - elixir: 1.11.x
+            otp: 23
+          - elixir: 1.12.x
+            otp: 23
+          - elixir: 1.13.x
+            otp: 24
+            warnings_as_errors: true
+            static_analysis: true
+    runs-on: ${{ matrix.os }}
+    env:
+      MIX_ENV: test
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    # skips CI and prints cli message, without fail build badge
+    if: "contains(github.event.head_commit.message, '[skip ci]')"
+    steps:
+      - name: print message via cli
+        run: echo "no need to build, based from commit message"
+
+    # doesn't contain "ci skip" in commit message
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Setup Erlang/OTP & Elixir
+        uses: erlef/setup-beam@v1
+        with:
+          otp-version: ${{ matrix.otp }}
+          elixir-version: ${{ matrix.elixir }}
+
+      - name: Cache artifacts
+        uses: actions/cache@v2
+        id: mix-cache
+        with:
+          path: |
+            ~/.hex
+            ~/.mix
+            deps
+            _build
+          key: ${{ matrix.os }}-${{ matrix.elixir }}-${{ matrix.otp }}-${{ hashFiles('mix.lock') }}
+
+      - name: Install Dependencies
+        if: steps.mix-cache.outputs.cache-hit != 'true'
+        run: |
+          mix format --check-formatted
+          mix local.rebar --force
+          mix local.hex --force
+          mix deps.get --only test
+
+      - name: Compile project
+        if: matrix.warnings_as_errors
+        run: mix compile --warnings-as-errors
+
+      - name: Run tests
+        run: mix coveralls.github
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: run static analysis
+        if: matrix.static_analysis
+        run: mix credo --strict
