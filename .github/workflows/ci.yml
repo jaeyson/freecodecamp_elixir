@@ -5,12 +5,20 @@ on:
   push:
 
 jobs:
+  check_commit_message:
+    name: skips CI and prints cli message, without fail build badge
+    if: "contains(github.event.head_commit.message, '[skip ci]')"
+    runs-on: ubuntu-latest
+    steps:
+      - name: print message via cli
+        run: echo "no need to build, based from commit message"
+        
   test:
     name: (${{ matrix.os }}) Unit tests Elixir v${{ matrix.elixir }}/OTP v${{ matrix.otp }}
     strategy:
       matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
         include:
-          - os: [ubuntu-latest, macos-latest, windows-latest]
           - elixir: 1.9.x
             otp: 21
           - elixir: 1.10.x
@@ -29,12 +37,6 @@ jobs:
     env:
       MIX_ENV: test
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    # skips CI and prints cli message, without fail build badge
-    if: "contains(github.event.head_commit.message, '[skip ci]')"
-    steps:
-      - name: print message via cli
-        run: echo "no need to build, based from commit message"
 
     # doesn't contain "ci skip" in commit message
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
