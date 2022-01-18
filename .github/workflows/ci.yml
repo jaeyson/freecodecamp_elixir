@@ -17,7 +17,8 @@ jobs:
     name: (${{ matrix.os }}) Unit tests Elixir v${{ matrix.elixir }}/OTP v${{ matrix.otp }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        # os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu-latest, windows-latest]
         include:
           - elixir: 1.9.x
             otp: 21
