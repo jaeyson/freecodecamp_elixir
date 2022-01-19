@@ -13,7 +13,7 @@ jobs:
       - run: echo "no need to build, based from commit message"
         
   test:
-    name: (${{ matrix.os }}) Unit tests Elixir v${{ matrix.elixir }}/OTP v${{ matrix.otp }}
+    name: Elixir v${{ matrix.elixir }}/OTP v${{ matrix.otp }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -57,9 +57,9 @@ jobs:
             ~/.mix
             deps
             _build
-          key: ${{ matrix.os }}-${{ matrix.elixir }}-${{ matrix.otp }}-${{ hashFiles('mix.lock') }}
+          key: ${{ matrix.os }}-${{ matrix.elixir }}-${{ matrix.otp }}-mix-${{ hashFiles('mix.lock') }}
           restore-keys: |
-            ${{ matrix.os }}-${{ matrix.elixir }}-${{ matrix.otp }}-
+            ${{ matrix.os }}-${{ matrix.elixir }}-${{ matrix.otp }}-mix-
 
       - name: Install Dependencies
         if: steps.mix-cache.outputs.cache-hit != 'true'
