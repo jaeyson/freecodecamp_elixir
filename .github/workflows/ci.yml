@@ -18,7 +18,6 @@ jobs:
     strategy:
       matrix:
         include:
-          - os: ubuntu-latest
           - elixir: 1.9.x
             otp: 21
           - elixir: 1.10.x
