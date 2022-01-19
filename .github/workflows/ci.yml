@@ -6,11 +6,11 @@ on:
 
 jobs:
   check_commit_message:
-    if: "contains(github.event.head_commit.message, '[skip ci]')"
+    name: skips CI and prints cli message, without fail build badge
     runs-on: ubuntu-latest
+    if: "contains(github.event.head_commit.message, '[skip ci]')"
     steps:
-      - name: skips CI and prints cli message, without fail build badge
-        run: echo "no need to build, based from commit message"
+      - run: echo "no need to build, based from commit message"
         
   test:
     name: (${{ matrix.os }}) Unit tests Elixir v${{ matrix.elixir }}/OTP v${{ matrix.otp }}
