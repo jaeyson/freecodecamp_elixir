@@ -6,11 +6,10 @@ on:
 
 jobs:
   check_commit_message:
-    name: skips CI and prints cli message, without fail build badge
     if: "contains(github.event.head_commit.message, '[skip ci]')"
     runs-on: ubuntu-latest
     steps:
-      - name: print message via cli
+      - name: skips CI and prints cli message, without fail build badge
         run: echo "no need to build, based from commit message"
         
   test:
@@ -18,8 +17,6 @@ jobs:
     strategy:
       matrix:
         include:
-          # - os: macos-latest
-          # - os: windows-latest
           - os: ubuntu-latest
           - elixir: 1.9.x
             otp: 21
