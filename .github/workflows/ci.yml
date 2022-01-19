@@ -14,7 +14,7 @@ jobs:
         
   test:
     name: (${{ matrix.os }}) Unit tests Elixir v${{ matrix.elixir }}/OTP v${{ matrix.otp }}
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         include:
