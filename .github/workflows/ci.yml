@@ -58,6 +58,8 @@ jobs:
             deps
             _build
           key: ${{ matrix.os }}-${{ matrix.elixir }}-${{ matrix.otp }}-${{ hashFiles('mix.lock') }}
+          restore-keys: |
+            ${{ matrix.os }}-${{ matrix.elixir }}-${{ matrix.otp }}-
 
       - name: Install Dependencies
         if: steps.mix-cache.outputs.cache-hit != 'true'
