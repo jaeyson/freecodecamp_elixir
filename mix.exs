@@ -45,7 +45,7 @@ defmodule Freecodecamp.MixProject do
       {:stream_data, "~> 0.5.0", only: [:dev, :test]},
       {:benchee, "~> 1.0", only: [:dev], runtime: false},
       {:benchee_html, "~> 1.0", only: [:dev], runtime: false},
-      {:ex_doc, "~> 0.27.3", only: [:dev, :test], runtime: false},
+      {:ex_doc, "~> 0.28.1", only: [:dev, :test], runtime: false},
       {:credo, "~> 1.6.1", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.10", only: :test}
     ]
