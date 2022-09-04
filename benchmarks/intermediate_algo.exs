@@ -44,9 +44,39 @@ defmodule Benchmark.IntermediateAlgo do
     )
   end
 
+  @spec diff_list(module(), any()) :: module()
+  def diff_list(formatter, _args) do
+    generic_benchee(
+      %{
+        "IntermediateAlgo.diff_list" => fn {list1, list2} ->
+          IntermediateAlgo.diff_list(list1, list2)
+        end,
+        "Enum.frequencies/1 && Enum.reduce/3" => fn {list1, list2} ->
+          diff_list_gen(list1, list2)
+        end
+      },
+      formatter,
+      fn _ ->
+        {
+          gen_list_int_or_string(20),
+          gen_list_int_or_string(20)
+        }
+      end
+    )
+  end
+
   ##################################################
   ### Below are helpers for the main functions above
   ##################################################
+
+  @spec gen_list_int_or_string(pos_integer) :: integer()
+  defp gen_list_int_or_string(number) do
+    integer = StreamData.integer(-10_000..10_000)
+    string = StreamData.string(:alphanumeric, min_length: 5, max_length: 10)
+
+    StreamData.one_of([integer, string])
+    |> Enum.take(number)
+  end
 
   @spec gen_int_input(integer) :: integer()
   defp gen_int_input(number) do
@@ -75,13 +105,26 @@ defmodule Benchmark.IntermediateAlgo do
 
   defp do_sum_all_v3([]), do: 0
   defp do_sum_all_v3([h | t] = _list), do: h + do_sum_all_v3(t)
+
+  defp diff_list_gen(list_one, list_two) do
+    (list_one ++ list_two)
+    |> Enum.frequencies()
+    |> Enum.reduce([], fn {k, v}, acc ->
+      if v === 1 do
+        [k | acc]
+      else
+        acc
+      end
+    end)
+  end
 end
 
 alias Benchmark.IntermediateAlgo
 alias Benchee.Formatters.{HTML, Console}
 
 # IntermediateAlgo.run("mutation", HTML)
-IntermediateAlgo.run("sum_all", Console)
+IntermediateAlgo.run("diff_list", Console)
 
 # Available functions (uncomment above):
+#   - diff_list
 #   - sum_all

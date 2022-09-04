@@ -1,5 +1,3 @@
 defmodule Freecodecamp do
-  @moduledoc """
-  Documentation for Freecodecamp.
-  """
+  @moduledoc false
 end

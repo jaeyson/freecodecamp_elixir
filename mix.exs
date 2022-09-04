@@ -56,7 +56,7 @@ defmodule Freecodecamp.MixProject do
       test: [
         "format --check-formatted",
         "test --trace",
-        "credo --strict"
+        "credo --strict --all"
       ]
     ]
   end

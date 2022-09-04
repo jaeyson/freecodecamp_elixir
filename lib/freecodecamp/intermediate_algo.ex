@@ -45,4 +45,52 @@ defmodule Freecodecamp.IntermediateAlgo do
   @spec sum([integer]) :: integer
   defp sum([]), do: 0
   defp sum([h | t] = _list), do: h + sum(t)
+
+  @doc """
+  Compare two arrays and return a new array
+  with any items only found in one of the
+  two given arrays, but not both. In other
+  words, return the symmetric difference of
+  the two arrays.
+
+  It returns either an list of empty or
+  unsorted element(s).
+
+  source: [Diff Two Arrays](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/intermediate-algorithm-scripting/diff-two-arrays)
+
+  ## Examples
+
+      iex> IntermediateAlgo.diff_list(["andesite", "grass", "dirt", "pink wool", "dead shrub"], ["diorite", "andesite", "grass", "dirt", "dead shrub"])
+      ["diorite", "pink wool"]
+
+      iex> IntermediateAlgo.diff_list(["andesite", "grass", "dirt", "dead shrub"],["andesite", "grass", "dirt", "dead shrub"])
+      []
+
+      iex> IntermediateAlgo.diff_list([1, 2, 3, 5], [1, 2, 3, 4, 5])
+      [4]
+
+      iex> IntermediateAlgo.diff_list([1, 2, 3, 5], [])
+      [1, 2, 3, 5]
+
+      iex> IntermediateAlgo.diff_list([1, "calf", 3, "piglet"], [1, "calf", 3, 4])
+      [4, "piglet"]
+
+  """
+  @doc since: "0.1.0"
+  @spec diff_list(list(any), list(any)) :: [] | list(any)
+  def diff_list([], list), do: list
+  def diff_list(list, []), do: list
+
+  def diff_list(list_one, list_two),
+    do: do_diff_list(list_one ++ list_two, [], [])
+
+  defp do_diff_list([], _dups, result), do: result
+
+  defp do_diff_list([h | t], dups, result) do
+    if h in t or h in dups do
+      do_diff_list(t, [h | dups], result)
+    else
+      do_diff_list(t, dups, [h | result])
+    end
+  end
 end
