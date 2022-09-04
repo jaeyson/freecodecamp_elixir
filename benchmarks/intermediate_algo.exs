@@ -1,5 +1,5 @@
 defmodule Benchmark.IntermediateAlgo do
-  alias Freecodecamp.IntermediateAlgo
+  alias FreecodecampElixir.IntermediateAlgo
 
   @spec run(String.t(), module(), any()) :: module()
   def run(function_name, formatter, args \\ nil),

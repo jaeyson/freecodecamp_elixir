@@ -1,7 +1,7 @@
 {
     "skip_files": [
-        "benchmarks",
-        "lib/mix"
+        "benchmarks/",
+        "lib/mix/"
     ],
     "terminal_options": {
         "file_column_width": 60

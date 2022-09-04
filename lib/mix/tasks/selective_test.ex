@@ -4,8 +4,17 @@ defmodule Mix.Tasks.SelectiveTest do
 
   Running e.g. `mix selective_test basic_algo` will
   only include tests from `test/basic_algo_test.exs`.
+  Another way to call it:
+  `mix test --exclude intermediate_algo basic_algo ...`.
+  Note: these command is not to be ran inside `iex`,
+  rather run this in your OS shell.
 
-  Another way to call it: `mix test --exclude intermediate_algo`
+  Example:
+
+  ```bash
+  mix selective_test basic_algo
+  ```
+
   """
   @moduledoc since: "0.1.0"
   @shortdoc "Selects 1 or more modules to be tested."

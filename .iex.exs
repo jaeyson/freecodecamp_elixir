@@ -1,5 +1,5 @@
-alias Freecodecamp.AlgoProjects
-alias Freecodecamp.BasicAlgo
-alias Freecodecamp.IntermediateAlgo
+alias FreecodecampElixir.AlgoProjects
+alias FreecodecampElixir.BasicAlgo
+alias FreecodecampElixir.IntermediateAlgo
 
 require Logger

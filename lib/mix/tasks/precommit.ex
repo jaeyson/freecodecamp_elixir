@@ -2,11 +2,18 @@ defmodule Mix.Tasks.Precommit do
   @moduledoc """
   Usage: `mix precommit [--force]`
 
-  Generates `pre-commit` git hook. Visit [this link]
-  (https://git-scm.com/book/en/Customizing-Git-Git-Hooks)
-  to know more about git hooks.
+  Generates `pre-commit` git hook. Visit [this link](https://git-scm.com/book/en/Customizing-Git-Git-Hooks)
+  to know more about git hooks. Add option `--force` to
+  generate a new precommit file. Note: these
+  command is not to be ran inside `iex`, rather run
+  this in your OS shell.
 
-  Add option `--force` to generate a new precommit file
+  Example:
+
+  ```bash
+  mix precommit
+  ```
+
   """
   @moduledoc since: "0.1.0"
   @shortdoc "Adds git precommit"
@@ -19,7 +26,7 @@ defmodule Mix.Tasks.Precommit do
   set -euo
 
   MIX_ENV=test mix format --check-formatted
-  MIX_ENV=test mix credo --strict
+  MIX_ENV=test mix credo --strict --all
   MIX_ENV=test mix coveralls
   """
 

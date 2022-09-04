@@ -1,5 +1,5 @@
 defmodule Benchmark.BasicAlgo do
-  alias Freecodecamp.BasicAlgo
+  alias FreecodecampElixir.BasicAlgo
 
   @spec run(String.t(), module(), any()) :: module()
   def run(function_name, formatter, args \\ nil),
@@ -197,14 +197,14 @@ defmodule Benchmark.BasicAlgo do
   def franken_splice(formatter, _args) do
     generic_benchee(
       %{
-        "franken_splice: BasicAlgo.franken_splice" => fn {listA, listB, int} ->
-          BasicAlgo.franken_splice(listA, listB, int)
+        "franken_splice: BasicAlgo.franken_splice" => fn {list_a, list_b, int} ->
+          BasicAlgo.franken_splice(list_a, list_b, int)
         end,
-        "franken_splice: List.insert_at" => fn {listA, listB, int} ->
-          franken_splice_gen_v1(listA, listB, int)
+        "franken_splice: List.insert_at" => fn {list_a, list_b, int} ->
+          franken_splice_gen_v1(list_a, list_b, int)
         end,
-        "franken_splice: Enum.split" => fn {listA, listB, int} ->
-          franken_splice_gen_v2(listA, listB, int)
+        "franken_splice: Enum.split" => fn {list_a, list_b, int} ->
+          franken_splice_gen_v2(list_a, list_b, int)
         end
       },
       formatter,
@@ -376,9 +376,7 @@ defmodule Benchmark.BasicAlgo do
   @spec title_case_gen(String.t()) :: String.t()
   def title_case_gen(string) do
     ~w(#{string})
-    |> Enum.map(&String.downcase(&1))
-    |> Enum.map(&String.capitalize(&1))
-    |> Enum.join(" ")
+    |> Enum.map_join(" ", &(String.downcase(&1) |> String.capitalize()))
   end
 
   @spec franken_splice_gen_v1(Enumerable.t(), Enumerable.t(), integer) :: Enumerable.t()

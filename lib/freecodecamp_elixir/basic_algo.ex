@@ -1,11 +1,15 @@
-defmodule Freecodecamp.BasicAlgo do
+defmodule FreecodecampElixir.BasicAlgo do
   @moduledoc """
-  Documentation for Freecodecamp (Basic Alogrithmic Scripting).
+  Documentation for Freecodecamp ([Basic Alogrithmic Scripting](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/#basic-algorithm-scripting)).
   """
   @moduledoc since: "0.1.0"
 
   @doc """
-  Convert Celsius to Fahrenheit
+  The formula to convert from Celsius to Fahrenheit is the temperature in Celsius times `9/5`, plus `32`.
+
+  Returns an integer.
+
+  source: [Convert Celsius to Fahrenheit](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-algorithm-scripting/convert-celsius-to-fahrenheit)
 
   ## Examples
 
@@ -13,11 +17,14 @@ defmodule Freecodecamp.BasicAlgo do
       86
 
   """
+  @doc since: "0.1.0"
   @spec convert_to_f(integer) :: integer
   def convert_to_f(celsius), do: div(celsius * 9, 5) + 32
 
   @doc """
-  Reverses a string
+  Reverses a string.
+
+  source: [Reverse a String](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-algorithm-scripting/reverse-a-string)
 
   ## Examples
 
@@ -25,6 +32,7 @@ defmodule Freecodecamp.BasicAlgo do
       "olleh"
 
   """
+  @doc since: "0.1.0"
   @spec reverse_string(String.t()) :: String.t()
   # defdelegate reverse_string(str), to: String, as: :reverse
   def reverse_string(""), do: ""
@@ -35,6 +43,8 @@ defmodule Freecodecamp.BasicAlgo do
   @doc """
   Factorialize a number
 
+  source: [Factorialize a Number](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-algorithm-scripting/factorialize-a-number)
+
   ## Examples
 
       iex> BasicAlgo.factorialize(0)
@@ -44,6 +54,7 @@ defmodule Freecodecamp.BasicAlgo do
       120
 
   """
+  @doc since: "0.1.0"
   @spec factorialize(integer) :: integer
   def factorialize(0), do: 1
 
@@ -59,7 +70,11 @@ defmodule Freecodecamp.BasicAlgo do
   defp do_factorialize([head | tail]), do: head * do_factorialize(tail)
 
   @doc """
-  Find the longest word and returns the length of it
+  Return the length of the longest word in the provided sentence.
+
+  Returns an integer.
+
+  source: [Find the Longest Word in a String](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-algorithm-scripting/find-the-longest-word-in-a-string)
 
   ## Examples
 
@@ -70,6 +85,7 @@ defmodule Freecodecamp.BasicAlgo do
       5
 
   """
+  @doc since: "0.1.0"
   @spec find_longest_word_length(String.t()) :: integer
   def find_longest_word_length(""), do: 0
 
@@ -81,7 +97,9 @@ defmodule Freecodecamp.BasicAlgo do
   end
 
   @doc """
-  Return largest numbers in lists
+  Return an array consisting of the largest number from each provided sub-array. For simplicity, the provided array will contain exactly 4 sub-arrays.
+
+  source: [Return Largest Numbers in Arrays](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-algorithm-scripting/return-largest-numbers-in-arrays)
 
   ## Examples
 
@@ -92,6 +110,7 @@ defmodule Freecodecamp.BasicAlgo do
       [25, 48, 21, -3]
 
   """
+  @doc since: "0.1.0"
   @spec largest_of_four([integer]) :: [integer]
   def largest_of_four(list) do
     list
@@ -110,7 +129,9 @@ defmodule Freecodecamp.BasicAlgo do
   end
 
   @doc """
-  Return repeated string
+  Return repeated string.
+
+  source: [Repeat a String Repeat a String](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-algorithm-scripting/repeat-a-string-repeat-a-string)
 
   ## Examples
 
@@ -120,10 +141,14 @@ defmodule Freecodecamp.BasicAlgo do
       iex> BasicAlgo.repeat_string_num_times("abc", 0)
       ""
       
+      iex> BasicAlgo.repeat_string_num_times("", 100)
+      ""
+      
       iex> BasicAlgo.repeat_string_num_times("abc", -1)
       ""
 
   """
+  @doc since: "0.1.0"
   @spec repeat_string_num_times(String.t(), integer) :: String.t()
   def repeat_string_num_times(_string, num) when num <= 0, do: ""
   def repeat_string_num_times("", _num), do: ""
@@ -138,6 +163,8 @@ defmodule Freecodecamp.BasicAlgo do
   contains all of the letters of the string in the second
   element of the array.
 
+  source: [Mutations](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-algorithm-scripting/mutations)
+
   ## Examples
 
       iex> BasicAlgo.mutation(["hello", "Hey"])
@@ -150,6 +177,7 @@ defmodule Freecodecamp.BasicAlgo do
       true
 
   """
+  @doc since: "0.1.0"
   @spec mutation([String.t()]) :: boolean()
   def mutation(["", ""]), do: false
   def mutation(["", _source]), do: false
@@ -172,6 +200,8 @@ defmodule Freecodecamp.BasicAlgo do
   the given maximum string length (second argument). Return
   the truncated string with a `...` ending.
 
+  source: [Truncate a String](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-algorithm-scripting/truncate-a-string)
+
   ## Examples
 
       iex> BasicAlgo.truncate_string("A-tisket a-tasket A green and yellow basket", 8)
@@ -190,6 +220,7 @@ defmodule Freecodecamp.BasicAlgo do
       "Hello..."
 
   """
+  @doc since: "0.1.0"
   @spec truncate_string(String.t(), integer) :: String.t()
   def truncate_string(_words, len) when len <= 0, do: "..."
   def truncate_string("", _len), do: "..."
@@ -221,6 +252,8 @@ defmodule Freecodecamp.BasicAlgo do
 
   Likewise, `get_index_to_ins([20,3,5], 19)` should return 2 because once the array has been sorted it will look like `[3,5,20]` and 19 is less than 20 (index 2) and greater than 5 (index 1).
 
+  source: [Where do I Belong](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-algorithm-scripting/where-do-i-belong)
+
   ## Examples
 
       iex> BasicAlgo.get_index_to_ins([1, 2, 3, 4], 1.5)
@@ -233,6 +266,7 @@ defmodule Freecodecamp.BasicAlgo do
       0
       
   """
+  @doc since: "0.1.0"
   @spec get_index_to_ins([integer], integer) :: integer
   def get_index_to_ins([], _value), do: 0
 
@@ -257,6 +291,10 @@ defmodule Freecodecamp.BasicAlgo do
   Check if a string (first argument, `string`) ends with the
   given target string (second argument, `target`).
 
+  Returns a boolean.
+
+  source: [Confirm the Ending](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-algorithm-scripting/confirm-the-ending)
+
   ## Examples
 
       iex> BasicAlgo.confirm_ending("Bastian", "n")
@@ -269,6 +307,7 @@ defmodule Freecodecamp.BasicAlgo do
       false
       
   """
+  @doc since: "0.1.0"
   @spec confirm_ending(String.t(), String.t()) :: boolean()
   def confirm_ending(string, target)
       when byte_size(string) < byte_size(target) do
@@ -284,6 +323,8 @@ defmodule Freecodecamp.BasicAlgo do
   @doc """
   Returns the first element thats passes the `truth test` from a given function.
 
+  source: [Finders Keepers](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-algorithm-scripting/finders-keepers)
+
   ## Examples
 
       iex> BasicAlgo.find_element([1, 3, 5, 8, 9, 10], &Integer.mod(&1, 2) === 0)
@@ -296,6 +337,7 @@ defmodule Freecodecamp.BasicAlgo do
       nil
 
   """
+  @doc since: "0.1.0"
   @spec find_element(list(), function()) :: any()
   def find_element([], _fun), do: nil
 
@@ -309,6 +351,8 @@ defmodule Freecodecamp.BasicAlgo do
 
   @doc """
   Check if a value is classified as a boolean primitive. Return true or false.
+
+  source: [Boo who](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-algorithm-scripting/boo-who)
 
   ## Examples
 
@@ -325,12 +369,15 @@ defmodule Freecodecamp.BasicAlgo do
       false
 
   """
+  @doc since: "0.1.0"
   @spec boo_who(any()) :: boolean()
   def boo_who(any) when is_boolean(any), do: true
   def boo_who(_not_boolean), do: false
 
   @doc """
   Capitalize each word in a sentence
+
+  source: [Title Case a Sentence](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-algorithm-scripting/title-case-a-sentence)
 
   ## Examples
 
@@ -344,6 +391,7 @@ defmodule Freecodecamp.BasicAlgo do
       "Here Is My Handle Here Is My Spout"
 
   """
+  @doc since: "0.1.0"
   @spec title_case(String.t()) :: String.t()
   def title_case(""), do: ""
 
@@ -365,6 +413,8 @@ defmodule Freecodecamp.BasicAlgo do
   Also an [SO link](https://stackoverflow.com/a/27420592/10250774) why doing
   binary search on linked list is slower. Used linear search instead.
 
+  source: [Slice and Splice](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-algorithm-scripting/slice-and-splice)
+
   ## Examples
 
       iex> BasicAlgo.franken_splice([1, 2, 3], [4, 5], 1)
@@ -377,6 +427,7 @@ defmodule Freecodecamp.BasicAlgo do
       ["head", "shoulders", "claw", "tentacle", "knees", "toes"]
 
   """
+  @doc since: "0.1.0"
   @spec franken_splice(Enumerable.t(), Enumerable.t(), integer) :: Enumerable.t()
   def franken_splice(list_a, list_b, el) when el >= 0 do
     do_franken_splice(el, list_a, [], list_b)
@@ -412,6 +463,8 @@ defmodule Freecodecamp.BasicAlgo do
   only "", false, nil or 0 were implemented for simplicity
   reasons.
 
+  source: [Falsy Bouncer](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-algorithm-scripting/falsy-bouncer)
+
 
   ## Examples
 
@@ -427,6 +480,7 @@ defmodule Freecodecamp.BasicAlgo do
       iex> BasicAlgo.bouncer([7, [], false, ""])
       [7, []]
   """
+  @doc since: "0.1.0"
   @spec bouncer(list()) :: list()
   def bouncer(list), do: do_bouncer(list, [])
 
@@ -448,6 +502,8 @@ defmodule Freecodecamp.BasicAlgo do
   of size (second argument) and returns them as a
   two-dimensional list.
 
+  source: [Chunky Monkey](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-algorithm-scripting/chunky-monkey)
+
   ## Examples
 
       iex> BasicAlgo.chunk_array_in_groups(["a", "b", "c", "d"], 2)
@@ -460,6 +516,7 @@ defmodule Freecodecamp.BasicAlgo do
       [[0, 1], [2, 3], [4, 5]]
 
   """
+  @doc since: "0.1.0"
   @spec chunk_array_in_groups(list(), integer) :: [list()]
   def chunk_array_in_groups([], _size), do: []
   def chunk_array_in_groups(list, size) when size < 1, do: list

@@ -2,8 +2,8 @@ defmodule IntermediateAlgoTest do
   use ExUnit.Case, async: true
   use ExUnitProperties, async: true
 
-  alias Freecodecamp.IntermediateAlgo
-  doctest Freecodecamp.IntermediateAlgo
+  alias FreecodecampElixir.IntermediateAlgo
+  doctest FreecodecampElixir.IntermediateAlgo
 
   @tag :intermediate_algo
   describe "Intermediate Algorithm Scripting: Sum All Numbers in a Range" do

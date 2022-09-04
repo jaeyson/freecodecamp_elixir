@@ -1,13 +1,19 @@
-defmodule Freecodecamp.IntermediateAlgo do
+defmodule FreecodecampElixir.IntermediateAlgo do
   @moduledoc """
-  Documentation for Freecodecamp (Intermediate Alogrithmic Scripting).
+  Documentation for Freecodecamp ([Intermediate Alogrithmic Scripting](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/#intermediate-algorithm-scripting)).
   """
   @moduledoc since: "0.1.0"
 
   @doc """
-  Pass a list of two integers. Return
-  the sum of those two integers plus the sum of
-  all the integers between them.
+  We'll pass you an array of two numbers.
+  Return the sum of those two numbers plus
+  the sum of all the numbers between them.
+  The lowest number will not always come
+  first.
+
+  Returns an integer.
+
+  source: [Sum All Numbers in a Range](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/intermediate-algorithm-scripting/sum-all-numbers-in-a-range)
 
   ## Examples
 
@@ -17,10 +23,14 @@ defmodule Freecodecamp.IntermediateAlgo do
       iex> IntermediateAlgo.sum_all([4, 1])
       10
 
+      iex> IntermediateAlgo.sum_all([0, 0])
+      0
+
       iex> IntermediateAlgo.sum_all([5, 10])
       45
 
   """
+  @doc since: "0.1.0"
   @spec sum_all([integer]) :: integer
   def sum_all([0, 0]), do: 0
 

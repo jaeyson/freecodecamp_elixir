@@ -1,32 +1,32 @@
-defmodule Freecodecamp.MixProject do
+defmodule FreecodecampElixir.MixProject do
   use Mix.Project
+
+  @version "0.1.0"
+  @elixir_version "~> 1.9"
+  @source_url "https://github.com/jaeyson/freecodecamp_elixir"
+  @coverage_url "https://coveralls.io/github/jaeyson/freecodecamp_elixir"
 
   def project do
     [
-      app: :freecodecamp,
-      version: "0.1.0",
-      elixir: "~> 1.9",
+      app: :freecodecamp_elixir,
+      version: @version,
+      elixir: @elixir_version,
       start_permanent: Mix.env() == :prod,
       test_coverage: [tool: ExCoveralls],
-      aliases: aliases(),
-      deps: deps(),
       preferred_cli_env: [
         coveralls: :test,
         "coveralls.detail": :test,
         "coveralls.post": :test,
         "coveralls.html": :test
       ],
-
-      # Docs
-      name: "FCC using Elixir",
-      source_url: "https://github.com/jaeyson/freecodecamp-exercises-using-elixir",
-      docs: [
-        authors: ["Jaeyson Anthony Y."],
-        api_reference: false,
-        assets: "assets",
-        main: "Freecodecamp",
-        logo: "assets/static/images/logo.png"
-      ]
+      name: "Freecodecamp using Elixir",
+      description:
+        "Solving exercises from Freecodecamp.org using Elixir programming language. Includes benchmarks and tests for every functions.",
+      source_url: @source_url,
+      aliases: aliases(),
+      deps: deps(),
+      docs: docs(),
+      package: package()
     ]
   end
 
@@ -58,6 +58,41 @@ defmodule Freecodecamp.MixProject do
         "test --trace",
         "credo --strict --all"
       ]
+    ]
+  end
+
+  defp docs do
+    [
+      main: "README",
+      extra_section: "PAGES",
+      authors: ["Jaeyson Anthony Y."],
+      api_reference: false,
+      # assets: "assets",
+      # logo: "assets/static/images/logo.png",
+      source_ref: "v#{@version}",
+      source_url: @source_url,
+      canonical: "http://hexdocs.pm/freecodecamp_elixir",
+      skip_undefined_reference_warnings_on: ["CHANGELOG.md"],
+      extras: extras()
+    ]
+  end
+
+  defp package do
+    [
+      maintainers: ["Jaeyson Anthony Y."],
+      licenses: ["MIT"],
+      links: %{
+        "Github" => @source_url,
+        "Test coverage" => @coverage_url
+      }
+    ]
+  end
+
+  defp extras do
+    [
+      "README.md",
+      "CHANGELOG.md",
+      "LICENSE"
     ]
   end
 end

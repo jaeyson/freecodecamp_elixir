@@ -2,8 +2,8 @@ defmodule BasicAlgoTest do
   use ExUnit.Case, async: true
   use ExUnitProperties, async: true
 
-  alias Freecodecamp.BasicAlgo
-  doctest Freecodecamp.BasicAlgo
+  alias FreecodecampElixir.BasicAlgo
+  doctest FreecodecampElixir.BasicAlgo
 
   @tag :basic_algo
   describe "Basic Algorithm Scripting: Convert Celsius to Fahrenheit" do
@@ -269,9 +269,7 @@ defmodule BasicAlgoTest do
         test_function = fn str ->
           str
           |> String.split(" ", trim: true)
-          |> Enum.map(&String.downcase(&1))
-          |> Enum.map(&String.capitalize(&1))
-          |> Enum.join(" ")
+          |> Enum.map_join(" ", &(String.downcase(&1) |> String.capitalize()))
         end
 
         assert BasicAlgo.title_case("") === test_function.("")
