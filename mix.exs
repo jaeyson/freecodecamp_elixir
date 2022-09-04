@@ -63,7 +63,7 @@ defmodule FreecodecampElixir.MixProject do
 
   defp docs do
     [
-      main: "README",
+      main: "readme",
       extra_section: "PAGES",
       authors: ["Jaeyson Anthony Y."],
       api_reference: false,
