@@ -1,14 +1,27 @@
-defmodule Benchmark.IntermediateAlgo do
+defmodule FreecodecampElixir.Benchmarks.IntermediateAlgo do
+  alias Benchee.Formatters.Console
+  alias Benchee.Formatters.HTML
   alias FreecodecampElixir.IntermediateAlgo
+  @moduledoc false
 
-  @spec run(String.t(), module(), any()) :: module()
-  def run(function_name, formatter, args \\ nil),
-    do: __MODULE__ |> apply(String.to_atom(function_name), [formatter, args])
+  # NOTE: We can't use apply/3 here to run a number of
+  # arbitrary functions in order to minimize the use
+  # of atoms. So we listed all (and future) functions.
+
+  @spec run(String.t(), String.t()) :: module()
+  def run(function_name, formatter \\ "--console") do
+    case formatter do
+      "--console" -> Console
+      "--html" -> HTML
+    end
+
+    do_run(function_name, formatter)
+  end
 
   # set config for benchmark here
-  defp generic_benchee(jobs, formatter, before_each_function) do
+  defp generic_benchee(map, formatter, before_each_function) do
     Benchee.run(
-      jobs,
+      map,
       before_each: before_each_function,
       time: 5,
       memory_time: 2,
@@ -17,8 +30,8 @@ defmodule Benchmark.IntermediateAlgo do
     )
   end
 
-  @spec sum_all(module(), any()) :: module()
-  def sum_all(formatter, _args) do
+  @spec do_run(String.t(), module()) :: module()
+  defp do_run("sum_all", formatter) do
     generic_benchee(
       %{
         "IntermediateAlgo.sum_all" => fn {int1, int2} ->
@@ -44,8 +57,8 @@ defmodule Benchmark.IntermediateAlgo do
     )
   end
 
-  @spec diff_list(module(), any()) :: module()
-  def diff_list(formatter, _args) do
+  @spec do_run(String.t(), module()) :: module()
+  defp do_run("diff_list", formatter) do
     generic_benchee(
       %{
         "IntermediateAlgo.diff_list" => fn {list1, list2} ->
@@ -96,9 +109,9 @@ defmodule Benchmark.IntermediateAlgo do
   end
 
   @spec sum_all_gen_v3(list(integer)) :: integer
-  def sum_all_gen_v3([0, 0]), do: 0
+  defp sum_all_gen_v3([0, 0]), do: 0
 
-  def sum_all_gen_v3([num_one, num_two] = _list) do
+  defp sum_all_gen_v3([num_one, num_two] = _list) do
     for(x <- num_one..num_two, do: x)
     |> do_sum_all_v3()
   end
@@ -119,11 +132,11 @@ defmodule Benchmark.IntermediateAlgo do
   end
 end
 
-alias Benchmark.IntermediateAlgo
-alias Benchee.Formatters.{HTML, Console}
+# alias Benchmark.IntermediateAlgo
+# alias Benchee.Formatters.{HTML, Console}
 
 # IntermediateAlgo.run("mutation", HTML)
-IntermediateAlgo.run("diff_list", Console)
+# IntermediateAlgo.run("diff_list", Console)
 
 # Available functions (uncomment above):
 #   - diff_list

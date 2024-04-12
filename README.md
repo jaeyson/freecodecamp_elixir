@@ -3,6 +3,7 @@
 Solving exercises from Freecodecamp.org using Elixir programming language. Includes benchmarks and tests for every functions.
 
 [//]: # "Badges"
+
 [![Last Commit][commit-badge]](https://github.com/jaeyson/freecodecamp_elixir/commit/main)
 [![Commit activity][pulse-badge]](https://github.com/jaeyson/freecodecamp_elixir/pulse)
 [![Dependabot][dependabot-badge]](https://github.com/jaeyson/freecodecamp_elixir/pulls/app%2Fdependabot)
@@ -112,7 +113,6 @@ mix selective_test basic_algo intermediate_algo
 
 # basic_algo        = Basic Algorithm Scripting
 # intermediate_algo = Intermediate Algorithm Scripting
-# algo_projects     = Algorithm Projects
 ```
 
 ## Generate `HTML` Docs
@@ -124,22 +124,22 @@ mix docs
 
 ## Benchmarks (using Benchee)
 
-If you want to benchmark a specific function:
-
 ```bash
-# NOTE: file path is at
-# freecodecamp_elixir/benchmarks/basic_algo.exs
-
-# Example: change the function name from
-# "mutation" to "repeat_string"
-# BasicAlgo.run("mutation", HTML)
-# or uncomment lines to use that instead
-BasicAlgo.run("repeat_string", HTML)
-
-# you can use the default formatter (console)
-BasicAlgo.run("repeat_string", Console)
+# view benchmark commands
+mix help benchmark
 ```
 
 ```bash
-mix run benchmarks/basic_algo.exs
+# list available functions
+mix benchmark --list
+```
+
+```bash
+# specific function
+mix benchmark mutation
+```
+
+```bash
+# benchmark results saved as html in "benchmarks/" directory
+mix benchmark mutation --html
 ```

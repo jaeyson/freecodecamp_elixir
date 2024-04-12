@@ -1,9 +1,6 @@
 {
-    "skip_files": [
-        "benchmarks/",
-        "lib/mix/"
-    ],
-    "terminal_options": {
-        "file_column_width": 60
-    }
+  "skip_files": ["lib/freecodecamp_elixir/benchmarks/", "lib/mix/"],
+  "terminal_options": {
+    "file_column_width": 60
+  }
 }

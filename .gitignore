@@ -25,6 +25,9 @@ sample-*.tar
 # Temporary files, for example, from tests.
 /tmp/
 
+# Benchmarks from benchee
+/benchmarks/
+
 .elixir_ls
 
 .DS_Store
