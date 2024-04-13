@@ -5,56 +5,41 @@ on:
   push:
 
 jobs:
-  check_commit_message:
-    name: skips CI and prints cli message, without fail build badge
-    runs-on: ubuntu-latest
-    if: "contains(github.event.head_commit.message, '[skip ci]')"
-    steps:
-      - run: echo "no need to build, based from commit message"
-        
+  # https://docs.github.com/en/actions/managing-workflow-runs/skipping-workflow-runs
+  # Workflows that would otherwise be triggered using `on: push` or
+  # `on: pull_request` won't be triggered if you add any of the
+  # following strings to the commit message in a push, or the HEAD
+  # commit of a pull request:
+  # - [skip ci]
+  # - [ci skip]
+  # - [no ci]
+  # - [skip actions]
+  # - [actions skip]
   test:
-    name: Elixir v${{ matrix.elixir }}/OTP v${{ matrix.otp }}
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        include:
-          # - elixir: 1.11.x
-          #   otp: 22
-          # - elixir: 1.11.x
-          #   otp: 23
-          # - elixir: 1.12.x
-          #   otp: 23
-          # - elixir: 1.13.x
-          #   otp: 24
-          - elixir: 1.14.x
-            otp: 25
-            warnings_as_errors: true
-            static_analysis: true
+    name: Elixir setup and test
+    runs-on: ubuntu-20.04
     env:
       MIX_ENV: test
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    # doesn't contain "ci skip" in commit message
-    if: "!contains(github.event.head_commit.message, '[skip ci]')"
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Setup Erlang/OTP & Elixir
         uses: erlef/setup-beam@v1
         with:
-          otp-version: ${{ matrix.otp }}
-          elixir-version: ${{ matrix.elixir }}
+          otp-version: "26"
+          elixir-version: "1.16.x"
 
       - name: Cache artifacts
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: |
             deps
             _build
-          key: ${{ runner.os }}-${{ matrix.elixir }}-${{ matrix.otp }}-mix-${{ hashFiles('**/mix.lock') }}
+          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
           restore-keys: |
-            ${{ runner.os }}-${{ matrix.elixir }}-${{ matrix.otp }}-mix-
+            ${{ runner.os }}-mix-
 
       - name: Install Dependencies
         run: |
@@ -73,9 +58,3 @@ jobs:
         run: mix coveralls.github
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Publish to Hex
-        if: "contains(github.event.head_commit.message, '[publish to hex]')"
-        run: |
-          mix hex.config api_key ${{ secrets.HEX_API_KEY }}
-          mix hex.publish --yes

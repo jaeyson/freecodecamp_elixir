@@ -284,8 +284,8 @@ defmodule FreecodecampElixir.BasicAlgo do
   end
 
   @spec do_get_index_to_ins(non_neg_integer | nil) :: non_neg_integer
-  def do_get_index_to_ins(nil), do: 0
-  def do_get_index_to_ins(result), do: result
+  defp do_get_index_to_ins(nil), do: 0
+  defp do_get_index_to_ins(result), do: result
 
   @doc """
   Check if a string (first argument, `string`) ends with the

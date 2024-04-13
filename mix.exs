@@ -1,7 +1,7 @@
 defmodule FreecodecampElixir.MixProject do
   use Mix.Project
 
-  @version "0.1.0"
+  @version "0.2.0"
   @elixir_version "~> 1.9"
   @source_url "https://github.com/jaeyson/freecodecamp_elixir"
   @coverage_url "https://coveralls.io/github/jaeyson/freecodecamp_elixir"
@@ -42,11 +42,11 @@ defmodule FreecodecampElixir.MixProject do
     [
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
-      {:stream_data, "~> 0.5.0", only: [:dev, :test]},
+      {:stream_data, "~> 0.6", only: [:dev, :test]},
       {:benchee, "~> 1.0", only: [:dev], runtime: false},
       {:benchee_html, "~> 1.0", only: [:dev], runtime: false},
-      {:ex_doc, "~> 0.28.2", only: [:dev, :test], runtime: false},
-      {:credo, "~> 1.6.4", only: [:dev, :test], runtime: false},
+      {:ex_doc, "~> 0.32", only: :dev, runtime: false},
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.10", only: :test}
     ]
   end

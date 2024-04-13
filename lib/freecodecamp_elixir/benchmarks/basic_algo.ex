@@ -1,11 +1,26 @@
-defmodule Benchmark.BasicAlgo do
+defmodule FreecodecampElixir.Benchmarks.BasicAlgo do
+  alias Benchee.Formatters.Console
+  alias Benchee.Formatters.HTML
   alias FreecodecampElixir.BasicAlgo
+  @moduledoc false
 
-  @spec run(String.t(), module(), any()) :: module()
-  def run(function_name, formatter, args \\ nil),
-    do: __MODULE__ |> apply(String.to_atom(function_name), [formatter, args])
+  # NOTE: We can't use apply/3 here to run a number of
+  # arbitrary functions in order to minimize the use
+  # of atoms. So we listed all (and future) functions.
+
+  @spec run(String.t(), String.t()) :: module()
+  def run(function_name, formatter \\ "--console") do
+    formatter =
+      case String.downcase(formatter) do
+        "--console" -> Console
+        "--html" -> HTML
+      end
+
+    do_run(function_name, formatter)
+  end
 
   # set config for benchmark here
+  @spec generic_benchee(map(), HTML | Console, (any() -> any())) :: Benchee.Suite.t()
   defp generic_benchee(map, formatter, before_each_function) do
     Benchee.run(
       map,
@@ -17,8 +32,8 @@ defmodule Benchmark.BasicAlgo do
     )
   end
 
-  @spec mutation(module(), any()) :: module()
-  def mutation(formatter, _args) do
+  @spec do_run(String.t(), module()) :: module()
+  defp do_run("mutation", formatter) do
     generic_benchee(
       %{
         "mutation: Enum.filter" => fn {string1, string2} ->
@@ -38,8 +53,8 @@ defmodule Benchmark.BasicAlgo do
     )
   end
 
-  @spec truncate_string(module(), any()) :: module()
-  def truncate_string(formatter, _args) do
+  @spec do_run(String.t(), module()) :: module()
+  defp do_run("truncate_string", formatter) do
     generic_benchee(
       %{
         "BasicAlgo.truncate_string" => fn {string, pos} ->
@@ -62,8 +77,8 @@ defmodule Benchmark.BasicAlgo do
     )
   end
 
-  @spec get_index_to_ins(module(), any()) :: module()
-  def get_index_to_ins(formatter, _args) do
+  @spec do_run(String.t(), module()) :: module()
+  defp do_run("get_index_to_ins", formatter) do
     generic_benchee(
       %{
         "get_index_to_ins: List comprehension" => fn {list_int, value} ->
@@ -83,8 +98,8 @@ defmodule Benchmark.BasicAlgo do
     )
   end
 
-  @spec factorialize(module(), any()) :: module()
-  def factorialize(formatter, _args) do
+  @spec do_run(String.t(), module()) :: module()
+  defp do_run("factorialize", formatter) do
     generic_benchee(
       %{
         "factorialize: Enum.filter and tco function" => &BasicAlgo.factorialize/1,
@@ -95,8 +110,8 @@ defmodule Benchmark.BasicAlgo do
     )
   end
 
-  @spec reverse_string(module(), any()) :: module()
-  def reverse_string(formatter, _args) do
+  @spec do_run(String.t(), module()) :: module()
+  defp do_run("reverse_string", formatter) do
     generic_benchee(
       %{
         "reverse_string: Pattern matching" => &BasicAlgo.reverse_string/1,
@@ -107,8 +122,8 @@ defmodule Benchmark.BasicAlgo do
     )
   end
 
-  @spec reverse_string(module(), any()) :: module()
-  def find_longest_word_length(formatter, _args) do
+  @spec do_run(String.t(), module()) :: module()
+  defp do_run("find_longest_word_length", formatter) do
     generic_benchee(
       %{
         "find_longest_word_length: Enum.max_by" => &BasicAlgo.find_longest_word_length/1,
@@ -119,8 +134,8 @@ defmodule Benchmark.BasicAlgo do
     )
   end
 
-  @spec largest_of_four(module(), any()) :: module()
-  def largest_of_four(formatter, _args) do
+  @spec do_run(String.t(), module()) :: module()
+  defp do_run("largest_of_four", formatter) do
     list_int =
       -10_000..10_000
       |> StreamData.integer()
@@ -137,8 +152,8 @@ defmodule Benchmark.BasicAlgo do
     )
   end
 
-  @spec confirm_ending(module(), any()) :: module()
-  def confirm_ending(formatter, _args) do
+  @spec do_run(String.t(), module()) :: module()
+  defp do_run("confirm_ending", formatter) do
     generic_benchee(
       %{
         "confirm_ending: String.ends_with?" => fn {str_one, str_two} ->
@@ -158,8 +173,8 @@ defmodule Benchmark.BasicAlgo do
     )
   end
 
-  @spec find_element(module(), any()) :: module()
-  def find_element(formatter, _args) do
+  @spec do_run(String.t(), module()) :: module()
+  defp do_run("find_element", formatter) do
     generic_benchee(
       %{
         "find_element: Enum.find" => fn list ->
@@ -177,8 +192,8 @@ defmodule Benchmark.BasicAlgo do
     )
   end
 
-  @spec title_case(module(), any()) :: module()
-  def title_case(formatter, _args) do
+  @spec do_run(String.t(), module()) :: module()
+  defp do_run("title_case", formatter) do
     generic_benchee(
       %{
         "title_case: BasicAlgo.title_case" => fn string ->
@@ -193,8 +208,8 @@ defmodule Benchmark.BasicAlgo do
     )
   end
 
-  @spec franken_splice(module(), any()) :: module()
-  def franken_splice(formatter, _args) do
+  @spec do_run(String.t(), module()) :: module()
+  defp do_run("franken_splice", formatter) do
     generic_benchee(
       %{
         "franken_splice: BasicAlgo.franken_splice" => fn {list_a, list_b, int} ->
@@ -218,8 +233,8 @@ defmodule Benchmark.BasicAlgo do
     )
   end
 
-  @spec chunk_array_in_groups(module(), any()) :: module()
-  def chunk_array_in_groups(formatter, _args) do
+  @spec do_run(String.t(), module()) :: module()
+  defp do_run("chunk_array_in_groups", formatter) do
     generic_benchee(
       %{
         "chunk_array_in_groups: BasicAlgo.chunk_array_in_groups" => fn {list, size} ->
@@ -374,32 +389,32 @@ defmodule Benchmark.BasicAlgo do
   end
 
   @spec title_case_gen(String.t()) :: String.t()
-  def title_case_gen(string) do
+  defp title_case_gen(string) do
     ~w(#{string})
     |> Enum.map_join(" ", &(String.downcase(&1) |> String.capitalize()))
   end
 
   @spec franken_splice_gen_v1(Enumerable.t(), Enumerable.t(), integer) :: Enumerable.t()
-  def franken_splice_gen_v1([], [], _el), do: []
+  defp franken_splice_gen_v1([], [], _el), do: []
 
-  def franken_splice_gen_v1(list_one, list_two, el) do
+  defp franken_splice_gen_v1(list_one, list_two, el) do
     List.insert_at(list_two, el, list_one) |> List.flatten()
   end
 
   @spec franken_splice_gen_v2(Enumerable.t(), Enumerable.t(), integer) :: Enumerable.t()
-  def franken_splice_gen_v2(list_one, list_two, -1) do
+  defp franken_splice_gen_v2(list_one, list_two, -1) do
     {head, tails} = Enum.split(list_two, length(list_two))
     [head | [list_one | [tails]]] |> :lists.flatten()
   end
 
-  def franken_splice_gen_v2(list_one, list_two, el) when el < -1 do
+  defp franken_splice_gen_v2(list_one, list_two, el) when el < -1 do
     {head, tails} = Enum.split(list_two, el + 1)
 
     do_franken_splice(list_one, head, tails)
     |> :lists.flatten()
   end
 
-  def franken_splice_gen_v2(list_one, list_two, el) do
+  defp franken_splice_gen_v2(list_one, list_two, el) do
     {head, tails} = Enum.split(list_two, el)
 
     do_franken_splice(list_one, head, tails)
@@ -411,19 +426,19 @@ defmodule Benchmark.BasicAlgo do
   end
 
   @spec chunk_array_in_groups_gen(Enumerable.t(), integer) :: list(Enumerable.t())
-  def chunk_array_in_groups_gen([], _size), do: []
-  def chunk_array_in_groups_gen(list, size) when size < 1, do: list
+  defp chunk_array_in_groups_gen([], _size), do: []
+  defp chunk_array_in_groups_gen(list, size) when size < 1, do: list
 
-  def chunk_array_in_groups_gen(list, size) do
+  defp chunk_array_in_groups_gen(list, size) do
     Enum.chunk_every(list, size)
   end
 end
 
-alias Benchmark.BasicAlgo
-alias Benchee.Formatters.{HTML, Console}
+# alias Benchmark.BasicAlgo
+# alias Benchee.Formatters.{HTML, Console}
 
 # BasicAlgo.run("mutation", HTML)
-BasicAlgo.run("chunk_array_in_groups", Console)
+# BasicAlgo.run("chunk_array_in_groups", Console)
 
 # Available functions (uncomment above):
 #   - mutation
