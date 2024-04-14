@@ -1,28 +1,21 @@
 name: CI
 
 on:
-  pull_request:
-    branches:
-      - main
+  workflow_call:
   push:
     branches:
       - main
 
 jobs:
-  check_commit_message:
-    name: skips CI and prints cli message, without fail build badge
+  ci_workflow:
+    uses: ./.github/workflows/ci.yml
+  staging_deploy:
     runs-on: ubuntu-latest
-    if: "contains(github.event.head_commit.message, '[skip ci]')"
-    steps:
-      - run: echo "no need to build, based from commit message"
-        
   publish_to_hex:
     name: "Publish to Hex"
     runs-on: ubuntu-latest
-
-    # doesn't contain "ci skip" in commit message
-    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    needs: [ci_workflow]
     steps:
-      run: |
-        mix hex.config api_key ${{ secrets.HEX_API_KEY }}
-        mix hex.publish --yes
+      - run: |
+          mix hex.config api_key ${{ secrets.HEX_API_KEY }}
+          mix hex.publish --yes
