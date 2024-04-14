@@ -2,11 +2,12 @@ defmodule Mix.Tasks.Benchmark do
   @moduledoc """
   ## Usage
 
-  `mix benchmark [module, ...] [options] `
+  `mix benchmark [options] [module, ...]`
 
   Running e.g. `mix selective_test basic_algo` will
   only include tests from `test/basic_algo_test.exs`.
-  Note: these command is not to be ran inside `iex`,
+
+  > **Note**: these command is not to be ran inside `iex`,
   rather run this in your OS shell.
 
   To view this via terminal:

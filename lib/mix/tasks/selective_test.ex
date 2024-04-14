@@ -6,7 +6,8 @@ defmodule Mix.Tasks.SelectiveTest do
 
   Running e.g. `mix selective_test basic_algo` will
   only include tests from `test/basic_algo_test.exs`.
-  Note: these command is not to be ran inside `iex`,
+
+  > **Note**: these command is not to be ran inside `iex`,
   rather run this in your OS shell.
 
   To view this via terminal:
@@ -22,7 +23,7 @@ defmodule Mix.Tasks.SelectiveTest do
   mix selective_test basic_algo
 
   # two or more
-  mix test --exclude intermediate_algo basic_algo
+  mix selective_test basic_algo intermediate_algo
   ```
 
   """
@@ -31,10 +32,7 @@ defmodule Mix.Tasks.SelectiveTest do
 
   use Mix.Task
 
-  @modules [
-    "basic_algo",
-    "intermediate_algo"
-  ]
+  @modules ~w(basic_algo intermediate_algo)
 
   @impl Mix.Task
   @spec run([String.t()]) :: IO.puts()
