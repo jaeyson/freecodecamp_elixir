@@ -9,8 +9,6 @@ on:
 jobs:
   ci_workflow:
     uses: ./.github/workflows/ci.yml
-  staging_deploy:
-    runs-on: ubuntu-latest
   publish_to_hex:
     name: "Publish to Hex"
     runs-on: ubuntu-latest
