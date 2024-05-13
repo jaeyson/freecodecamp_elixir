@@ -42,7 +42,7 @@ defmodule FreecodecampElixir.MixProject do
     [
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
-      {:stream_data, "~> 0.6", only: [:dev, :test]},
+      {:stream_data, "~> 1.0", only: [:dev, :test]},
       {:benchee, "~> 1.0", only: [:dev], runtime: false},
       {:benchee_html, "~> 1.0", only: [:dev], runtime: false},
       {:ex_doc, "~> 0.32", only: :dev, runtime: false},
